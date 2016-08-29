@@ -87,4 +87,9 @@ class CursosController extends Controller {
 
         return response()->json($cursos);
     }
+    public function todas()
+    {
+        $cursos = $this->cursoRepo->all();
+        return response()->json($cursos);
+    }
 }

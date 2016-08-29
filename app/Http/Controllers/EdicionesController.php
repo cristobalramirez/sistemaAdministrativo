@@ -14,7 +14,7 @@ class EdicionesController extends Controller {
 
     public function __construct(EdicionRepo $edicionRepo)
     {
-        $this->edicionRepo = $edicionRepo;
+        $this->edicionRepo = $edicionRepo; 
     }
 
     public function index()
@@ -63,6 +63,37 @@ class EdicionesController extends Controller {
     {
         $edicion = $this->edicionRepo->find($request->id);
 
+        if($request->brochure!=$edicion->brochure){
+            if ($edicion->brochure!="") {
+                $rest = substr(__DIR__, 0, -21);
+                unlink($rest."/public".$edicion->brochure);
+            }            
+        }
+        if($request->resolucion!=$edicion->resolucion){
+            if ($edicion->resolucion!="") {
+                $rest = substr(__DIR__, 0, -21);
+                unlink($rest."/public".$edicion->resolucion);
+            }            
+        }
+        if($request->proyecto!=$docente->proyecto){
+            if ($edicion->proyecto!="") {
+                $rest = substr(__DIR__, 0, -21);
+                unlink($rest."/public".$edicion->proyecto);
+            }            
+        }
+        if($request->publicidadFace!=$edicion->publicidadFace){
+            if ($edicion->publicidadFace!="") {
+                $rest = substr(__DIR__, 0, -21);
+                unlink($rest."/public".$edicion->publicidadFace);
+            }            
+        }
+        if($request->publicidadImprimir!=$edicion->publicidadImprimir){
+            if ($edicion->publicidadImprimir!="") {
+                $rest = substr(__DIR__, 0, -21);
+                unlink($rest."/public".$edicion->publicidadImprimir);
+            }            
+        }
+
         $manager = new EdicionManager($edicion,$request->all());
         $manager->save();
 
@@ -72,6 +103,26 @@ class EdicionesController extends Controller {
     public function destroy(Request $request)
     {
         $edicion= $this->edicionRepo->find($request->id);
+        if($edicion->brochure!=""){
+            $rest = substr(__DIR__, 0, -21);
+            unlink($rest."/public".$edicion->brochure);
+        }
+        if($edicion->resolucion!=""){
+            $rest = substr(__DIR__, 0, -21);
+            unlink($rest."/public".$edicion->resolucion);
+        }
+        if($edicion->proyecto!=""){
+            $rest = substr(__DIR__, 0, -21);
+            unlink($rest."/public".$edicion->proyecto);
+        }
+        if($edicion->publicidadFace!=""){
+            $rest = substr(__DIR__, 0, -21);
+            unlink($rest."/public".$edicion->publicidadFace);
+        }
+        if($edicion->publicidadImprimir!=""){
+            $rest = substr(__DIR__, 0, -21);
+            unlink($rest."/public".$edicion->publicidadImprimir);
+        }
         $edicion->delete();
         return response()->json(['estado'=>true, 'nombre'=>$edicion->nombre]);
     }
@@ -82,4 +133,19 @@ class EdicionesController extends Controller {
 
         return response()->json($ediciones);
     }
+    public function uploadFile(){
+
+        $file = $_FILES["file"]["name"];
+
+        $time=time();
+        if(!is_dir("files/"))
+            mkdir("files/", 0777);
+        if($file && move_uploaded_file($_FILES["file"]["tmp_name"], "files/".$time."_".$file))
+        {
+             
+        }
+        return "/files/".$time."_".$file;      
+    }
+  
+    
 }

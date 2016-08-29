@@ -22,4 +22,9 @@ class AcreditadoraRepo extends BaseRepo{
         }))->paginate($c);
         return $Acreditadoras;
     }
-} 
+    public function all()
+    {
+        $Acreditadoras =Acreditadora::get();
+        return $Acreditadoras;
+    }
+}  

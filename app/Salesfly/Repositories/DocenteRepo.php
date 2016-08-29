@@ -30,4 +30,11 @@ class DocenteRepo extends BaseRepo{
                     ->first();
         return $persona;
     }
+    public function buscarDocente($q){
+      $datos = Docente::where('nombres','like',$q.'%')
+                        ->orwhere('apellidos','like',$q.'%') 
+                        ->orwhere('dni','like',$q.'%')                
+                            ->get();
+            return $datos;
+    }
 } 

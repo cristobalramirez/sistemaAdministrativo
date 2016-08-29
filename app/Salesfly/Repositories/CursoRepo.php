@@ -15,4 +15,9 @@ class CursoRepo extends BaseRepo{
                     ->paginate(15);
         return $cursos;
     }
+    public function all()
+    {
+        $curos =Curso::get();
+        return $curos;
+    }
 } 

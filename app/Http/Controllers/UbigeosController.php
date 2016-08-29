@@ -4,13 +4,15 @@ namespace Salesfly\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Validation\ValidationException;
 
 use Salesfly\Salesfly\Repositories\UbigeoRepo;
 use Salesfly\Salesfly\Managers\UbigeoManager;
+
  
 class UbigeosController extends Controller {
 
-    protected $ubigeoRepo;
+    protected $ubigeoRepo; 
 
     public function __construct(UbigeoRepo $ubigeoRepo)
     {
@@ -55,25 +57,25 @@ class UbigeosController extends Controller {
 
     public function find($id)
     {
-        $station = $this->ubigeoRepo->find($id);
-        return response()->json($station);
+        $ubigeo = $this->ubigeoRepo->find($id);
+        return response()->json($ubigeo);
     }
 
     public function edit(Request $request)
     {
-        $station = $this->ubigeoRepo->find($request->id);
+        $ubigeo = $this->ubigeoRepo->find($request->id);
 
-        $manager = new UbigeoManager($station,$request->all());
+        $manager = new UbigeoManager($ubigeo,$request->all());
         $manager->save();
 
-        return response()->json(['estado'=>true, 'nombre'=>$station->nombre]);
+        return response()->json(['estado'=>true, 'nombre'=>$ubigeo->nombre]);
     }
 
     public function destroy(Request $request)
     {
-        $station= $this->ubigeoRepo->find($request->id);
-        $station->delete();
-        return response()->json(['estado'=>true, 'nombre'=>$station->nombre]);
+        $ubigeo= $this->ubigeoRepo->find($request->id);
+        $ubigeo->delete();
+        return response()->json(['estado'=>true, 'nombre'=>$ubigeo->nombre]);
     }
 
     public function search($q)

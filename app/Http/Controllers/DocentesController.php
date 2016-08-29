@@ -55,37 +55,36 @@ class DocentesController extends Controller {
 
     public function find($id)
     {
-        $station = $this->docenteRepo->find($id);
-        return response()->json($station);
+        $docente = $this->docenteRepo->find($id);
+        return response()->json($docente);
     }
 
     public function edit(Request $request)
     {
-        $station = $this->docenteRepo->find($request->id);
+        $docente = $this->docenteRepo->find($request->id);
 
-        if($request->curriculo!=$station->curriculo){
-            if ($station->curriculo!="") {
+        if($request->curriculo!=$docente->curriculo){
+            if ($docente->curriculo!="") {
                 $rest = substr(__DIR__, 0, -21);
-                unlink($rest."/public".$station->curriculo);
-            }
-            
+                unlink($rest."/public".$docente->curriculo);
+            }            
         }
-        $manager = new DocenteManager($station,$request->all());
+        $manager = new DocenteManager($docente,$request->all());
         $manager->save();
 
-        return response()->json(['estado'=>true, 'nombre'=>$station->nombre]);
+        return response()->json(['estado'=>true, 'nombre'=>$docente->nombre]);
     }
 
     public function destroy(Request $request)
     {
-        $station= $this->docenteRepo->find($request->id);
-        if($station->curriculo!=""){
+        $docente= $this->docenteRepo->find($request->id);
+        if($docente->curriculo!=""){
             $rest = substr(__DIR__, 0, -21);
-            unlink($rest."/public".$station->curriculo);
+            unlink($rest."/public".$docente->curriculo);
         }
         
-        $station->delete();
-        return response()->json(['estado'=>true, 'nombre'=>$station->nombre]);
+        $docente->delete();
+        return response()->json(['estado'=>true, 'nombre'=>$docente->nombre]);
     }
 
     public function search($q)
@@ -127,5 +126,10 @@ class DocentesController extends Controller {
              //echo $file;
         }
         return "/files/".$time."_".$file;      
+    }
+    public function buscarDocente($q)
+    {
+        $docentes = $this->docenteRepo->buscarDocente($q);
+        return response()->json($docentes);
     }
 }

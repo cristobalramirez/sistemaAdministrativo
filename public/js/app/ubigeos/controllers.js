@@ -7,8 +7,9 @@
                 $scope.errors = null;
                 $scope.success;
                 $scope.query = '';
+                $scope.codigoAntiguo="";
 
-                $scope.toggle = function () {
+                $scope.toggle = function () { 
                     $scope.show = !$scope.show; 
                 };
 
@@ -31,6 +32,7 @@
                 {
                     crudService.byId(id,'ubigeos').then(function (data) {
                         $scope.ubigeo = data;
+                        $scope.codigoAntiguo=$scope.ubigeo.codigo;
                     });
                 }else{
                     crudService.paginate('ubigeos',1).then(function (data) {
@@ -41,6 +43,7 @@
                         $scope.itemsperPage = 15;
 
                     });
+                    $scope.codigoAntiguo="";
                 }
 
                 
@@ -63,8 +66,7 @@
                 };
 
                 $scope.createUbigeo = function(){
-                    //$scope.atribut.estado = 1;
-                    if ($scope.ubigeoCreateForm.$valid) {
+                    //if ($scope.ubigeoCreateForm.$valid) {
                         crudService.create($scope.ubigeo, 'ubigeos').then(function (data) {
                           
                             if (data['estado'] == true) {
@@ -74,10 +76,11 @@
 
                             } else {
                                 $scope.errors = data;
-
+                                $log.log("Errores");
+                                $log.log($scope.errors);
                             }
                         });
-                    }
+                    //}
                 }
 
 
@@ -87,7 +90,7 @@
 
                 $scope.updateUbigeo = function(){
 
-                    if ($scope.ubigeoCreateForm.$valid) {
+                    if ($scope.ubigeoEditForm.$valid) {
                         crudService.update($scope.ubigeo,'ubigeos').then(function(data)
                         {
                             if(data['estado'] == true){
@@ -103,9 +106,12 @@
                  $scope.validanomUbigeo=function(texto){
                    if(texto!=undefined){
                         crudService.validar('ubigeos',texto).then(function (data){
-                            if(data.codigo!=undefined){
+                            if(data.codigo!=undefined && data.codigo!=$scope.codigoAntiguo){
                                 alert("Codigo Ubigeo Registrado!!");
-                                $scope.ubigeo.codigo='';
+                              
+                                    $scope.ubigeo.codigo='';
+
+                                
                             }
                         });
                     }

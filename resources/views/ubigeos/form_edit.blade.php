@@ -22,50 +22,50 @@
                   <h3 class="box-title">Editar Ubigeo</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form name="ubigeoCreateForm" role="form" novalidate>
+                <form name="ubigeoEditForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
+                  <div class="callout callout-danger" ng-show="ubigeoEditForm.departamento.$error.required || ubigeoEditForm.provincia.$error.required || ubigeoEditForm.codigo.$error.required || ubigeoEditForm.distrito.$error.required">
+                        <ul>
+                          <li ng-show="ubigeoEditForm.departamento.$error.required"> 
+                            <i class="fa fa-times-circle-o"></i>El campo Departamento Requerido.
+                          </li>
+                          <li ng-show="ubigeoEditForm.provincia.$error.required">
+                            <i class="fa fa-times-circle-o"></i>El campo Departamento Requerido.
+                          </li>
+                          <li ng-show="ubigeoEditForm.codigo.$error.required">
+                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                          </li>
+                          <li ng-show="ubigeoEditForm.distrito.$error.required">
+                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                          </li>
+                        </ul>                                                
+                    </div> 
+                                          
                     
-                    <div class="form-group" ng-class="{true: 'has-error'}[ ubigeoCreateForm.codigo.$error.required && ubigeoCreateForm.$submitted || ubigeoCreateForm.codigo.$dirty && ubigeoCreateForm.codigo.$invalid]">
+                    <div class="form-group" ng-class="{'has-error': ubigeoEditForm.codigo.$invalid,'has-success':ubigeoEditForm.codigo.$invalid}">
                       <label for="codigo">Codigo</label>
-                      <input type="text" class="form-control" name="codigo" ng-blur="validanomUbigeo(ubigeo.codigo)" placeholder="Codigo" ng-model="ubigeo.codigo" required>
-                      <label ng-show="ubigeoCreateForm.$submitted || ubigeoCreateForm.codigo.$dirty && ubigeoCreateForm.codigo.$invalid">
-                        <span ng-show="ubigeoCreateForm.codigo.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
+                      <input ng-blur="validanomUbigeo(ubigeo.codigo)" type="text" class="form-control" name="codigo" placeholder="Codigo" ng-model="ubigeo.codigo" required>
                     </div>
 
-                    <div class="form-group" ng-class="{true: 'has-error'}[ ubigeoCreateForm.departamento.$error.required && ubigeoCreateForm.$submitted || ubigeoCreateForm.departamento.$dirty && ubigeoCreateForm.departamento.$invalid]">
+                    <div class="form-group" ng-class="{'has-error': ubigeoEditForm.departamento.$invalid,'has-success':ubigeoEditForm.departamento.$invalid}">
                       <label for="departamento">Departamento</label>
                       <input type="text" class="form-control" name="departamento" placeholder="Departamento" ng-model="ubigeo.departamento" required>
-                      <label ng-show="ubigeoCreateForm.$submitted || ubigeoCreateForm.departamento.$dirty && ubigeoCreateForm.departamento.$invalid">
-                        <span ng-show="ubigeoCreateForm.departamento.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
                     </div>
 
-                    <div class="form-group" ng-class="{true: 'has-error'}[ ubigeoCreateForm.provincia.$error.required && ubigeoCreateForm.$submitted || ubigeoCreateForm.provincia.$dirty && ubigeoCreateForm.provincia.$invalid]">
+                    <div class="form-group" ng-class="{'has-error': ubigeoEditForm.provincia.$invalid,'has-success':ubigeoEditForm.provincia.$invalid}">
                       <label for="provincia">Provincia</label>
                       <input type="text" class="form-control" name="provincia" placeholder="Provincia" ng-model="ubigeo.provincia" required>
-                      <label ng-show="ubigeoCreateForm.$submitted || ubigeoCreateForm.provincia.$dirty && ubigeoCreateForm.provincia.$invalid">
-                        <span ng-show="ubigeoCreateForm.provincia.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
                     </div>
 
-                    <div class="form-group" ng-class="{true: 'has-error'}[ ubigeoCreateForm.distrito.$error.required && ubigeoCreateForm.$submitted || ubigeoCreateForm.distrito.$dirty && ubigeoCreateForm.distrito.$invalid]">
+                    <div class="form-group" ng-class="{'has-error': ubigeoEditForm.distrito.$invalid,'has-success':ubigeoEditForm.distrito.$invalid}">
                       <label for="distrito">Distrito</label>
                       <input type="text" class="form-control" name="distrito" placeholder="Distrito" ng-model="ubigeo.distrito" required>
-                      <label ng-show="ubigeoCreateForm.$submitted || ubigeoCreateForm.distrito.$dirty && ubigeoCreateForm.distrito.$invalid">
-                        <span ng-show="ubigeoCreateForm.distrito.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
                     </div>
 
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="updateUbigeo()">Modificar</button>
+                    <button type="submit" ng-disabled="ubigeoEditForm.$invalid" class="btn btn-primary" ng-click="updateUbigeo()">Modificar</button>
                     <a href="/ubigeos" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

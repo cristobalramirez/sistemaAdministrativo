@@ -18,6 +18,7 @@
                 $scope.ubigeo ={};
                 $scope.success;
                 $scope.query = '';
+                $scope.banderaCargando=false;
 
                 $scope.toggle = function () { 
                     $scope.show = !$scope.show; 
@@ -124,6 +125,7 @@
                             $scope.docente.ubigeo_id=$scope.DistritoSelect;
                             $scope.docente.estado="Activo";
                             $log.log($scope.docente);
+                            $scope.banderaCargando=true;
                                 crudService.create($scope.docente, 'docentes').then(function (data) {
                                     
                                     if (data['estado'] == true) {
@@ -153,6 +155,7 @@
 
                     
                                 $scope.docente.ubigeo_id=$scope.DistritoSelect;
+                                $scope.banderaCargando=true;
                                 crudService.update($scope.docente,'docentes').then(function(data)
                                 {
                                     if(data['estado'] == true){

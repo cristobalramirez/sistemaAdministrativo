@@ -198,8 +198,8 @@
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="editUploadFile()">Modificar</button>
-                    <a href="/docentes" class="btn btn-danger">Cancelar</a>
+                    <button ng-disabled="banderaCargando"  vtype="submit" class="btn btn-primary" ng-click="editUploadFile()">Modificar</button>
+                    <a ng-disabled="banderaCargando"  href="/docentes" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>
               </div><!-- /.box -->

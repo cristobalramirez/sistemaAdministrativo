@@ -120,6 +120,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('api/acreditadoras/destroy', ['as' => 'person_destroy', 'uses' => 'AcreditadorasController@destroy']);
     Route::get('api/acreditadoras/search/{q?}', ['as' => 'person_search', 'uses' => 'AcreditadorasController@search']);
     Route::get('api/acreditadoras/find/{id}', ['as' => 'person_find', 'uses' => 'AcreditadorasController@find']);
+    Route::get('api/todasAcreditadoras/all', ['as' => 'person_all', 'uses' => 'AcreditadorasController@todas']);
 //END CATEGORIAS ROUTES
     //MEDIOS PUBLICITARIO ROUTES
     Route::get('medioPublicitarios', ['as' => 'person', 'uses' => 'MedioPublicitariosController@index']);
@@ -216,6 +217,8 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/docentes/disablePersona/{id}',['as'=>'product_disabled', 'uses'=>'DocentesController@disablePersona']);
 
     Route::post('api/docentes/uploadFile',['as'=>'product_disabled', 'uses'=>'DocentesController@uploadFile']);
+
+    Route::get('api/buscarDocente/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'DocentesController@buscarDocente']);
 //END CATEGORIAS ROUTES
 //PERSONS ROUTES
     Route::get('cursos', ['as' => 'person', 'uses' => 'CursosController@index']);
@@ -230,6 +233,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('api/cursos/destroy', ['as' => 'person_destroy', 'uses' => 'CursosController@destroy']);
     Route::get('api/cursos/search/{q?}', ['as' => 'person_search', 'uses' => 'CursosController@search']);
     Route::get('api/cursos/find/{id}', ['as' => 'person_find', 'uses' => 'CursosController@find']);
+    Route::get('api/todasCursos/all', ['as' => 'person_all', 'uses' => 'CursosController@todas']);
 //END PERSONS ROUTES
 //PERSONS ROUTES
     Route::get('ediciones', ['as' => 'person', 'uses' => 'EdicionesController@index']);
@@ -244,4 +248,6 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('api/ediciones/destroy', ['as' => 'person_destroy', 'uses' => 'EdicionesController@destroy']);
     Route::get('api/ediciones/search/{q?}', ['as' => 'person_search', 'uses' => 'EdicionesController@search']);
     Route::get('api/ediciones/find/{id}', ['as' => 'person_find', 'uses' => 'EdicionesController@find']);
+
+    Route::post('api/ediciones/uploadFile',['as'=>'product_disabled', 'uses'=>'DocentesController@uploadFile']);
 //END PERSONS ROUTES

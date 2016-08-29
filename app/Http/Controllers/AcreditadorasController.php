@@ -24,7 +24,12 @@ class AcreditadorasController extends Controller {
 
     public function all()
     {
-        $acreditadoras = $this->acreditadoraRepo->paginaterepo(15);
+        $acreditadoras = $this->acreditadoraRepo->paginaterepo();
+        return response()->json($acreditadoras);
+    }
+    public function todas()
+    {
+        $acreditadoras = $this->acreditadoraRepo->all();
         return response()->json($acreditadoras);
     }
 
