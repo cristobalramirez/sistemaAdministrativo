@@ -5,6 +5,6 @@ class DetalleDocenteEdicion extends \Eloquent {
 
 	protected $table = 'detalleDocenteEdicion';
     
-    protected $fillable = ['curso_id','edicion_id'];
+    protected $fillable = ['docente_id','edicion_id'];
 
 }

@@ -35,12 +35,28 @@
                     crudService.byId(id,'ediciones').then(function (data) {
                         $scope.edicion = data;
 
+                        crudService.search('detalleDocenteEdiciones',$scope.edicion.id,1).then(function (data){
+                             $scope.docentesAdd=data;
+                        });
+
                         if($scope.edicion != null) {
-                            if ($scope.edicion.fechaRegistro.length > 0) {
-                                $scope.edicion.fechaRegistro = new Date($scope.edicion.fechaRegistro);
+                            if ($scope.edicion.fechaInicio.length > 0) {
+                                $scope.edicion.fechaInicio = new Date($scope.edicion.fechaInicio);
+                            }
+                            if ($scope.edicion.fechaFin.length > 0) {
+                                $scope.edicion.fechaFin = new Date($scope.edicion.fechaFin);
                             }
                         }
                     });
+
+                    crudService.all('todasAcreditadoras').then(function (data) {
+                        
+                        $scope.acreditadoras=data;
+                    });
+                    crudService.all('todasCursos').then(function (data) {
+                        $scope.cursos=data;
+                    });
+
                 }else{
                     crudService.paginate('ediciones',1).then(function (data) {
                         $scope.ediciones = data.data;
@@ -82,21 +98,10 @@
 
 
                 $scope.createEdicion = function(){
-                    //$scope.atribut.estado = 1;
-                    
-
-
-
                     if ($scope.edicionCreateForm.$valid) {
                         //if($scope.edicion.fechaRegistro!=null){
-                            $log.log($scope.edicion);
+                            $scope.edicion.detDocenteEdicion=$scope.docentesAdd;
                             crudService.create($scope.edicion, 'ediciones').then(function (data) {
-                                
-
-                                
-
-                                  
-
                                 if (data['estado'] == true) {
                                     $scope.success = data['nombres'];
                                     alert('Grabado correctamente');
@@ -107,68 +112,16 @@
 
                                 }
                             });
-                        //}else{
-                            //alert('Selecione Fecha');  
-                        //}
                     }
                 }
-                //-----------------------------------------------
-                $scope.haceAlgo = function(){
-                    var name = $scope.name;
-                    var fileBrochure = $scope.fileBrochure;
-                    var fileResolucion = $scope.fileResolucion;
-                    var fileProyecto = $scope.fileProyecto;
-                    var filePublicidadFace = $scope.filePublicidadFace;
-                    var filePublicidadImprimir = $scope.filePublicidadImprimir;
-                    
-                    //callbackPaso1(fileBrochure);
-                    $scope.paso1($scope.fileBrochure);
-                    $scope.paso1($scope.fileResolucion);
-                    $scope.createEdicion();
-                    //sigo... algo aca
-                    //callbackPaso2(fileResolucion);
-
-                    //sigo ... y termino
-                    //callbackTermino();
-                }
-
-                $scope.paso1 = function (quePaso){
-                    if (quePaso!=undefined) {
-                        crudService.uploadFile('ediciones',quePaso, name).then(function(data)
-                        {
-                            $scope.edicion.brochure=data.data;
-                        })    
-                    }else{
-                        $scope.edicion.brochure="";
-                    }
-                }
-
-                $scope.paso2 = function (quePaso){
-                    if (quePaso!=undefined) {
-                        crudService.uploadFile('ediciones',quePaso, name).then(function(data)
-                        {
-                            $scope.edicion.resolucion=data.data;
-                        })    
-                    }else{
-                        $scope.edicion.resolucion="";
-                    }  
-                }
-
-                
-                //$scope.haceAlgo($scope.paso1, $scope.paso2, $scope.createEdicion);
-                //------------------------------------------
-                //-----------------------------------------
-
-                
-                
-
+                           
                 $scope.editEdicion = function(row){
                     $location.path('/ediciones/edit/'+row.id);
                 };
 
                 $scope.updateEdicion = function(){
 
-                    if ($scope.cursoEditForm.$valid) {
+                    if ($scope.edicionEditForm.$valid) {
                         if($scope.edicion.fechaRegistro!=null){
                             crudService.update($scope.edicion,'ediciones').then(function(data)
                             {
@@ -196,18 +149,26 @@
                 }
 
                 $scope.destroyEdicion = function(){
-                    crudService.destroy($scope.edicion,'ediciones').then(function(data)
-                    {
-                        if(data['estado'] == true){
-                            $scope.success = data['nombre'];
-                            $scope.edicion = {};
-                            //alert('hola');
-                            $route.reload();
+                    crudService.search('detalleDocenteEdiciones',$scope.edicion.id,1).then(function (data){
+                            $scope.docentesAdd=data;
+                            $log.log($scope.docentesAdd);
+                            if ($scope.docentesAdd.length>0) {
+                                for (var i = $scope.docentesAdd.length - 1; i >= 0; i--) {
+                                    crudService.destroy($scope.docentesAdd[i],'detalleDocenteEdiciones').then(function(data){});
+                                }
+                            }
+                        crudService.destroy($scope.edicion,'ediciones').then(function(data)
+                        {
+                            if(data['estado'] == true){
+                                $scope.success = data['nombre'];
+                                $scope.edicion = {};
+                                $route.reload();
 
-                        }else{
-                            $scope.errors = data;
-                        }
-                    });
+                            }else{
+                                $scope.errors = data;
+                            }
+                        });
+                    }); 
                 }
                 
                 $scope.name="";
@@ -299,9 +260,34 @@
                         $scope.docenteSelected=undefined;
                     }
                 }
+                $scope.crearDocenteEdicion = function(){
+                    if ($scope.docenteSelected.nombres==undefined) {
+                        alert("Seleccione Correctamente un Docente");
+                        $scope.docenteSelected=undefined;
+                    }else{
+                        $scope.docenteSelected.docente_id=$scope.docenteSelected.id;
+                        $scope.docenteSelected.edicion_id=id;
+
+                        crudService.create($scope.docenteSelected, 'detalleDocenteEdiciones').then(function (data) {
+                            $scope.docenteSelected=undefined;
+                            crudService.search('detalleDocenteEdiciones',id,1).then(function (data){
+                                $scope.docentesAdd=data;
+                            });
+                        });
+                        
+                    }
+                }
                 $scope.destroyDocente = function($index){
                     //alert($index);
                     $scope.docentesAdd.splice($index,1);
+                }
+                $scope.eliminarDocenteEdicion = function(docente){
+                    crudService.destroy(docente,'detalleDocenteEdiciones').then(function(data)
+                    {
+                        crudService.search('detalleDocenteEdiciones',id,1).then(function (data){
+                             $scope.docentesAdd=data;
+                        });
+                    });
                 }
                 
                 

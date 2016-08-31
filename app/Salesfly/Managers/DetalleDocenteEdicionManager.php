@@ -5,7 +5,7 @@ class DetalleDocenteEdicionManager extends BaseManager {
     public function getRules()
     {
         $rules = [              
-            'curso_id'=> 'required',
+            'docente_id'=> 'required',
             'edicion_id'=> 'required'
                   ];
         return $rules;

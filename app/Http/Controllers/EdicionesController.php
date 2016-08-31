@@ -7,7 +7,9 @@ use Illuminate\Routing\Controller;
 
 use Salesfly\Salesfly\Repositories\EdicionRepo;
 use Salesfly\Salesfly\Managers\EdicionManager;
- 
+
+use Salesfly\Salesfly\Managers\DetalleDocenteEdicionManager;
+use Salesfly\Salesfly\Repositories\DetalleDocenteEdicionRepo;
 class EdicionesController extends Controller {
 
     protected $edicionRepo;
@@ -46,10 +48,24 @@ class EdicionesController extends Controller {
 
     public function create(Request $request)
     {
+        \DB::beginTransaction();
+        $detDocenteEdicion = $request->detDocenteEdicion;
+
         $ediciones = $this->edicionRepo->getModel();
         $manager = new EdicionManager($ediciones,$request->all());
         $manager->save();
+        $temporal=$ediciones->id;
 
+        $detDocenteEdicionRepo;
+        foreach($detDocenteEdicion as $objeto){
+            $objeto['edicion_id'] = $temporal;
+            $detDocenteEdicionRepo = new DetalleDocenteEdicionRepo;
+            $insertar=new DetalleDocenteEdicionManager($detDocenteEdicionRepo->getModel(),$objeto);
+            $insertar->save();
+          
+            $detDocenteEdicionRepo = null;
+        }
+        \DB::commit();
         return response()->json(['estado'=>true, 'nombre'=>$ediciones->nombre]);
     }
 
@@ -61,6 +77,7 @@ class EdicionesController extends Controller {
 
     public function edit(Request $request)
     {
+        \DB::beginTransaction();
         $edicion = $this->edicionRepo->find($request->id);
 
         if($request->brochure!=$edicion->brochure){
@@ -96,12 +113,13 @@ class EdicionesController extends Controller {
 
         $manager = new EdicionManager($edicion,$request->all());
         $manager->save();
-
+        \DB::commit();
         return response()->json(['estado'=>true, 'nombre'=>$edicion->nombre]);
     }
 
     public function destroy(Request $request)
     {
+        \DB::beginTransaction();
         $edicion= $this->edicionRepo->find($request->id);
         if($edicion->brochure!=""){
             $rest = substr(__DIR__, 0, -21);
@@ -124,6 +142,7 @@ class EdicionesController extends Controller {
             unlink($rest."/public".$edicion->publicidadImprimir);
         }
         $edicion->delete();
+        \DB::commit();
         return response()->json(['estado'=>true, 'nombre'=>$edicion->nombre]);
     }
 

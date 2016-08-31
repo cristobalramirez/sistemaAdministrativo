@@ -251,3 +251,9 @@ Route::group(['middleware' => 'role'], function () {
 
     Route::post('api/ediciones/uploadFile',['as'=>'product_disabled', 'uses'=>'DocentesController@uploadFile']);
 //END PERSONS ROUTES
+//PERSONS ROUTES
+    Route::post('api/detalleDocenteEdiciones/create', ['as' => 'person_create', 'uses' => 'DetalleDocenteEdicionesController@create']);
+    Route::put('api/detalleDocenteEdiciones/edit', ['as' => 'person_edit', 'uses' => 'DetalleDocenteEdicionesController@edit']);
+    Route::post('api/detalleDocenteEdiciones/destroy', ['as' => 'person_destroy', 'uses' => 'DetalleDocenteEdicionesController@destroy']);
+    Route::get('api/detalleDocenteEdiciones/search/{q?}', ['as' => 'person_search', 'uses' => 'DetalleDocenteEdicionesController@search']);
+//END PERSONS ROUTES

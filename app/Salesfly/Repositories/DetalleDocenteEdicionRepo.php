@@ -9,5 +9,14 @@ class DetalleDocenteEdicionRepo extends BaseRepo{
         return new DetalleDocenteEdicion;
     }
 
+    public function search($q)
+    {
+        $detDocenteEdicion =DetalleDocenteEdicion::where('edicion_id','=', $q)
+        			->leftjoin('docentes','detalleDocenteEdicion.docente_id','=','docentes.id')
+        			->select('detalleDocenteEdicion.*','docentes.nombres','docentes.apellidos','docentes.sexo')
+                    ->get();
+        return $detDocenteEdicion;
+    }
+
   
 } 
