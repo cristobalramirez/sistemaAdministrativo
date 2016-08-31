@@ -26,20 +26,20 @@
                   <div class="box-body">
                   <div class="callout callout-danger" ng-show="ubigeoEditForm.departamento.$error.required || ubigeoEditForm.provincia.$error.required || ubigeoEditForm.codigo.$error.required || ubigeoEditForm.distrito.$error.required">
                         <ul>
+                          <li ng-show="ubigeoEditForm.codigo.$error.required">
+                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                          </li>
                           <li ng-show="ubigeoEditForm.departamento.$error.required"> 
                             <i class="fa fa-times-circle-o"></i>El campo Departamento Requerido.
                           </li>
                           <li ng-show="ubigeoEditForm.provincia.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Departamento Requerido.
-                          </li>
-                          <li ng-show="ubigeoEditForm.codigo.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                            <i class="fa fa-times-circle-o"></i>El campo Provincia Requerido.
                           </li>
                           <li ng-show="ubigeoEditForm.distrito.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                            <i class="fa fa-times-circle-o"></i>El campo Distrito Requerido.
                           </li>
                         </ul>                                                
-                    </div> 
+                    </div>  
                                           
                     
                     <div class="form-group" ng-class="{'has-error': ubigeoEditForm.codigo.$invalid,'has-success':ubigeoEditForm.codigo.$invalid}">

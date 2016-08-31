@@ -30,33 +30,46 @@
                                               </ul>
                                             </div>
                                             
-                    <div class="form-group" ng-class="{true: 'has-error'}[ acreditadoraEditForm.nombre.$error.required && acreditadoraEditForm.$submitted || acreditadoraEditForm.z.$dirty && acreditadoraEditForm.nombre.$invalid]">
+                    <div class="form-group" ng-class="{'has-error': acreditadoraEditForm.nombre.$invalid,'has-success':acreditadoraEditForm.nombre.$invalid}">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control" name="nombre" ng-blur="validanomUbigeo(acreditadora.nombre)" placeholder="Nombre" ng-model="acreditadora.nombre" required>
-                      <label ng-show="acreditadoraEditForm.$submitted || acreditadoraEditForm.nombre.$dirty && acreditadoraEditForm.nombre.$invalid">
-                        <span ng-show="acreditadoraEditForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                      <label ng-show="acreditadoraEditForm.nombre.$error.required">
+                        <span ng-show="acreditadoraEditForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>El campo Nombre Requerido. 
+                        </span>
                       </label>
                     </div>
 
-                    <div>
+                    <div class="form-group" ng-class="{'has-error': acreditadoraEditForm.departamento.$invalid,'has-success':acreditadoraEditForm.departamento.$invalid}">
                         <label>Departamento</label>
-                        <select ng-click="cargarProvincia()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="depertamentoSelect" ng-options="item.departamento as item.departamento for item in departamentos"><option value="">-- Elige Departamento --</option></select>
+                        <select ng-click="cargarProvincia()" class="form-control ng-pristine ng-valid ng-touched" name="departamento" ng-model="depertamentoSelect" ng-options="item.departamento as item.departamento for item in departamentos" required><option value="">-- Elige Departamento --</option></select>
+                        <label ng-show="acreditadoraEditForm.departamento.$error.required">
+                        <span ng-show="acreditadoraEditForm.departamento.$error.required"><i class="fa fa-times-circle-o"></i>Debe selecionar un Departamento. 
+                        </span>
+                      </label>
                     </div>
  
-                    <div>
+                    <div class="form-group" ng-class="{'has-error': acreditadoraEditForm.provincia.$invalid,'has-success':acreditadoraEditForm.provincia.$invalid}">
                         <label>Provinca</label>
-                        <select ng-disabled="depertamentoSelect==null" ng-click="cargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="provinciaSelect" ng-options="item.provincia as item.provincia for item in provincias"><option value="">-- Elige Provincia --</option></select>
+                        <select ng-disabled="depertamentoSelect==null" ng-click="cargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="provincia" ng-model="provinciaSelect" ng-options="item.provincia as item.provincia for item in provincias" required><option value="">-- Elige Provincia --</option></select>
+                        <label ng-show="acreditadoraEditForm.provincia.$error.required">
+                        <span ng-show="acreditadoraEditForm.provincia.$error.required"><i class="fa fa-times-circle-o"></i>Debe selecionar una Provincia. 
+                        </span>
+                      </label>
                     </div>
 
-                    <div>
+                    <div class="form-group" ng-class="{'has-error': acreditadoraEditForm.distrito.$invalid,'has-success':acreditadoraEditForm.distrito.$invalid}">
                         <label>Distrito</label>
-                        <select ng-disabled="depertamentoSelect==null || provinciaSelect==undefined" ng-click="selectPlan1()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="distritoSelect" ng-options="item.id as item.distrito for item in distritos"><option value="">-- Elige Distrito --</option></select>
+                        <select ng-disabled="depertamentoSelect==null || provinciaSelect==undefined" ng-click="selectPlan1()" class="form-control ng-pristine ng-valid ng-touched" name="distrito" ng-model="distritoSelect" ng-options="item.id as item.distrito for item in distritos" required><option value="">-- Elige Distrito --</option></select>
+                        <label ng-show="acreditadoraEditForm.distrito.$error.required">
+                        <span ng-show="acreditadoraEditForm.distrito.$error.required"><i class="fa fa-times-circle-o"></i>Debe selecionar un Distrito. 
+                        </span>
+                      </label>
                     </div>
 
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="updateAcreditadora()">Modificar</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="acreditadoraEditForm.$invalid" ng-click="updateAcreditadora()">Modificar</button>
                     <a href="/acreditadoras" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

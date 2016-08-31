@@ -29,11 +29,12 @@
                                               </ul>
                                             </div>
                     
-                   <div class="form-group" ng-class="{true: 'has-error'}[ medioPublicitarioCreateForm.descripcion.$error.required && medioPublicitarioCreateForm.$submitted || medioPublicitarioCreateForm.descripcion.$dirty && medioPublicitarioCreateForm.descripcion.$invalid]">
+                   <div class="form-group" ng-class="{'has-error': medioPublicitarioCreateForm.descripcion.$invalid,'has-success':medioPublicitarioCreateForm.descripcion.$invalid}">
                       <label for="descripcion">Descripcion</label>
                       <input type="text" class="form-control" name="descripcion" placeholder="Descripcion" ng-model="medioPublicitario.descripcion" required>
-                      <label ng-show="medioPublicitarioCreateForm.$submitted || medioPublicitarioCreateForm.descripcion.$dirty && medioPublicitarioCreateForm.descripcion.$invalid">
-                        <span ng-show="medioPublicitarioCreateForm.descripcion.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                      <label ng-show="medioPublicitarioCreateForm.descripcion.$error.required">
+                        <span ng-show="medioPublicitarioCreateForm.descripcion.$error.required"><i class="fa fa-times-circle-o"></i>El campo Descripcion es Requerido. 
+                        </span>
                       </label>
                     </div>
                     
@@ -41,7 +42,7 @@
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="createMedioPublicitario()">Crear</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="medioPublicitarioCreateForm.$invalid" ng-click="createMedioPublicitario()">Crear</button>
                     <a href="/medioPublicitarios" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

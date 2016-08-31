@@ -30,11 +30,12 @@
                                               </ul>
                                             </div>
                     
-                     <div class="form-group" ng-class="{true: 'has-error'}[ profesionEditForm.nombre.$error.required && profesionEditForm.$submitted || profesionEditForm.nombre.$dirty && profesionEditForm.nombre.$invalid]">
-                      <label for="nombre">nombre</label>
-                      <input type="text" class="form-control" name="nombre" placeholder="nombre" ng-model="profesion.nombre" required>
-                      <label ng-show="profesionEditForm.$submitted || profesionEditForm.nombre.$dirty && profesionEditForm.nombre.$invalid">
-                        <span ng-show="profesionEditForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                     <div class="form-group" ng-class="{'has-error': profesionEditForm.nombre.$invalid,'has-success':profesionEditForm.nombre.$invalid}">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" class="form-control" name="nombre" placeholder="Nombre" ng-model="profesion.nombre" required>
+                      <label ng-show="profesionEditForm.nombre.$error.required">
+                        <span ng-show="profesionEditForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>El campo Nombre es Requerido. 
+                        </span>
                       </label>
                     </div>
 
@@ -47,7 +48,7 @@
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="updateProfesion()">Modificar</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="profesionEditForm.$invalid" ng-click="updateProfesion()">Modificar</button>
                     <a href="/profesiones" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

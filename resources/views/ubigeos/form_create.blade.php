@@ -26,17 +26,17 @@
                  
                       <div class="callout callout-danger" ng-show="ubigeoCreateForm.departamento.$error.required || ubigeoCreateForm.provincia.$error.required || ubigeoCreateForm.codigo.$error.required || ubigeoCreateForm.distrito.$error.required">
                         <ul>
+                          <li ng-show="ubigeoCreateForm.codigo.$error.required">
+                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                          </li>
                           <li ng-show="ubigeoCreateForm.departamento.$error.required"> 
                             <i class="fa fa-times-circle-o"></i>El campo Departamento Requerido.
                           </li>
                           <li ng-show="ubigeoCreateForm.provincia.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Departamento Requerido.
-                          </li>
-                          <li ng-show="ubigeoCreateForm.codigo.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                            <i class="fa fa-times-circle-o"></i>El campo Provincia Requerido.
                           </li>
                           <li ng-show="ubigeoCreateForm.distrito.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
+                            <i class="fa fa-times-circle-o"></i>El campo Distrito Requerido.
                           </li>
                         </ul>                                                
                     </div> 

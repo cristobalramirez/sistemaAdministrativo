@@ -29,51 +29,62 @@
                                               </ul>
                                             </div>
                     
-                   <div class="form-group" ng-class="{true: 'has-error'}[ personaCreateForm.nombres.$error.required && personaCreateForm.$submitted || personaCreateForm.z.$dirty && personaCreateForm.nombres.$invalid]">
+                   <div class="form-group" ng-class="{'has-error': personaCreateForm.nombres.$invalid,'has-success':personaCreateForm.nombres.$invalid}">
                       <label for="nombres">Nombres</label>
                       <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="persona.nombres" required>
-                      <label ng-show="personaCreateForm.$submitted || personaCreateForm.nombres.$dirty && personaCreateForm.nombres.$invalid">
-                        <span ng-show="personaCreateForm.nombres.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                      <label ng-show="personaCreateForm.nombres.$error.required">
+                        <span ng-show="personaCreateForm.nombres.$error.required"><i class="fa fa-times-circle-o"></i>El campo Nombres es Requerido. 
+                        </span>
                       </label>
                     </div>
 
-                    <div class="form-group" ng-class="{true: 'has-error'}[ personaCreateForm.apellidos.$error.required && personaCreateForm.$submitted || personaCreateForm.z.$dirty && personaCreateForm.apellidos.$invalid]">
+                    <div class="form-group" ng-class="{'has-error': personaCreateForm.apellidos.$invalid,'has-success':personaCreateForm.apellidos.$invalid}">
                       <label for="apellidos">Apellidos</label>
                       <input type="text" class="form-control" name="apellidos"  placeholder="Apellidos" ng-model="persona.apellidos" required>
-                      <label ng-show="personaCreateForm.$submitted || personaCreateForm.apellidos.$dirty && personaCreateForm.apellidos.$invalid">
-                        <span ng-show="personaCreateForm.apellidos.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                      <label ng-show="personaCreateForm.apellidos.$error.required">
+                        <span ng-show="personaCreateForm.apellidos.$error.required"><i class="fa fa-times-circle-o"></i>El campo Apellidos es Requerido. 
+                        </span>
                       </label>
                     </div>
                     
                     <div class="row">
                       <div  class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ personaCreateForm.dni.$error.required && personaCreateForm.$submitted || personaCreateForm.z.$dirty && personaCreateForm.dni.$invalid]">
+                        <div class="form-group" ng-class="{'has-error': personaCreateForm.dni.$invalid,'has-success':personaCreateForm.dni.$invalid}">
                           <label for="dni">DNI</label>
                           <input ng-blur="validaDni(persona.dni)" type="text" class="form-control" name="dni"  placeholder="DNI" ng-model="persona.dni" required>
-                          <label ng-show="personaCreateForm.$submitted || personaCreateForm.dni.$dirty && personaCreateForm.dni.$invalid">
-                            <span ng-show="personaCreateForm.dni.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                          <label ng-show="personaCreateForm.dni.$error.required">
+                            <span ng-show="personaCreateForm.dni.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                            </span>
                           </label>
                         </div>
                       </div>
 
                       <div  class="col-md-4">
-                        <div  class="form-group">
+                        <div class="form-group" ng-class="{'has-error': personaCreateForm.fechaNacimiento.$invalid,'has-success':personaCreateForm.fechaNacimiento.$invalid}">
                                   <label for="fechaNacimiento">Fecha de Nacimiento</label>
                               <div  class="input-group">
                                   <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                  </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaNacimiento" ng-model="persona.fechaNac">
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaNacimiento" ng-model="persona.fechaNac" required>
                               </div>
+                              <label ng-show="personaCreateForm.fechaNacimiento.$error.required">
+                            <span ng-show="personaCreateForm.fechaNacimiento.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                            </span>
+                          </label>
                         </div>
                       </div>
 
                     <div  class="col-md-4">
-                        <div>
+                        <div class="form-group" ng-class="{'has-error': personaCreateForm.sexo.$invalid,'has-success':personaCreateForm.sexo.$invalid}">
                               <label>Sexo</label>
-                              <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.sexo"><option value="">-- Elige Sexo --</option>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="sexo" ng-model="persona.sexo" required><option value="">-- Elige Sexo --</option>
                               <option value="Masculino">Masculino</option>
                               <option value="Femenino">Femenino</option></select>
+                              <label ng-show="personaCreateForm.sexo.$error.required">
+                            <span ng-show="personaCreateForm.sexo.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                            </span>
+                          </label>
                           </div>
                       </div>
 
@@ -82,22 +93,30 @@
 
                       <div class="row">
                       <div  class="col-md-4">
-                        <div>
+                        <div class="form-group" ng-class="{'has-error': personaCreateForm.estadoCivil.$invalid,'has-success':personaCreateForm.estadoCivil.$invalid}">
                               <label>Estado Civil</label>
-                              <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.estadoCivil"><option value="">-- Elige Estado Civil --</option>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="estadoCivil" ng-model="persona.estadoCivil" required><option value="">-- Elige Estado Civil --</option>
                                 <option value="Masculino">SOLTERO</option>
                                 <option value="Femenino">CASADO</option>
                                 <option value="Femenino">CONVIVIENTE</option>
                                 <option value="Femenino">VIUDO</option>
                                 <option value="Femenino">DIVORCIADO</option>
                               </select>
+                              <label ng-show="personaCreateForm.estadoCivil.$error.required">
+                                <span ng-show="personaCreateForm.estadoCivil.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                                </span>
+                              </label>
                           </div>
                       </div>
                       
                       <div  class="col-md-4">
-                        <div>
+                        <div class="form-group" ng-class="{'has-error': personaCreateForm.profesion_id.$invalid,'has-success':personaCreateForm.profesion_id.$invalid}">
                             <label>Profesion</label>
-                            <select ng-click="cargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.profesion_id" ng-options="item.id as item.nombre for item in profesiones"><option value="">-- Elige Profesion --</option></select>
+                            <select ng-click="cargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="profesion_id" ng-model="persona.profesion_id" ng-options="item.id as item.nombre for item in profesiones" required><option value="">-- Elige Profesion --</option></select>
+                            <label ng-show="personaCreateForm.profesion_id.$error.required">
+                                <span ng-show="personaCreateForm.profesion_id.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                                </span>
+                              </label>
                         </div>
                       </div>
 

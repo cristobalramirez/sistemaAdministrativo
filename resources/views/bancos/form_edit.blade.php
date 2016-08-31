@@ -30,18 +30,19 @@
                                               </ul>
                                             </div>
                     
-                     <div class="form-group" ng-class="{true: 'has-error'}[ bancoEditForm.nombre.$error.required && bancoEditForm.$submitted || bancoEditForm.nombre.$dirty && bancoEditForm.nombre.$invalid]">
-                      <label for="nombre">nombre</label>
-                      <input type="text" class="form-control" name="nombre" placeholder="nombre" ng-model="banco.nombre" required>
-                      <label ng-show="bancoEditForm.$submitted || bancoEditForm.nombre.$dirty && bancoEditForm.nombre.$invalid">
-                        <span ng-show="bancoEditForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                     <div class="form-group" ng-class="{'has-error': bancoEditForm.nombre.$invalid,'has-success':bancoEditForm.nombre.$invalid}">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" class="form-control" name="nombre" placeholder="Nombre" ng-model="banco.nombre" required>
+                      <label ng-show="bancoEditForm.nombre.$error.required">
+                        <span ng-show="bancoEditForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>El campo Nombre es Requerido. 
+                        </span>
                       </label>
                     </div>
 
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="updateBanco()">Modificar</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="bancoEditForm.$invalid" ng-click="updateBanco()">Modificar</button>
                     <a href="/bancos" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

@@ -30,23 +30,28 @@
                                               </ul>
                                             </div>
                                             
-                   <div class="form-group" ng-class="{true: 'has-error'}[ cuentaBancariaEditForm.numeroCuenta.$error.required && cuentaBancariaEditForm.$submitted || cuentaBancariaEditForm.z.$dirty && cuentaBancariaEditForm.numeroCuenta.$invalid]">
+                   <div class="form-group" ng-class="{'has-error': cuentaBancariaEditForm.cuentaBancaria.$invalid,'has-success':cuentaBancariaEditForm.cuentaBancaria.$invalid}">
                       <label for="numeroCuenta">Numero de Cuenta </label>
-                      <input type="text" class="form-control" name="numeroCuenta" ng-blur="validanomUbigeo(cuentaBancaria.numeroCuenta)" placeholder=" Numero de Cuenta" ng-model="cuentaBancaria.numeroCuenta" required>
-                      <label ng-show="cuentaBancariaEditForm.$submitted || cuentaBancariaEditForm.numeroCuenta.$dirty && cuentaBancariaEditForm.numeroCuenta.$invalid">
-                        <span ng-show="cuentaBancariaEditForm.numeroCuenta.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                      <input type="text" class="form-control" name="cuentaBancaria" ng-blur="validanomUbigeo(cuentaBancaria.numeroCuenta)" placeholder=" Numero de Cuenta" ng-model="cuentaBancaria.numeroCuenta" required>
+                      <label ng-show="cuentaBancariaEditForm.cuentaBancaria.$error.required">
+                        <span ng-show="cuentaBancariaEditForm.cuentaBancaria.$error.required"><i class="fa fa-times-circle-o"></i>El campo Numero de Cuenta es Requerido. 
+                        </span>
                       </label>
                     </div>
 
-                    <div>
+                     <div class="form-group" ng-class="{'has-error': cuentaBancariaEditForm.banco_id.$invalid,'has-success':cuentaBancariaEditForm.banco_id.$invalid}">
                         <label>Banco</label>
-                        <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="cuentaBancaria.banco_id" ng-options="item.id as item.nombre for item in bancos"><option value="">-- Elige Banco --</option></select>
+                        <select class="form-control ng-pristine ng-valid ng-touched" name="banco_id" ng-model="cuentaBancaria.banco_id" ng-options="item.id as item.nombre for item in bancos" required><option value="">-- Elige Banco --</option></select>
+                        <label ng-show="cuentaBancariaEditForm.banco_id.$error.required">
+                        <span ng-show="cuentaBancariaEditForm.banco_id.$error.required"><i class="fa fa-times-circle-o"></i>Debe selecionar un Banco. 
+                        </span>
+                      </label>
                     </div>
 
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="updateCuentaBancaria()">Modificar</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="cuentaBancariaEditForm.$invalid" ng-click="updateCuentaBancaria()">Modificar</button>
                     <a href="/cuentaBancarias" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>
