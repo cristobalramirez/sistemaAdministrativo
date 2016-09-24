@@ -135,6 +135,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('api/medioPublicitarios/destroy', ['as' => 'person_destroy', 'uses' => 'MedioPublicitariosController@destroy']);
     Route::get('api/medioPublicitarios/search/{q?}', ['as' => 'person_search', 'uses' => 'MedioPublicitariosController@search']);
     Route::get('api/medioPublicitarios/find/{id}', ['as' => 'person_find', 'uses' => 'MedioPublicitariosController@find']);
+    Route::get('api/cargarMedioPublicitarios/all', ['as' => 'person_all', 'uses' => 'MedioPublicitariosController@CargarMedioPublicitarios']);
 //END CATEGORIAS ROUTES
     //BANCOS ROUTES
     Route::get('bancos', ['as' => 'person', 'uses' => 'BancosController@index']);
@@ -184,6 +185,7 @@ Route::group(['middleware' => 'role'], function () {
     
     Route::get('api/personas/validar/{text}','PersonasController@validarDni');
     Route::get('api/personas/disablePersona/{id}',['as'=>'product_disabled', 'uses'=>'PersonasController@disablePersona']);
+    Route::get('api/buscarPersona/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'PersonasController@buscarPersona']);
 //END CATEGORIAS ROUTES
     //CUENTAS BANCARIAS ROUTES
     Route::get('cuentaBancarias', ['as' => 'person', 'uses' => 'CuentaBancariasController@index']);
@@ -250,6 +252,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/ediciones/find/{id}', ['as' => 'person_find', 'uses' => 'EdicionesController@find']);
 
     Route::post('api/ediciones/uploadFile',['as'=>'product_disabled', 'uses'=>'DocentesController@uploadFile']);
+    Route::get('api/buscarEdicion/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'EdicionesController@buscarEdicion']);
 //END PERSONS ROUTES
 //PERSONS ROUTES
     Route::post('api/detalleDocenteEdiciones/create', ['as' => 'person_create', 'uses' => 'DetalleDocenteEdicionesController@create']);
@@ -257,3 +260,18 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('api/detalleDocenteEdiciones/destroy', ['as' => 'person_destroy', 'uses' => 'DetalleDocenteEdicionesController@destroy']);
     Route::get('api/detalleDocenteEdiciones/search/{q?}', ['as' => 'person_search', 'uses' => 'DetalleDocenteEdicionesController@search']);
 //END PERSONS ROUTES
+//CUENTAS BANCARIAS ROUTES
+    Route::get('inscripciones', ['as' => 'person', 'uses' => 'InscripcionesController@index']);
+    Route::get('inscripciones/create', ['as' => 'person_create', 'uses' => 'InscripcionesController@index']);
+    Route::get('inscripciones/edit/{id?}', ['as' => 'person_edit', 'uses' => 'InscripcionesController@index']);
+    Route::get('inscripciones/form-create', ['as' => 'person_form_create', 'uses' => 'InscripcionesController@form_create']);
+    Route::get('inscripciones/form-edit', ['as' => 'person_form_edit', 'uses' => 'InscripcionesController@form_edit']);
+    Route::get('api/inscripciones/all', ['as' => 'person_all', 'uses' => 'InscripcionesController@all']);
+    Route::get('api/inscripciones/paginate/', ['as' => 'person_paginate', 'uses' => 'InscripcionesController@paginatep']);
+    Route::post('api/inscripciones/create', ['as' => 'person_create', 'uses' => 'InscripcionesController@create']);
+    Route::put('api/inscripciones/edit', ['as' => 'person_edit', 'uses' => 'InscripcionesController@edit']);
+    Route::post('api/inscripciones/destroy', ['as' => 'person_destroy', 'uses' => 'InscripcionesController@destroy']);
+    Route::get('api/inscripciones/search/{q?}', ['as' => 'person_search', 'uses' => 'InscripcionesController@search']);
+    Route::get('api/inscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'InscripcionesController@find']);
+
+//END CATEGORIAS ROUTES

@@ -1,11 +1,11 @@
 <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Ediciones
+          <h1>Inscripciones
             <small>Panel de Control</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Ediciones</li>
+            <li class="active">Inscripciones</li>
           </ol>
 
           
@@ -17,7 +17,7 @@
         <section class="content">
         <div class="row">
         <div class="col-md-12">
-          <a href="/ediciones/create" type="submit" class="btn btn-primary pull-left">Agregar Edicion</a> 
+          <a href="/inscripciones/create" type="submit" class="btn btn-primary pull-left">Agregar Inscripcion</a> 
           </div>
         </div>
         </br>
@@ -28,9 +28,9 @@
               <div class="box"> 
 
                 <div class="box-header with-border">
-                  <h3 class="box-title">Ediciones</h3>
+                  <h3 class="box-title">Inscripciones</h3>
                   <div class="box-tools">
-                  <form ng-keyup="searchEdicion()">
+                  <form ng-keyup="searchInscripcion()">
                     <div class="input-group" style="width: 200px;">
                       <input type="text" ng-model="query"  name="table_search" class="form-control input-sm pull-right" placeholder="Search" />
                       <div class="input-group-btn">
@@ -48,45 +48,28 @@
                             </div>
                         </div>
                     </div>
-                <div class="callout callout-info"  ng-show="edicion.id">
-                    <h4>¿ Estás seguro que deseas eliminar a "{{edicion.descripcion}}" ?</h4>
+                <div class="callout callout-info"  ng-show="inscripcion.id">
+                    <h4>¿ Estás seguro que deseas eliminar a "{{inscripcion.nombre}}" ?</h4>
                     <p>
-                      <button type="button" class="btn btn-danger" ng-click="destroyEdicion()">Si</button>
-                      <button type="button" class="btn btn-default" ng-click="cancelEdicion()">No</button>
+                      <button type="button" class="btn btn-danger" ng-click="destroyInscripcion()">Si</button>
+                      <button type="button" class="btn btn-default" ng-click="cancelInscripcion()">No</button>
                     </p>
                   </div>
                   <div class="box-body table-responsive no-padding">
                     <table class="table table-bordered">
                       <tr>
                         <th style="width: 10px">#</th>
-                        <th>FECHA INICIO</th>
-                        <th>FECHA FIN</th>
-                        <th>CURSO</th>
-                        <th>MODALIDAD</th>
-                        <th>COSTO</th>
-                        
-                        <th style="width: 210px">Documentos</th>
-                        <th style="width: 140px">Publicidad</th>
+                        <th>Nombre</th>
+                      
                         <th style="width: 40px">Editar</th>
                         <th style="width: 40px">Eliminar</th>
                       </tr>
                     
-                      <tr ng-repeat="row in ediciones">
+                      <tr ng-repeat="row in inscripciones">
                         <td>{{$index + 1}}</td>
-                        <td>{{row.fechaInicio}}</td>
-                        <td>{{row.fechaFin}}</td>
-                        <td>{{row.curso.descripcion}}</td>
-                        <td>{{row.modalidad}}</td>
-                        <td>{{row.costoCurso}}</td>
-                        <td><a  ng-disabled="row.brochure==''" href="{{row.brochure}}" target="_blank" class="btn btn-success btn-xs">Brochure</a>
-                        <a  ng-disabled="row.resolucion==''" href="{{row.resolucion}}" target="_blank" class="btn btn-success btn-xs">Resolucion</a>
-                        <a  ng-disabled="row.proyecto==''" href="{{row.proyecto}}" target="_blank" class="btn btn-success btn-xs">Proyecto</a>
-                        </td>
-                        <td><a  ng-disabled="row.publicidadFace==''" href="{{row.publicidadFace}}" target="_blank" class="btn btn-success btn-xs">Facebook</a>
-                        <a  ng-disabled="row.publicidadImprimir==''" href="{{row.publicidadImprimir}}" target="_blank" class="btn btn-success btn-xs">Imprimir</a>
-                        </td>
-                        <td><a ng-click="editEdicion(row)" class="btn btn-warning btn-xs">Editar</a></td>
-                        <td><a ng-click="deleteEdicion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+                        <td>{{row.nombre}}</td>
+                        <td><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Editar</a></td>
+                        <td><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
                       
                       </tr>
                     

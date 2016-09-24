@@ -22,4 +22,13 @@ class EdicionRepo extends BaseRepo{
         }))->paginate($c);
         return $ediciones;
     }
+    public function buscarEdicion($q){
+      $datos = Edicion::leftjoin('cursos','ediciones.curso_id','=','cursos.id')
+                        ->leftjoin('acreditadoras','ediciones.acreditadora_id','=','acreditadoras.id')
+                        ->select('ediciones.*','cursos.*','acreditadoras.*','ediciones.id as idedicion')
+                        ->where('descripcion','like',$q.'%')
+                        ->orwhere('nombre','like',$q.'%')               
+                        ->get();
+            return $datos;
+    }
 } 

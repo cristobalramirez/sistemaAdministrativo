@@ -69,7 +69,7 @@
                                     <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaNacimiento" ng-model="persona.fechaNac" required>
                               </div>
                               <label ng-show="personaCreateForm.fechaNacimiento.$error.required">
-                            <span ng-show="personaCreateForm.fechaNacimiento.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                            <span ng-show="personaCreateForm.fechaNacimiento.$error.required"><i class="fa fa-times-circle-o"></i>El campo Fecha de Nacimiento es Requerido. 
                             </span>
                           </label>
                         </div>
@@ -82,7 +82,7 @@
                               <option value="Masculino">Masculino</option>
                               <option value="Femenino">Femenino</option></select>
                               <label ng-show="personaCreateForm.sexo.$error.required">
-                            <span ng-show="personaCreateForm.sexo.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                            <span ng-show="personaCreateForm.sexo.$error.required"><i class="fa fa-times-circle-o"></i>El campo Sexo es Requerido. 
                             </span>
                           </label>
                           </div>
@@ -103,7 +103,7 @@
                                 <option value="Femenino">DIVORCIADO</option>
                               </select>
                               <label ng-show="personaCreateForm.estadoCivil.$error.required">
-                                <span ng-show="personaCreateForm.estadoCivil.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                                <span ng-show="personaCreateForm.estadoCivil.$error.required"><i class="fa fa-times-circle-o"></i>El campo Estado Civil es Requerido. 
                                 </span>
                               </label>
                           </div>
@@ -114,7 +114,7 @@
                             <label>Profesion</label>
                             <select ng-click="cargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="profesion_id" ng-model="persona.profesion_id" ng-options="item.id as item.nombre for item in profesiones" required><option value="">-- Elige Profesion --</option></select>
                             <label ng-show="personaCreateForm.profesion_id.$error.required">
-                                <span ng-show="personaCreateForm.profesion_id.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI es Requerido. 
+                                <span ng-show="personaCreateForm.profesion_id.$error.required"><i class="fa fa-times-circle-o"></i>El campo Profesion es Requerido. 
                                 </span>
                               </label>
                         </div>

@@ -102,4 +102,9 @@ class PersonasController extends Controller {
         \DB::commit();
         return response()->json(['estado'=>true]);
     }
+    public function buscarPersona($q)
+    {
+        $personas = $this->personaRepo->buscarPersona($q);
+        return response()->json($personas);
+    }
 }

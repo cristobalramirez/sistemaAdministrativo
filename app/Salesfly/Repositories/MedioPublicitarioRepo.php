@@ -11,8 +11,13 @@ class MedioPublicitarioRepo extends BaseRepo{
 
     public function search($q)
     {
-        $motivoVentas =MedioPublicitario::where('descripcion','like', $q.'%')
+        $medioPublicitarios =MedioPublicitario::where('descripcion','like', $q.'%')
                     ->paginate(15);
-        return $motivoVentas;
+        return $medioPublicitarios;
+    }
+    public function CargarMedioPublicitarios(){
+        $medioPublicitarios = MedioPublicitario::orderBy('descripcion', 'asc')
+                    ->get();
+        return $medioPublicitarios;
     }
 } 

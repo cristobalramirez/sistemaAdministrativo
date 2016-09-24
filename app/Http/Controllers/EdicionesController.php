@@ -165,6 +165,10 @@ class EdicionesController extends Controller {
         }
         return "/files/".$time."_".$file;      
     }
-  
+    public function buscarEdicion($q)
+    {
+        $ediciones = $this->edicionRepo->buscarEdicion($q);
+        return response()->json($ediciones);
+    }
     
 }

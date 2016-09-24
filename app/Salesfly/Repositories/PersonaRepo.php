@@ -30,4 +30,11 @@ class PersonaRepo extends BaseRepo{
                     ->first();
         return $persona;
     }
+    public function buscarPersona($q){
+      $datos = Persona::where('nombres','like',$q.'%')
+                        ->orwhere('apellidos','like',$q.'%') 
+                        ->orwhere('dni','like',$q.'%')                
+                            ->get();
+            return $datos;
+    }
 } 

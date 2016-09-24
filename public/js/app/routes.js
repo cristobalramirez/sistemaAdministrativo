@@ -173,6 +173,33 @@
                     controller: 'EdicionController'
                 }) 
                 //------------------
+                //RUTES PERSONAS
+                .when('/ediciones', {
+                    templateUrl: '/js/app/ediciones/views/index.html',
+                    controller: 'EdicionController'
+                })
+                .when('/ediciones/create',{
+                    templateUrl:'/ediciones/form-create',
+                    controller: 'EdicionController'
+                })
+                .when('/ediciones/edit/:id',{
+                    templateUrl:'/ediciones/form-edit',
+                    controller: 'EdicionController'
+                }) 
+                //------------------//RUTES PERSONAS
+                .when('/inscripciones', {
+                    templateUrl: '/js/app/inscripciones/views/index.html',
+                    controller: 'InscripcionController'
+                })
+                .when('/inscripciones/create',{
+                    templateUrl:'/inscripciones/form-create',
+                    controller: 'InscripcionController'
+                })
+                .when('/inscripciones/edit/:id',{
+                    templateUrl:'/inscripciones/form-edit',
+                    controller: 'InscripcionController'
+                }) 
+                //------------------
                 .otherwise({
                     redirectTo: '/'
                 });

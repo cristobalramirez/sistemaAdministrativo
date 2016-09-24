@@ -82,4 +82,9 @@ class MedioPublicitariosController extends Controller {
 
         return response()->json($medioPublicitarios);
     }
+    public function CargarMedioPublicitarios()
+    {
+        $medioPublicitarios = $this->medioPublicitarioRepo->CargarMedioPublicitarios();
+        return response()->json($medioPublicitarios); 
+    }
 }
