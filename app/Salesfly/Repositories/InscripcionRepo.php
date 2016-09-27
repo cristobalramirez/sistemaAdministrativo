@@ -15,4 +15,11 @@ class InscripcionRepo extends BaseRepo{
                     ->paginate(15);
         return $inscripciones;
     }
+    public function paginaterepo($c){
+         $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
+                    ->leftjoin('cursos','ediciones.curso_id','=','cursos.id')
+                    ->select('inscripciones.*','cursos.descripcion as curso')
+                    ->paginate($c);
+        return $inscripciones;
+    }
 } 

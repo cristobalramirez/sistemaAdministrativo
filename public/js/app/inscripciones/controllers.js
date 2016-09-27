@@ -32,6 +32,12 @@
                 { 
                     crudService.byId(id,'inscripciones').then(function (data) {
                         $scope.inscripcion = data;
+
+                        if($scope.inscripcion != null) {
+                            if ($scope.inscripcion.fechaInscripcion.length > 0) {
+                                $scope.inscripcion.fechaInscripcion = new Date($scope.inscripcion.fechaInscripcion);
+                            }
+                        }
                     });
                     crudService.all('cargarMedioPublicitarios').then(function(data){  
                         $scope.medioPublicitarios = data;
@@ -105,7 +111,11 @@
 
                 $scope.updateInscripcion = function(){
 
-                    if ($scope.bancoEditForm.$valid) {
+                    if ($scope.inscripcionEditForm.$valid) {
+                        $scope.inscripcion.saldo=$scope.inscripcion.montoCurso;
+                        $scope.inscripcion.montoPagado=0;
+                        $scope.inscripcion.estado=0;
+                        $log.log($scope.inscripcion);
                         crudService.update($scope.inscripcion,'inscripciones').then(function(data)
                         {
                             if(data['estado'] == true){

@@ -24,12 +24,12 @@ class InscripcionesController extends Controller {
 
     public function all()
     {
-        $inscripciones = $this->inscripcionRepo->paginate(15);
+        $inscripciones = $this->inscripcionRepo->paginaterepo(15);
         return response()->json($inscripciones);
     }
 
     public function paginatep(){
-        $inscripciones = $this->inscripcionRepo->paginate(15);
+        $inscripciones = $this->inscripcionRepo->paginaterepo(15);
         return response()->json($inscripciones);
     }
 
