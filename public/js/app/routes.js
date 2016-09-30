@@ -172,10 +172,7 @@
                     templateUrl:'/ediciones/form-edit',
                     controller: 'EdicionController'
                 }) 
-                .when('/inscribir/:id',{
-                    templateUrl:'/ediciones/form-inscribir',
-                    controller: 'EdicionController'
-                }) 
+                
                 //------------------
                 //RUTES PERSONAS
                 .when('/ediciones', {
@@ -203,10 +200,18 @@
                     templateUrl:'/inscripciones/form-edit',
                     controller: 'InscripcionController'
                 }) 
+                //------------------//RUTES PERSONAS
+                .when('/inscribir/:id', {
+                    templateUrl: '/js/app/inscribir/views/index.html',
+                    controller: 'InscribirController'
+                })
                 //------------------
                 .otherwise({
                     redirectTo: '/'
                 });
+                //------------------//RUTES PERSONAS
+                
+                //----------------------------
                 
             $locationProvider.html5Mode(true);
         }]);

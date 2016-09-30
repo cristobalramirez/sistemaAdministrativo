@@ -107,4 +107,9 @@ class PersonasController extends Controller {
         $personas = $this->personaRepo->buscarPersona($q);
         return response()->json($personas);
     }
+    public function buscarPersonaConDni($q)
+    {
+        $personas = $this->personaRepo->buscarPersonaConDni($q);
+        return response()->json($personas);
+    }
 }

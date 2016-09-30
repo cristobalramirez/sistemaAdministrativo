@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller;
 
 use Salesfly\Salesfly\Repositories\InscripcionRepo;
 use Salesfly\Salesfly\Managers\InscripcionManager;
+use Salesfly\Salesfly\Repositories\PersonaRepo;
+use Salesfly\Salesfly\Managers\PersonaManager;
  
 class InscripcionesController extends Controller {
 
@@ -50,6 +52,32 @@ class InscripcionesController extends Controller {
         $manager = new InscripcionManager($inscripciones,$request->all());
         $manager->save();
 
+        return response()->json(['estado'=>true, 'nombre'=>$inscripciones->nombre]);
+    }
+    public function createInscribir(Request $request)
+    {
+        \DB::beginTransaction();
+        $persona = $request->persona;
+        if($persona['id']==0){
+            $personarepo;
+            $personarepo = new PersonaRepo;
+            $personaSave=$personarepo->getModel();
+            
+            $insertarpersona=new PersonaManager($personaSave,$persona);
+            $insertarpersona->save();          
+            $personaSave->save();
+            $temporal=$personaSave->id;
+
+            $request->merge(["persona_id"=>$temporal]);
+        }else{
+            $request->merge(["persona_id"=>$persona['id']]);
+        }
+        $inscripciones = $this->inscripcionRepo->getModel();
+        $manager = new InscripcionManager($inscripciones,$request->all());
+        $manager->save();
+        $inscripciones->save();
+        $temporal=$inscripciones->id;
+        \DB::commit();
         return response()->json(['estado'=>true, 'nombre'=>$inscripciones->nombre]);
     }
 

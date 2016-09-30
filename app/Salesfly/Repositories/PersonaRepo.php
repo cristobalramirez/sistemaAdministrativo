@@ -31,10 +31,15 @@ class PersonaRepo extends BaseRepo{
         return $persona;
     }
     public function buscarPersona($q){
-      $datos = Persona::where('nombres','like',$q.'%')
+      $persona = Persona::where('nombres','like',$q.'%')
                         ->orwhere('apellidos','like',$q.'%') 
                         ->orwhere('dni','like',$q.'%')                
                             ->get();
-            return $datos;
+            return $persona;
+    }
+    public function buscarPersonaConDni($q){
+      $persona = Persona::where('dni','=',$q)              
+                        ->get();
+            return $persona;
     }
 } 

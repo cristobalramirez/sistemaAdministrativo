@@ -186,6 +186,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/personas/validar/{text}','PersonasController@validarDni');
     Route::get('api/personas/disablePersona/{id}',['as'=>'product_disabled', 'uses'=>'PersonasController@disablePersona']);
     Route::get('api/buscarPersona/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'PersonasController@buscarPersona']);
+    Route::get('api/buscarPersonaConDni/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'PersonasController@buscarPersonaConDni']);
 //END CATEGORIAS ROUTES
     //CUENTAS BANCARIAS ROUTES
     Route::get('cuentaBancarias', ['as' => 'person', 'uses' => 'CuentaBancariasController@index']);
@@ -255,8 +256,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/buscarEdicion/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'EdicionesController@buscarEdicion']);
 
 
-    Route::get('inscribir/{id?}','EdicionesController@index');
-    Route::get('ediciones/form-inscribir','EdicionesController@form_inscribir');
+    
     //Route::put('api/inscribir', ['as' => 'person_edit', 'uses' => 'EdicionesController@edit']);
 //END PERSONS ROUTES
 //PERSONS ROUTES
@@ -280,3 +280,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/inscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'InscripcionesController@find']);
 
 //END CATEGORIAS ROUTES
+
+    Route::get('inscribir/{id?}','InscribirController@index');
+    Route::get('inscribir/form-inscribir','InscribirController@form_inscribir');
+    Route::post('api/inscribir/create','InscripcionesController@createInscribir');
