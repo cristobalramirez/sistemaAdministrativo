@@ -67,6 +67,7 @@
                         
                         <th style="width: 210px">Documentos</th>
                         <th style="width: 140px">Publicidad</th>
+                        <th style="width: 40px">Inscribir</th>
                         <th style="width: 40px">Editar</th>
                         <th style="width: 40px">Eliminar</th>
                       </tr>
@@ -84,6 +85,8 @@
                         </td>
                         <td><a  ng-disabled="row.publicidadFace==''" href="{{row.publicidadFace}}" target="_blank" class="btn btn-success btn-xs">Facebook</a>
                         <a  ng-disabled="row.publicidadImprimir==''" href="{{row.publicidadImprimir}}" target="_blank" class="btn btn-success btn-xs">Imprimir</a>
+                        </td>
+                        <td><a ng-click="inscribirEdicion(row)" class="btn btn-warning btn-xs">Inscribir</a></td>
                         </td>
                         <td><a ng-click="editEdicion(row)" class="btn btn-warning btn-xs">Editar</a></td>
                         <td><a ng-click="deleteEdicion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>

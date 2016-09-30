@@ -46,6 +46,11 @@ class EdicionesController extends Controller {
         return View('ediciones.form_edit');
     }
 
+    public function form_inscribir()
+    {
+        return View('ediciones.form_inscribir');
+    }
+
     public function create(Request $request)
     {
         \DB::beginTransaction();

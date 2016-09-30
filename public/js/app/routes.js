@@ -172,6 +172,10 @@
                     templateUrl:'/ediciones/form-edit',
                     controller: 'EdicionController'
                 }) 
+                .when('/inscribir/:id',{
+                    templateUrl:'/ediciones/form-inscribir',
+                    controller: 'EdicionController'
+                }) 
                 //------------------
                 //RUTES PERSONAS
                 .when('/ediciones', {

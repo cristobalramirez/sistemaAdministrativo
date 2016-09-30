@@ -253,6 +253,11 @@ Route::group(['middleware' => 'role'], function () {
 
     Route::post('api/ediciones/uploadFile',['as'=>'product_disabled', 'uses'=>'DocentesController@uploadFile']);
     Route::get('api/buscarEdicion/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'EdicionesController@buscarEdicion']);
+
+
+    Route::get('inscribir/{id?}','EdicionesController@index');
+    Route::get('ediciones/form-inscribir','EdicionesController@form_inscribir');
+    //Route::put('api/inscribir', ['as' => 'person_edit', 'uses' => 'EdicionesController@edit']);
 //END PERSONS ROUTES
 //PERSONS ROUTES
     Route::post('api/detalleDocenteEdiciones/create', ['as' => 'person_create', 'uses' => 'DetalleDocenteEdicionesController@create']);

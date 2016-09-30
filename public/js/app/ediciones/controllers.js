@@ -118,6 +118,9 @@
                 $scope.editEdicion = function(row){
                     $location.path('/ediciones/edit/'+row.id);
                 };
+                $scope.inscribirEdicion = function(row){
+                    $location.path('/inscribir/'+row.id);
+                };
 
                 $scope.updateEdicion = function(){
 
