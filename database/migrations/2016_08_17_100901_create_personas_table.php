@@ -28,7 +28,7 @@ class CreatePersonasTable extends Migration
             $table->string('estado');
             $table->integer('ubigeoTrabajo_id')->unsigned()->nullable();
             $table->integer('ubigeoDireccion_id')->unsigned()->nullable();
-            $table->integer('profesion_id')->unsigned();
+            $table->integer('profesion_id')->unsigned()->nullable();
             
             $table->foreign('ubigeoTrabajo_id')->references('id')->on('ubigeos');
             $table->foreign('ubigeoDireccion_id')->references('id')->on('ubigeos');

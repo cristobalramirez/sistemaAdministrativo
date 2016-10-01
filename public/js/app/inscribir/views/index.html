@@ -4,29 +4,18 @@
     </div>
     <div  class="col-md-6">
     <div ng-if="edicion.id!=null">
-        <section class="content-header">
-          <h1>Curso {{curso.descripcion}}<h1>
-        </section>
-
-        <!-- Main content -->
+                <!-- Main content -->
         <section class="content">
-            <p>Precio del curso {{edicion.costoCurso}}<p>
 		<form name="inscribirCreateForm" role="form" novalidate>
-            <div class="row">
-            	<div  class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.medioPublicitario_id.$invalid,'has-success':inscribirCreateForm.medioPublicitario_id.$invalid}">
-                            <label>Medio Publicitario</label>
-                            <select  class="form-control ng-pristine ng-valid ng-touched" name="medioPublicitario_id" ng-model="inscribir.medioPublicitario_id" ng-options="item.id as item.descripcion for item in medioPublicitarios" required><option value="">-- Elige Medio Publicitario --</option></select>
-                            <label ng-show="inscribirCreateForm.medioPublicitario_id.$error.required">
-                                <span ng-show="inscribirCreateForm.medioPublicitario_id.$error.required"><i class="fa fa-times-circle-o"></i>El campo Medio Publicitario es Requerido. 
-                                </span>
-                              </label>
-                        </div>
-                      </div>
-                </div>
 
-            <div class="row">
-                      <div  class="col-md-4">
+
+          <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">DATOS PERSONALES</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                  <div class="box-body">
+
                         <div class="form-group" ng-class="{'has-error': inscribirCreateForm.dni.$invalid,'has-success':inscribirCreateForm.dni.$invalid}">
                           <label for="dni">DNI</label>
                           <input ng-blur="buscarPersonaDni(persona.dni)" type="text" class="form-control" name="dni"  placeholder="DNI" ng-model="persona.dni" required>
@@ -35,25 +24,7 @@
                             </span>
                           </label>
                         </div>
-                      </div>
 
-                      <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.fechaNacimiento.$invalid,'has-success':inscribirCreateForm.fechaNacimiento.$invalid}">
-                                  <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                              <div  class="input-group">
-                                  <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                 </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaNacimiento" ng-model="persona.fechaNac" required>
-                              </div>
-                              <label ng-show="inscribirCreateForm.fechaNacimiento.$error.required">
-                            <span ng-show="inscribirCreateForm.fechaNacimiento.$error.required"><i class="fa fa-times-circle-o"></i>El campo Fecha de Nacimiento es Requerido. 
-                            </span>
-                          </label>
-                        </div>
-                      </div>
-
-                    <div  class="col-md-4">
                         <div class="form-group" ng-class="{'has-error': inscribirCreateForm.sexo.$invalid,'has-success':inscribirCreateForm.sexo.$invalid}">
                               <label>Sexo</label>
                               <select class="form-control ng-pristine ng-valid ng-touched" name="sexo" ng-model="persona.sexo" required><option value="">-- Elige Sexo --</option>
@@ -64,10 +35,11 @@
                             </span>
                           </label>
                           </div>
-                      </div>
 
-                      </div>    
-            <div class="form-group" ng-class="{'has-error': inscribirCreateForm.nombres.$invalid,'has-success':inscribirCreateForm.nombres.$invalid}">
+
+
+
+                      <div class="form-group" ng-class="{'has-error': inscribirCreateForm.nombres.$invalid,'has-success':inscribirCreateForm.nombres.$invalid}">
                       <label for="nombres">Nombres</label>
                       <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="persona.nombres" required>
                       <label ng-show="inscribirCreateForm.nombres.$error.required">
@@ -85,47 +57,21 @@
                       </label>
                     </div>
                     
-                    
+
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
 
 
-                      <div class="row">
-                      <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.estadoCivil.$invalid,'has-success':inscribirCreateForm.estadoCivil.$invalid}">
-                              <label>Estado Civil</label>
-                              <select class="form-control ng-pristine ng-valid ng-touched" name="estadoCivil" ng-model="persona.estadoCivil" required><option value="">-- Elige Estado Civil --</option>
-                                <option value="Masculino">SOLTERO</option>
-                                <option value="Femenino">CASADO</option>
-                                <option value="Femenino">CONVIVIENTE</option>
-                                <option value="Femenino">VIUDO</option>
-                                <option value="Femenino">DIVORCIADO</option>
-                              </select>
-                              <label ng-show="inscribirCreateForm.estadoCivil.$error.required">
-                                <span ng-show="inscribirCreateForm.estadoCivil.$error.required"><i class="fa fa-times-circle-o"></i>El campo Estado Civil es Requerido. 
-                                </span>
-                              </label>
-                          </div>
-                      </div>
-                      
-                      <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.profesion_id.$invalid,'has-success':inscribirCreateForm.profesion_id.$invalid}">
-                            <label>Profesion</label>
-                            <select ng-click="cargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="profesion_id" ng-model="persona.profesion_id" ng-options="item.id as item.nombre for item in profesiones" required><option value="">-- Elige Profesion --</option></select>
-                            <label ng-show="inscribirCreateForm.profesion_id.$error.required">
-                                <span ng-show="inscribirCreateForm.profesion_id.$error.required"><i class="fa fa-times-circle-o"></i>El campo Profesion es Requerido. 
-                                </span>
-                              </label>
-                        </div>
-                      </div>
 
-                      <div class="col-md-4">
-                        <label for="descripcionProfesion">Descipcion Profesion</label>
-                        <input type="text" class="form-control" name="Ciclo Academico" placeholder="Descipcion Profesion" ng-disabled="persona.profesion_id!=1" ng-model="persona.descripcionProfesio">
-                      </div>
-                      
-                    </div>
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">DATOS CONTACTO</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
 
-                    <div class="row">
-                      <div  class="col-md-8">
+                  <div class="box-body">
+
+
                         <div class="form-group" ng-class="{true: 'has-error'}[ inscribirCreateForm.email.$error.required && inscribirCreateForm.$submitted || inscribirCreateForm.z.$dirty && inscribirCreateForm.email.$invalid]">
                           <label for="email">Email</label>
                           <input type="text" class="form-control" name="email"  placeholder="Email" ng-model="persona.email" required>
@@ -133,9 +79,7 @@
                             <span ng-show="inscribirCreateForm.email.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
                           </label>
                         </div>
-                      </div>
-                      
-                      <div  class="col-md-4">
+
                         <div class="form-group" ng-class="{true: 'has-error'}[ inscribirCreateForm.telefono.$error.required && inscribirCreateForm.$submitted || inscribirCreateForm.z.$dirty && inscribirCreateForm.telefono.$invalid]">
                           <label for="telefono">Telefono</label>
                           <input type="text" class="form-control" name="telefono"  placeholder="Telefono" ng-model="persona.telefono" required>
@@ -143,50 +87,8 @@
                             <span ng-show="inscribirCreateForm.telefono.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
                           </label>
                         </div>
-                      </div>
-
-                      
-                    </div>
-                    
-                    <div class="form-group" ng-class="{true: 'has-error'}[ inscribirCreateForm.institucionTrabajo.$error.required && inscribirCreateForm.$submitted || inscribirCreateForm.z.$dirty && inscribirCreateForm.institucionTrabajo.$invalid]">
-                      <label for="institucionTrabajo">Institucion de Trabajo</label>
-                      <input type="text" class="form-control" name="institucionTrabajo"  placeholder="Institucion de Trabajo" ng-model="persona.institucionTrabajo" required>
-                      <label ng-show="inscribirCreateForm.$submitted || inscribirCreateForm.institucionTrabajo.$dirty && inscribirCreateForm.institucionTrabajo.$invalid">
-                        <span ng-show="inscribirCreateForm.institucionTrabajo.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
-                    </div>
-
-                    
 
 
-                    <div class="row">
-                      <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.trabajoDepartamento.$invalid,'has-success':inscribirCreateForm.trabajoDepartamento.$invalid}">
-                            <label>Departamento</label>
-                            <select ng-click="TrabajoCargarProvincia()" class="form-control ng-pristine ng-valid ng-touched" name="trabajoDepartamento" ng-model="persona.TrabajoDepertamentoSelect" ng-options="item.departamento as item.departamento for item in TrabajoDepartamentos"><option value="">-- Elige Departamento --</option>
-                            </select>
-                            <label ng-show="inscribirCreateForm.trabajoDepartamento.$error.required">
-                                <span ng-show="inscribirCreateForm.trabajoDepartamento.$error.required"><i class="fa fa-times-circle-o"></i>El campo Departamento es Requerido. 
-                                </span>
-                              </label>
-                        </div>
-                      </div>
-                      
-                      <div  class="col-md-4">
-                        <div>
-                            <label>Provinca</label>
-                            <select ng-disabled="persona.TrabajoDepertamentoSelect==null" ng-click="TrabajoCargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.TrabajoProvinciaSelect" ng-options="item.provincia as item.provincia for item in TrabajoProvincias"><option value="">-- Elige Provincia --</option></select>
-                        </div>
-                      </div>
-
-                      <div  class="col-md-4">
-                        <div>
-                            <label>Distrito</label>
-                            <select ng-disabled="persona.TrabajoDepertamentoSelect==null || persona.TrabajoProvinciaSelect==undefined" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.TrabajoDistritoSelect" ng-options="item.id as item.distrito for item in TrabajoDistritos"><option value="">-- Elige Distrito --</option></select>
-                        </div>
-                      </div>
-                    </div>
-                    
                     <div class="form-group" ng-class="{true: 'has-error'}[ inscribirCreateForm.direccion.$error.required && inscribirCreateForm.$submitted || inscribirCreateForm.z.$dirty && inscribirCreateForm.direccion.$invalid]">
                       <label for="direccion">Domicilio</label>
                       <input type="text" class="form-control" name="direccion"  placeholder="Domicilio" ng-model="persona.direccion" required>
@@ -218,6 +120,34 @@
                         </div>
                       </div>
                     </div>
+                    
+
+                </div><!-- /.box-body -->
+
+              </div><!-- /.box -->
+
+
+
+
+
+
+
+
+            <div class="row">
+            	<div  class="col-md-8">
+                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.medioPublicitario_id.$invalid,'has-success':inscribirCreateForm.medioPublicitario_id.$invalid}">
+                            <label>Medio Publicitario</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" name="medioPublicitario_id" ng-model="inscribir.medioPublicitario_id" ng-options="item.id as item.descripcion for item in medioPublicitarios" required><option value="">-- Elige Medio Publicitario --</option></select>
+                            <label ng-show="inscribirCreateForm.medioPublicitario_id.$error.required">
+                                <span ng-show="inscribirCreateForm.medioPublicitario_id.$error.required"><i class="fa fa-times-circle-o"></i>El campo Medio Publicitario es Requerido. 
+                                </span>
+                              </label>
+                        </div>
+                      </div>
+                </div>
+
+           
+                    
                     </br>
                     <div>
                     <button type="submit" ng-disabled="inscribirCreateForm.$invalid" class="btn btn-primary" ng-click="createInscripcion()">Inscribir</button>

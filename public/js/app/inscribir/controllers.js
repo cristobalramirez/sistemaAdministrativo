@@ -67,7 +67,6 @@
                     //$scope.atribut.estado = 1;
                     $log.log($scope.persona);
                     //if ($scope.inscribirCreateForm.$valid) {
-                        if($scope.persona.TrabajoDistritoSelect!=null){
                             if($scope.persona.DomicilioDistritoSelect!=null){
                                 $scope.persona.ubigeoTrabajo_id=$scope.persona.TrabajoDistritoSelect;
                                 $scope.persona.ubigeoDireccion_id=$scope.persona.DomicilioDistritoSelect;
@@ -101,9 +100,7 @@
                             }else{
                                 alert('Selecione Direcion de Domicilio Correctamente');  
                             }
-                        }else{
-                            alert('Selecione Direcion de Trabajo Correctamente');
-                        }
+                        
                     //}
                 }
 
