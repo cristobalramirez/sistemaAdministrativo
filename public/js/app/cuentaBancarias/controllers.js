@@ -32,6 +32,7 @@
                 {
                     crudService.byId(id,'cuentaBancarias').then(function (data) {
                         $scope.cuentaBancaria = data;
+                        $scope.cuentaBancaria.numeroCuenta=Number($scope.cuentaBancaria.numeroCuenta);
                     });
                     crudService.all('cargarBancos').then(function (data) {
                         $scope.bancos = data;
@@ -70,15 +71,12 @@
                 };
 
                 $scope.createCuentaBancaria = function(){
-                    //$scope.atribut.estado = 1;
-                    $log.log($scope.cuentaBancaria);
                     if ($scope.cuentaBancariaCreateForm.$valid) {
-                        if($scope.cuentaBancaria.banco_id!=undefined){
                             crudService.create($scope.cuentaBancaria, 'cuentaBancarias').then(function (data) {
                           
                                 if (data['estado'] == true) {
                                     $scope.success = data['nombres'];
-                                    alert('grabado correctamente');
+                                    alert('Grabado correctamente');
                                     $location.path('/cuentaBancarias');
 
                                 } else {
@@ -86,9 +84,6 @@
 
                                 }
                             });
-                        }else{
-                            alert("Selecione Banco");
-                        }
                     }
                 }
 
@@ -100,20 +95,17 @@
                 $scope.updateCuentaBancaria = function(){
 
                     if ($scope.cuentaBancariaEditForm.$valid) {
-                        if($scope.cuentaBancaria.banco_id!=undefined){
                             crudService.update($scope.cuentaBancaria,'cuentaBancarias').then(function(data)
                             {
                                 if(data['estado'] == true){
                                     $scope.success = data['nombres'];
-                                    alert('editado correctamente');
+                                    alert('Editado correctamente');
                                     $location.path('/cuentaBancarias');
                                 }else{
                                     $scope.errors =data;
                                 }
                             });
-                        }else{
-                            alert("Selecione Banco");
-                        }
+                        
                     }
                 };
 
@@ -132,7 +124,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.cuentaBancaria = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{

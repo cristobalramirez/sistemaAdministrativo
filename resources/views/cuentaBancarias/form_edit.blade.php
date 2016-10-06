@@ -32,7 +32,7 @@
                                             
                    <div class="form-group" ng-class="{'has-error': cuentaBancariaEditForm.cuentaBancaria.$invalid,'has-success':cuentaBancariaEditForm.cuentaBancaria.$invalid}">
                       <label for="numeroCuenta">Numero de Cuenta </label>
-                      <input type="text" class="form-control" name="cuentaBancaria" ng-blur="validanomUbigeo(cuentaBancaria.numeroCuenta)" placeholder=" Numero de Cuenta" ng-model="cuentaBancaria.numeroCuenta" required>
+                      <input type="number" class="form-control" name="cuentaBancaria" ng-blur="validanomUbigeo(cuentaBancaria.numeroCuenta)" placeholder=" Numero de Cuenta" ng-model="cuentaBancaria.numeroCuenta" required>
                       <label ng-show="cuentaBancariaEditForm.cuentaBancaria.$error.required">
                         <span ng-show="cuentaBancariaEditForm.cuentaBancaria.$error.required"><i class="fa fa-times-circle-o"></i>El campo Numero de Cuenta es Requerido. 
                         </span>

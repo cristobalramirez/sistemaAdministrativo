@@ -68,7 +68,7 @@
                           
                             if (data['estado'] == true) {
                                 $scope.success = data['nombres'];
-                                alert('grabado correctamente');
+                                alert('Grabado correctamente');
                                 $location.path('/medioPublicitarios');
 
                             } else {
@@ -91,7 +91,7 @@
                         {
                             if(data['estado'] == true){
                                 $scope.success = data['nombres'];
-                                alert('editado correctamente');
+                                alert('Editado correctamente');
                                 $location.path('/medioPublicitarios');
                             }else{
                                 $scope.errors =data;
@@ -99,16 +99,6 @@
                         });
                     }
                 };
-                 $scope.validanomMedioPublicitario=function(texto){
-                   if(texto!=undefined){
-                        crudService.validar('medioPublicitarios',texto).then(function (data){
-                            if(data.codigo!=undefined){
-                                alert("Codigo Ubigeo Registrado!!");
-                                $scope.medioPublicitario.codigo='';
-                            }
-                        });
-                    }
-               }
                 $scope.deleteMedioPublicitario= function(row){
                     
                     $scope.medioPublicitario = row;
@@ -124,7 +114,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.medioPublicitario = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{

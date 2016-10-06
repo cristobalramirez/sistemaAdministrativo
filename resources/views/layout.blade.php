@@ -152,7 +152,6 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class=""><a href="/users" ><i class="fa fa-circle-o"></i>Usuarios</a></li>
                 <li class=""><a href="/ubigeos" ><i class="fa fa-circle-o"></i>Ubigeos</a></li>
                 <li class=""><a href="/acreditadoras" ><i class="fa fa-circle-o"></i>Acreditadoras</a></li>
                 <li class=""><a href="/medioPublicitarios" ><i class="fa fa-circle-o"></i>Medios Publicitarios</a></li>
@@ -163,6 +162,7 @@
                 <li class=""><a href="/docentes" ><i class="fa fa-circle-o"></i>Docentes </a></li>
                 <li class=""><a href="/cursos" ><i class="fa fa-circle-o"></i>Cursos</a></li>
                 <li class=""><a href="/ediciones" ><i class="fa fa-circle-o"></i>Ediciones </a></li>
+                <li class=""><a href="/inscripciones" ><i class="fa fa-circle-o"></i>Inscripciones</a></li>
               </ul>
             </li>
             @endif

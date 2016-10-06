@@ -23,43 +23,41 @@
                 <!-- form start -->
                 <form name="ubigeoCreateForm" role="form" novalidate>
                   <div class="box-body">
-                 
-                      <div class="callout callout-danger" ng-show="ubigeoCreateForm.departamento.$error.required || ubigeoCreateForm.provincia.$error.required || ubigeoCreateForm.codigo.$error.required || ubigeoCreateForm.distrito.$error.required">
-                        <ul>
-                          <li ng-show="ubigeoCreateForm.codigo.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Codigo Requerido.
-                          </li>
-                          <li ng-show="ubigeoCreateForm.departamento.$error.required"> 
-                            <i class="fa fa-times-circle-o"></i>El campo Departamento Requerido.
-                          </li>
-                          <li ng-show="ubigeoCreateForm.provincia.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Provincia Requerido.
-                          </li>
-                          <li ng-show="ubigeoCreateForm.distrito.$error.required">
-                            <i class="fa fa-times-circle-o"></i>El campo Distrito Requerido.
-                          </li>
-                        </ul>                                                
-                    </div> 
-                                          
-                    
-                    <div class="form-group" ng-class="{'has-error': ubigeoCreateForm.codigo.$invalid,'has-success':ubigeoCreateForm.codigo.$invalid}">
+
+                  <div class="form-group" ng-class="{'has-error': ubigeoCreateForm.codigo.$invalid,'has-success':ubigeoCreateForm.codigo.$invalid}">
                       <label for="codigo">Codigo</label>
-                      <input ng-blur="validanomUbigeo(ubigeo.codigo)" type="text" class="form-control" name="codigo" placeholder="Codigo" ng-model="ubigeo.codigo" required>
+                      <input ng-blur="validanomUbigeo(ubigeo.codigo)" type="number" class="form-control" name="codigo" placeholder="Codigo" ng-model="ubigeo.codigo" required>
+                      <label ng-show="ubigeoCreateForm.codigo.$error.required">
+                        <span ng-show="ubigeoCreateForm.codigo.$error.required"><i class="fa fa-times-circle-o"></i>El campo Codigo Requerido. 
+                        </span>
+                      </label>
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': ubigeoCreateForm.departamento.$invalid,'has-success':ubigeoCreateForm.departamento.$invalid}">
                       <label for="departamento">Departamento</label>
                       <input type="text" class="form-control" name="departamento" placeholder="Departamento" ng-model="ubigeo.departamento" required>
+                      <label ng-show="ubigeoCreateForm.departamento.$error.required">
+                        <span ng-show="ubigeoCreateForm.departamento.$error.required"><i class="fa fa-times-circle-o"></i>El campo Departamento Requerido. 
+                        </span>
+                      </label>
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': ubigeoCreateForm.provincia.$invalid,'has-success':ubigeoCreateForm.provincia.$invalid}">
                       <label for="provincia">Provincia</label>
                       <input type="text" class="form-control" name="provincia" placeholder="Provincia" ng-model="ubigeo.provincia" required>
+                      <label ng-show="ubigeoCreateForm.provincia.$error.required">
+                        <span ng-show="ubigeoCreateForm.provincia.$error.required"><i class="fa fa-times-circle-o"></i>El campo Provincia Requerido. 
+                        </span>
+                      </label>
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': ubigeoCreateForm.distrito.$invalid,'has-success':ubigeoCreateForm.distrito.$invalid}">
                       <label for="distrito">Distrito</label>
                       <input type="text" class="form-control" name="distrito" placeholder="Distrito" ng-model="ubigeo.distrito" required>
+                      <label ng-show="ubigeoCreateForm.distrito.$error.required">
+                        <span ng-show="ubigeoCreateForm.distrito.$error.required"><i class="fa fa-times-circle-o"></i>El campo Distrito Requerido. 
+                        </span>
+                      </label>
                     </div>
                     
 

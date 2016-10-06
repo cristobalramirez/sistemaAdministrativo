@@ -49,7 +49,9 @@
                 {
                     crudService.byId(id,'personas').then(function (data) {
                         $scope.persona = data;
-                        
+                        $scope.persona.dni=Number($scope.persona.dni);
+                        $scope.persona.telefono=Number($scope.persona.telefono);
+
                         if($scope.persona != null) {
                             if ($scope.persona.fechaNac.length > 0) {
                                 $scope.persona.fechaNac = new Date($scope.persona.fechaNac);
@@ -138,11 +140,7 @@
                 };
 
                 $scope.createPersona = function(){
-                    //$scope.atribut.estado = 1;
-                    $log.log($scope.persona);
                     if ($scope.personaCreateForm.$valid) {
-                        if($scope.TrabajoDistritoSelect!=null){
-                            if($scope.DomicilioDistritoSelect!=null){
                                 $scope.persona.ubigeoTrabajo_id=$scope.TrabajoDistritoSelect;
                                 $scope.persona.ubigeoDireccion_id=$scope.DomicilioDistritoSelect;
                                 $scope.persona.estado="Activo";
@@ -150,20 +148,14 @@
                           
                                     if (data['estado'] == true) {
                                     $scope.success = data['nombres'];
-                                        alert('grabado correctamente');
+                                        alert('Grabado correctamente');
                                         $location.path('/personas');
 
                                     } else {
                                         $scope.errors = data;
 
                                     }
-                                });
-                            }else{
-                                alert('Selecione Direcion de Domicilio Correctamente');  
-                            }
-                        }else{
-                            alert('Selecione Direcion de Trabajo Correctamente');
-                        }
+                                });                            
                     }
                 }
 
@@ -175,26 +167,18 @@
                 $scope.updatePersona = function(){
 
                     if ($scope.PersonaEditForm.$valid) {
-                        if($scope.TrabajoDistritoSelect!=null){
-                            if($scope.DomicilioDistritoSelect!=null){
                                 $scope.persona.ubigeoTrabajo_id=$scope.TrabajoDistritoSelect;
                                 $scope.persona.ubigeoDireccion_id=$scope.DomicilioDistritoSelect;
                                 crudService.update($scope.persona,'personas').then(function(data)
                                 {
                                     if(data['estado'] == true){
                                         $scope.success = data['nombres'];
-                                        alert('editado correctamente');
+                                        alert('Editado correctamente');
                                         $location.path('/personas');
                                     }else{
                                         $scope.errors =data;
                                     }
-                                });
-                         }else{
-                                alert('Selecione Direcion de Domicilio Correctamente');  
-                            }
-                        }else{
-                            alert('Selecione Direcion de Trabajo Correctamente');
-                        }
+                                });                        
                     }
                 };
 
@@ -213,7 +197,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.persona = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{
@@ -227,7 +210,6 @@
                     $scope.TrabajoDistritoSelect=null;
                     crudService.recuperarUnDato('ubigeoProvincia',$scope.TrabajoDepertamentoSelect).then(function(data){  
                         $scope.TrabajoProvincias = data;
-                        //$scope.provinciaSelect=data[0].provincia;
                     });
                 }
                 $scope.TrabajoCargarDistrito = function(){
@@ -235,7 +217,6 @@
                     $scope.TrabajoDistritoSelect=null;
                     crudService.recuperarDosDato('ubigeoDistrito',$scope.TrabajoDepertamentoSelect,$scope.TrabajoProvinciaSelect).then(function(data){  
                         $scope.TrabajoDistritos = data;
-                        $log.log($scope.TrabajoDistritos);
                     });
                 }
                 $scope.DomicilioCargarProvincia = function(){
@@ -244,7 +225,6 @@
                     $scope.DomicilioDistritoSelect=null;
                     crudService.recuperarUnDato('ubigeoProvincia',$scope.DomicilioDepertamentoSelect).then(function(data){  
                         $scope.DomicilioProvincias = data;
-                        //$scope.provinciaSelect=data[0].provincia;
                     });
                 }
                 $scope.DomicilioCargarDistrito = function(){
@@ -260,7 +240,6 @@
                    if(texto!=undefined){
 
                         crudService.validar('personas',texto).then(function (data){
-                            $log.log(data);
                             if(data.dni!=undefined){
                                 alert("DNI Registrado!!");
                                 $scope.persona.dni='';
@@ -269,7 +248,6 @@
                     }
                }
                $scope.disableProduct = function(row){
-                    //$log.log(row);
                     crudService.byforeingKey('personas','disablePersona',row.id).then(function(data)
                     {
                         if(data['estado'] == true){

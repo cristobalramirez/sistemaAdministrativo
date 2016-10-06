@@ -63,14 +63,13 @@
                 };
 
                 $scope.createProfesion = function(){
-                    //$scope.atribut.estado = 1;
                     if ($scope.profesionCreateForm.$valid) {
                         $scope.profesion.orden=$scope.profesion.nombre;
                         crudService.create($scope.profesion, 'profesiones').then(function (data) {
                           
                             if (data['estado'] == true) {
                                 $scope.success = data['nombres'];
-                                alert('grabado correctamente');
+                                alert('Grabado correctamente');
                                 $location.path('/profesiones');
 
                             } else {
@@ -93,7 +92,7 @@
                         {
                             if(data['estado'] == true){
                                 $scope.success = data['nombres'];
-                                alert('editado correctamente');
+                                alert('Editado correctamente');
                                 $location.path('/profesiones');
                             }else{
                                 $scope.errors =data;
@@ -117,7 +116,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.profesion = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{

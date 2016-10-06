@@ -12,7 +12,7 @@ class PersonaRepo extends BaseRepo{
     public function search($q)
     {
         $personas =Persona::where('nombres','like', $q.'%')
-                    ->orwhere('apellidos','like', $q.'%')
+                    ->orwhere('apellidos','like', '%'.$q.'%')
                     ->orwhere('dni','like', $q.'%')
                     ->orwhere('email','like', $q.'%')
                     ->orwhere('telefono','like', $q.'%')

@@ -33,6 +33,7 @@
                     crudService.byId(id,'ubigeos').then(function (data) {
                         $scope.ubigeo = data;
                         $scope.codigoAntiguo=$scope.ubigeo.codigo;
+                        $scope.ubigeo.codigo=Number($scope.ubigeo.codigo);
                     });
                 }else{
                     crudService.paginate('ubigeos',1).then(function (data) {
@@ -71,13 +72,11 @@
                           
                             if (data['estado'] == true) {
                                 $scope.success = data['nombres'];
-                                alert('grabado correctamente');
+                                alert('Grabado correctamente');
                                 $location.path('/ubigeos');
 
                             } else {
                                 $scope.errors = data;
-                                $log.log("Errores");
-                                $log.log($scope.errors);
                             }
                         });
                     //}
@@ -95,7 +94,7 @@
                         {
                             if(data['estado'] == true){
                                 $scope.success = data['nombres'];
-                                alert('editado correctamente');
+                                alert('Editado correctamente');
                                 $location.path('/ubigeos');
                             }else{
                                 $scope.errors =data;
@@ -131,7 +130,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.ubigeo = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{

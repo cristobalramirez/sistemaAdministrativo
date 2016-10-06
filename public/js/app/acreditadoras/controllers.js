@@ -96,16 +96,13 @@
                 };
 
                 $scope.createAcreditadora = function(){
-                    //$scope.atribut.estado = 1;
-                    $log.log($scope.distritoSelect);
                     if ($scope.acreditadoraCreateForm.$valid) {
-                        if($scope.distritoSelect!=null){
                             $scope.acreditadora.ubigeo_id=$scope.distritoSelect;
                             crudService.create($scope.acreditadora, 'acreditadoras').then(function (data) {
                           
                                 if (data['estado'] == true) {
                                  $scope.success = data['nombres'];
-                                    alert('grabado correctamente');
+                                    alert('Grabado correctamente');
                                     $location.path('/acreditadoras');
 
                                 } else {
@@ -113,9 +110,6 @@
 
                                 }
                             });
-                        }else{
-                            alert('Selecione Direcion Correctamente');
-                        }
                     }
                 }
 
@@ -127,22 +121,18 @@
                 $scope.updateAcreditadora = function(){
 
                     if ($scope.acreditadoraEditForm.$valid) {
-                        if($scope.distritoSelect!=null){
                             $scope.acreditadora.ubigeo_id=$scope.distritoSelect;
 
                             crudService.update($scope.acreditadora,'acreditadoras').then(function(data)
                             {
                                 if(data['estado'] == true){
                                     $scope.success = data['nombres'];
-                                    alert('editado correctamente');
+                                    alert('Editado correctamente');
                                     $location.path('/acreditadoras');
                                 }else{
                                     $scope.errors =data;
                                 }
                             });
-                        }else{
-                            alert('Selecione Direcion Correctamente');
-                        }
                     }
                 };
 
@@ -161,7 +151,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.acreditadora = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{

@@ -11,8 +11,11 @@ class AcreditadoraRepo extends BaseRepo{
 
     public function search($q)
     {
-        $Acreditadoras =Acreditadora::where('nombre','like', $q.'%')
-                    ->paginate(15);
+        $Acreditadoras = Acreditadora::with('ubigeo')->paginate(15);
+        $Acreditadoras = Acreditadora::with(array('ubigeo'=>function($query){
+            $query->select('id','distrito','provincia','departamento');
+        }))->where('nombre','like', $q.'%')
+        ->paginate(15);
         return $Acreditadoras;
     }
     public function paginaterepo($c){

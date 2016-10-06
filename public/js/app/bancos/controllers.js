@@ -63,13 +63,12 @@
                 };
 
                 $scope.createBanco = function(){
-                    //$scope.atribut.estado = 1;
                     if ($scope.bancoCreateForm.$valid) {
                         crudService.create($scope.banco, 'bancos').then(function (data) {
                           
                             if (data['estado'] == true) {
                                 $scope.success = data['nombres'];
-                                alert('grabado correctamente');
+                                alert('Grabado correctamente');
                                 $location.path('/bancos');
 
                             } else {
@@ -92,7 +91,7 @@
                         {
                             if(data['estado'] == true){
                                 $scope.success = data['nombres'];
-                                alert('editado correctamente');
+                                alert('Editado correctamente');
                                 $location.path('/bancos');
                             }else{
                                 $scope.errors =data;
@@ -116,7 +115,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.banco = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{

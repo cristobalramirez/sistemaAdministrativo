@@ -11,8 +11,11 @@ class CuentaBancariaRepo extends BaseRepo{
 
     public function search($q)
     {
-        $cuentaBancarias =CuentaBancaria::where('nombre','like', $q.'%')
-                    ->paginate(15);
+        $cuentaBancarias = CuentaBancaria::with('banco')->paginate(15);
+        $cuentaBancarias = CuentaBancaria::with(array('banco'=>function($query){
+            $query->select('id','nombre');
+        }))->where('numeroCuenta','like', $q.'%')
+        ->paginate(15);
         return $cuentaBancarias;
     }
     public function paginaterepo($c){

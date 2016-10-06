@@ -11,7 +11,7 @@ class BancoRepo extends BaseRepo{
 
     public function search($q)
     {
-        $bancos =Banco::where('descripcion','like', $q.'%')
+        $bancos =Banco::where('nombre','like', $q.'%')
                     ->paginate(15);
         return $bancos;
     }
