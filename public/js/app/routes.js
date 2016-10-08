@@ -246,6 +246,19 @@
                     templateUrl:'/promociones/form-edit',
                     controller: 'PromocionController'
                 }) 
+                //------------------//RUTES PERSONAS
+                .when('/empleados', {
+                    templateUrl: '/js/app/empleados/views/index.html',
+                    controller: 'EmpleadoController'
+                })
+                .when('/empleados/create',{
+                    templateUrl:'/empleados/form-create',
+                    controller: 'EmpleadoController'
+                })
+                .when('/empleados/edit/:id',{
+                    templateUrl:'/empleados/form-edit',
+                    controller: 'EmpleadoController'
+                }) 
                 //---------------------
                 .otherwise({
                     redirectTo: '/'

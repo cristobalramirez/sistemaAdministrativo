@@ -175,5 +175,20 @@ class EdicionesController extends Controller {
         $ediciones = $this->edicionRepo->buscarEdicion($q);
         return response()->json($ediciones);
     }
+    public function disablePersona($id){
+        \DB::beginTransaction();
+        $edicion = $this->edicionRepo->find($id);
+        $estado = $edicion->estado;
+            if ($estado == 'Activo') {
+                $edicion->estado = 'Inactivo';
+            } else {
+                $edicion->estado = 'Activo';
+            }
+        
+        $edicion->save();
+        //die();
+        \DB::commit();
+        return response()->json(['estado'=>true]);
+    }
     
 }

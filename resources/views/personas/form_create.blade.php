@@ -103,7 +103,7 @@
                       <div  class="col-md-8">
                       <div class="form-group" ng-class="{'has-error': personaCreateForm.email.$invalid,'has-success':personaCreateForm.email.$invalid}">
                           <label for="email">Email * </label>
-                          <input type="text" class="form-control" name="email"  placeholder="Email" ng-model="persona.email" required>
+                          <input type="email" class="form-control" name="email"  placeholder="Email" ng-model="persona.email" required>
                         </div>
                       </div>
                       

@@ -152,8 +152,8 @@
 
                 </div><!-- /.box-body -->
 
-                  <div class="box-footer">
-                    <button ng-disabled="docenteCreateForm.$invalid" ng-disabled="banderaCargando" type="submit" class="btn btn-primary" ng-click="uploadFile()"  >Crear</button>
+                  <div class="box-footer" ng-show="!banderaCargando">
+                    <button ng-disabled="docenteCreateForm.$invalid" type="submit" class="btn btn-primary" ng-click="uploadFile()"  >Crear</button>
                     <a ng-disabled="banderaCargando" href="/docentes" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

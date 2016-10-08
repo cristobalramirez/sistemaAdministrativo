@@ -23,6 +23,7 @@ class CreateEdicionesTable extends Migration
             $table->string('proyecto');
             $table->string('publicidadFace');
             $table->string('publicidadImprimir');
+            $table->string('estado');
             
             $table->integer('curso_id')->unsigned()->nullable();
             $table->integer('acreditadora_id')->unsigned();

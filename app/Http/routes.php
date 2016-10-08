@@ -252,6 +252,8 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/ediciones/search/{q?}', ['as' => 'person_search', 'uses' => 'EdicionesController@search']);
     Route::get('api/ediciones/find/{id}', ['as' => 'person_find', 'uses' => 'EdicionesController@find']);
 
+    Route::get('api/ediciones/disablePersona/{id}',['as'=>'product_disabled', 'uses'=>'EdicionesController@disablePersona']);
+
     Route::post('api/ediciones/uploadFile',['as'=>'product_disabled', 'uses'=>'DocentesController@uploadFile']);
     Route::get('api/buscarEdicion/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'EdicionesController@buscarEdicion']);
 
@@ -278,6 +280,8 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('api/inscripciones/destroy', ['as' => 'person_destroy', 'uses' => 'InscripcionesController@destroy']);
     Route::get('api/inscripciones/search/{q?}', ['as' => 'person_search', 'uses' => 'InscripcionesController@search']);
     Route::get('api/inscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'InscripcionesController@find']);
+
+    Route::get('api/buscarInscripcion/recuperarDosDato/{d?}/{p?}', ['as' => 'person_all', 'uses' => 'InscripcionesController@buscarInscripcion']); 
 
 //END CATEGORIAS ROUTES
 
@@ -330,4 +334,24 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/promociones/search/{q?}', ['as' => 'person_search', 'uses' => 'PromocionesController@search']);
     Route::get('api/promociones/find/{id}', ['as' => 'person_find', 'uses' => 'PromocionesController@find']);
     Route::get('api/cargarPromociones/all', ['as' => 'person_all', 'uses' => 'PromocionesController@cargarPromociones']);
+//END CATEGORIAS ROUTES
+//ACREDITADORAS ROUTES
+    Route::get('empleados', ['as' => 'person', 'uses' => 'EmpleadosController@index']);
+    Route::get('empleados/create', ['as' => 'person_create', 'uses' => 'EmpleadosController@index']);
+    Route::get('empleados/edit/{id?}', ['as' => 'person_edit', 'uses' => 'EmpleadosController@index']);
+    Route::get('empleados/form-create', ['as' => 'person_form_create', 'uses' => 'EmpleadosController@form_create']);
+    Route::get('empleados/form-edit', ['as' => 'person_form_edit', 'uses' => 'EmpleadosController@form_edit']);
+    Route::get('api/empleados/all', ['as' => 'person_all', 'uses' => 'EmpleadosController@all']);
+    Route::get('api/empleados/paginate/', ['as' => 'person_paginate', 'uses' => 'EmpleadosController@paginatep']);
+    Route::post('api/empleados/create', ['as' => 'person_create', 'uses' => 'EmpleadosController@create']);
+    Route::put('api/empleados/edit', ['as' => 'person_edit', 'uses' => 'EmpleadosController@edit']);
+    Route::post('api/empleados/destroy', ['as' => 'person_destroy', 'uses' => 'EmpleadosController@destroy']);
+    Route::get('api/empleados/search/{q?}', ['as' => 'person_search', 'uses' => 'EmpleadosController@search']);
+    Route::get('api/empleados/find/{id}', ['as' => 'person_find', 'uses' => 'EmpleadosController@find']);
+    
+    Route::get('api/empleados/validar/{text}','EmpleadosController@validarDni');
+    Route::get('api/empleados/disablePersona/{id}',['as'=>'product_disabled', 'uses'=>'EmpleadosController@disablePersona']);
+
+    Route::get('api/buscarEmpleado/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'EmpleadosController@buscarEmpleado']);
+    Route::get('api/cargarEmpleados/all', ['as' => 'person_all', 'uses' => 'EmpleadosController@cargarEmpleados']);
 //END CATEGORIAS ROUTES

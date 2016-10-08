@@ -159,11 +159,13 @@
                 <li class=""><a href="/bancos" ><i class="fa fa-circle-o"></i>Bancos</a></li>
                  <li class=""><a href="/cuentaBancarias" ><i class="fa fa-circle-o"></i>Cuentas Bancarias</a></li>
                 <li class=""><a href="/profesiones" ><i class="fa fa-circle-o"></i>Profesiones</a></li>
+                <li class=""><a href="/empleados" ><i class="fa fa-circle-o"></i>Empleados</a></li>
                 <li class=""><a href="/personas" ><i class="fa fa-circle-o"></i>Personas</a></li>
                 <li class=""><a href="/docentes" ><i class="fa fa-circle-o"></i>Docentes </a></li>
                 <li class=""><a href="/categorias" ><i class="fa fa-circle-o"></i>Categorias</a></li>
                 <li class=""><a href="/cursos" ><i class="fa fa-circle-o"></i>Cursos</a></li>
                 <li class=""><a href="/ediciones" ><i class="fa fa-circle-o"></i>Ediciones </a></li>
+                <li class=""><a href="/promociones" ><i class="fa fa-circle-o"></i>Promociones </a></li>
                 <li class=""><a href="/inscripciones" ><i class="fa fa-circle-o"></i>Inscripciones</a></li>
               </ul>
             </li>

@@ -110,4 +110,9 @@ class InscripcionesController extends Controller {
 
         return response()->json($inscripciones);
     }
+    public function buscarInscripcion($d,$p)
+    {
+        $inscripciones = $this->inscripcionRepo->buscarInscripcion($d,$p);
+        return response()->json($inscripciones);
+    }
 }

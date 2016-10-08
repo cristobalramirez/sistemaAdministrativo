@@ -6,6 +6,7 @@
                 $scope.curso = {};
                 $scope.persona = {};
                 $scope.inscribir = {};
+                $scope.persona.pais_id = "1";
                 //----------------------
                 $scope.TrabajoDepartamentos ={};
                 $scope.TrabajoDepertamentoSelect;
@@ -46,7 +47,7 @@
                                 }
                                 if ($scope.edicion.fechaFin.length > 0) {
                                     $scope.edicion.fechaFin = new Date($scope.edicion.fechaFin);
-                                }
+                                } 
                             }
                         }
                     });
@@ -62,13 +63,22 @@
                     crudService.all('cargarMedioPublicitarios').then(function(data){  
                         $scope.medioPublicitarios = data;
                     });
+                    crudService.all('cargarPaises').then(function(data){  
+                        $scope.paises = data;
+                    });
                 }
                 $scope.createInscripcion = function(){
                     //$scope.atribut.estado = 1;
                     $log.log($scope.persona);
-                    //if ($scope.inscribirCreateForm.$valid) {
-                            if($scope.persona.DomicilioDistritoSelect!=null){
-                                $scope.persona.ubigeoTrabajo_id=$scope.persona.TrabajoDistritoSelect;
+                    crudService.recuperarDosDato('buscarInscripcion',$scope.edicion.id,$scope.persona.id).then(function(data){  
+                        $log.log("---");
+                        $log.log(data);
+                        $log.log(data.length);
+
+                        if (data.length>0) {
+                            alert("Usted ya se encuentra registrado en este curso");
+                        }else{
+                            $scope.persona.ubigeoTrabajo_id=$scope.persona.TrabajoDistritoSelect;
                                 $scope.persona.ubigeoDireccion_id=$scope.persona.DomicilioDistritoSelect;
                                 $scope.persona.estado="Activo";
 
@@ -97,9 +107,13 @@
 
                                     }
                                 });
-                            }else{
-                                alert('Selecione Direcion de Domicilio Correctamente');  
-                            }
+                        }
+
+                                
+                    });
+
+                    
+                                
                         
                     //}
                 }
@@ -142,6 +156,12 @@
                         $scope.DomicilioDistritos = data;
                         
                     });
+                }
+
+                $scope.validarPais = function(){
+                    $scope.DomicilioDepertamentoSelect;
+                    $scope.DomicilioProvinciaSelect;
+                    $scope.DomicilioDistritoSelect;
                 }
 
                 $scope.buscarPersonaDni = function(dato){
@@ -190,6 +210,7 @@
                             $scope.persona={};
                             $scope.persona.dni=dato;
                             $scope.persona.id=0;
+                            $scope.persona.pais_id = "1";
                         }
                     });
                 }

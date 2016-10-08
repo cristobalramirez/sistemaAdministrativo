@@ -14,6 +14,7 @@ class Edicion extends \Eloquent {
     						'proyecto',
     						'publicidadFace',
     						'publicidadImprimir',
+                            'estado',
     						'curso_id',
     						'acreditadora_id'];
 

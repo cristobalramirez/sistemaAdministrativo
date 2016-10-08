@@ -10,6 +10,7 @@
                 $scope.success;
                 $scope.query = '';
                 $scope.docentesAdd=[];
+                $scope.banderaCargando=false;
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
@@ -34,6 +35,7 @@
                 {
                     crudService.byId(id,'ediciones').then(function (data) {
                         $scope.edicion = data;
+                        $scope.edicion.costoCurso=Number($scope.edicion.costoCurso);
 
                         crudService.search('detalleDocenteEdiciones',$scope.edicion.id,1).then(function (data){
                              $scope.docentesAdd=data;
@@ -101,6 +103,8 @@
                     if ($scope.edicionCreateForm.$valid) {
                         //if($scope.edicion.fechaRegistro!=null){
                             $scope.edicion.detDocenteEdicion=$scope.docentesAdd;
+                            $scope.edicion.estado="Activo";
+                            $scope.banderaCargando=true;
                             crudService.create($scope.edicion, 'ediciones').then(function (data) {
                                 if (data['estado'] == true) {
                                     $scope.success = data['nombres'];
@@ -123,13 +127,13 @@
                 };
 
                 $scope.updateEdicion = function(){
-
                     if ($scope.edicionEditForm.$valid) {
+                            $scope.banderaCargando=true;
                             crudService.update($scope.edicion,'ediciones').then(function(data)
                             {
                                 if(data['estado'] == true){
                                     $scope.success = data['nombres'];
-                                    alert('editado correctamente');
+                                    alert('Editado correctamente');
                                     $location.path('/ediciones');
                                 }else{
                                     $scope.errors =data;
@@ -150,7 +154,6 @@
                 $scope.destroyEdicion = function(){
                     crudService.search('detalleDocenteEdiciones',$scope.edicion.id,1).then(function (data){
                             $scope.docentesAdd=data;
-                            $log.log($scope.docentesAdd);
                             if ($scope.docentesAdd.length>0) {
                                 for (var i = $scope.docentesAdd.length - 1; i >= 0; i--) {
                                     crudService.destroy($scope.docentesAdd[i],'detalleDocenteEdiciones').then(function(data){});
@@ -238,7 +241,69 @@
                         $scope.createEdicion();
                     }
                 }
-
+                //============================================
+                $scope.uploadEditFile = function()
+                { 
+                    var fileBrochure = $scope.fileBrochure;
+                    if (fileBrochure!=undefined) {
+                        crudService.uploadFile('ediciones',fileBrochure, name).then(function(data)
+                        {
+                            $scope.edicion.brochure=data.data;
+                            $scope.funcionEdit2();
+                        });
+                    }else{
+                        $scope.funcionEdit2();
+                    }                       
+                }
+                $scope.funcionEdit2 = function(){
+                    var fileResolucion = $scope.fileResolucion;
+                    if (fileResolucion!=undefined) {
+                        crudService.uploadFile('ediciones',fileResolucion, name).then(function(data)
+                        {
+                            $scope.edicion.resolucion=data.data;
+                            $scope.funcionEdit3();
+                        });
+                    }else{
+                        $scope.funcionEdit3();
+                    }
+                }
+                $scope.funcionEdit3 = function(){
+                    var fileProyecto = $scope.fileProyecto;
+                    if (fileProyecto!=undefined) {
+                        crudService.uploadFile('ediciones',fileProyecto, name).then(function(data)
+                        {
+                            $scope.edicion.proyecto=data.data;
+                            $scope.funcionEdit4();
+                        });
+                    }else{
+                        $scope.funcionEdit4();
+                    }
+                }
+                $scope.funcionEdit4 = function(){
+                    var filePublicidadFace = $scope.filePublicidadFace;
+                    if (filePublicidadFace!=undefined) {
+                        crudService.uploadFile('ediciones',filePublicidadFace, name).then(function(data)
+                        {
+                            $scope.edicion.publicidadFace=data.data;
+                            $scope.funcionEdit5();
+                        });
+                    }else{
+                        $scope.funcionEdit5();
+                    }
+                }
+                $scope.funcionEdit5 = function(){
+                    var filePublicidadImprimir = $scope.filePublicidadImprimir;
+                    if (filePublicidadImprimir!=undefined) {
+                        crudService.uploadFile('ediciones',filePublicidadImprimir, name).then(function(data)
+                        {
+                            $scope.edicion.publicidadImprimir=data.data;
+                            $scope.updateEdicion();
+                        });
+                    }else{
+                        $scope.updateEdicion();
+                    }
+                }
+                //============================================
                 $scope.docenteSelected=undefined;
                 $scope.getService = function(val) {
                   return crudService.recuperarUnDato('buscarDocente',val).then(function(response){
@@ -276,8 +341,19 @@
                         
                     }
                 }
+
+                $scope.disableProduct = function(row){
+                    crudService.byforeingKey('ediciones','disablePersona',row.id).then(function(data)
+                    {
+                        if(data['estado'] == true){
+                            $route.reload();
+                        }else{
+                            alert('No se pudo cambiar el estado');
+                        }
+                    });
+                }
+
                 $scope.destroyDocente = function($index){
-                    //alert($index);
                     $scope.docentesAdd.splice($index,1);
                 }
                 $scope.eliminarDocenteEdicion = function(docente){

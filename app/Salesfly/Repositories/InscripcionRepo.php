@@ -22,4 +22,10 @@ class InscripcionRepo extends BaseRepo{
                     ->paginate($c);
         return $inscripciones;
     }
+    public function buscarInscripcion($d,$p){
+        $inscripciones =Inscripcion::where('edicion_id','=', $d)
+                    ->where('persona_id','=', $p)
+                    ->get();
+        return $inscripciones;
+    } 
 } 

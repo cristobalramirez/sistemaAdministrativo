@@ -8,6 +8,11 @@
                 $scope.success;
                 $scope.query = '';
                 $scope.medioPublicitarios={};
+                $scope.promociones={};
+                $scope.empleados={};
+                $scope.promocion={};
+                $scope.inscripcion.descuentoPorcentaje=0;
+                $scope.inscripcion.descuento=0;
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
@@ -32,15 +37,15 @@
                 { 
                     crudService.byId(id,'inscripciones').then(function (data) {
                         $scope.inscripcion = data;
-
-                        if($scope.inscripcion != null) {
-                            if ($scope.inscripcion.fechaInscripcion.length > 0) {
-                                $scope.inscripcion.fechaInscripcion = new Date($scope.inscripcion.fechaInscripcion);
-                            }
-                        }
                     });
                     crudService.all('cargarMedioPublicitarios').then(function(data){  
                         $scope.medioPublicitarios = data;
+                    });
+                    crudService.all('cargarPromociones').then(function(data){  
+                        $scope.promociones = data;
+                    });
+                    crudService.all('cargarEmpleados').then(function(data){  
+                        $scope.empleados = data;
                     });
                 }else{
                     crudService.paginate('inscripciones',1).then(function (data) {
@@ -53,6 +58,12 @@
                     });
                     crudService.all('cargarMedioPublicitarios').then(function(data){  
                         $scope.medioPublicitarios = data;
+                    });
+                    crudService.all('cargarPromociones').then(function(data){  
+                        $scope.promociones = data;
+                    });
+                    crudService.all('cargarEmpleados').then(function(data){  
+                        $scope.empleados = data;
                     });
                 }
 
@@ -78,8 +89,8 @@
                 $scope.createInscripcion = function(){
                     //$scope.atribut.estado = 1;
                     if ($scope.inscripcionCreateForm.$valid) {
-                        $scope.inscripcion.saldo=$scope.inscripcion.montoCurso;
                         $scope.inscripcion.montoPagado=0;
+                        $scope.inscripcion.saldo=$scope.inscripcion.montoPagar-$scope.inscripcion.montoPagado;
                         $scope.inscripcion.estado=0;
                         if ($scope.inscripcion.edicion_id!=undefined) {
                             if ($scope.inscripcion.persona_id!=undefined) {
@@ -87,7 +98,7 @@
                           
                                     if (data['estado'] == true) {
                                         $scope.success = data['nombres'];
-                                        alert('grabado correctamente');
+                                        alert('Grabado correctamente');
                                         $location.path('/inscripciones');
 
                                     } else {
@@ -112,15 +123,12 @@
                 $scope.updateInscripcion = function(){
 
                     if ($scope.inscripcionEditForm.$valid) {
-                        $scope.inscripcion.saldo=$scope.inscripcion.montoCurso;
-                        $scope.inscripcion.montoPagado=0;
-                        $scope.inscripcion.estado=0;
-                        $log.log($scope.inscripcion);
+                        $scope.inscripcion.saldo=$scope.inscripcion.montoPagar-$scope.inscripcion.montoPagado;
                         crudService.update($scope.inscripcion,'inscripciones').then(function(data)
                         {
                             if(data['estado'] == true){
                                 $scope.success = data['nombres'];
-                                alert('editado correctamente');
+                                alert('Editado correctamente');
                                 $location.path('/inscripciones');
                             }else{
                                 $scope.errors =data;
@@ -144,7 +152,6 @@
                         if(data['estado'] == true){
                             $scope.success = data['nombre'];
                             $scope.inscripcion = {};
-                            //alert('hola');
                             $route.reload();
 
                         }else{
@@ -155,7 +162,6 @@
 
                 $scope.edicionSelected=undefined;
                 $scope.getService = function(val) {
-                    //alert(val);
                   return crudService.recuperarUnDato('buscarEdicion',val).then(function(response){
                     return response.map(function(item){
                       return item;
@@ -168,14 +174,40 @@
                     if ($scope.edicionSelected.descripcion==undefined) {
                         alert("Seleccione Correctamente una Edicion");
                         $scope.edicionSelected=undefined;
+                        $scope.inscripcion.montoCurso="";
+                        $scope.inscripcion.descuento=0;
+                        $scope.inscripcion.descuentoPorcentaje=$scope.inscripcion.descuentoPorcentaje;
+                        $scope.inscripcion.montoPagar="";
                     }else{
                         $scope.inscripcion.montoCurso=$scope.edicionSelected.costoCurso;
                         $scope.inscripcion.edicion_id=$scope.edicionSelected.idedicion;
+                            $scope.inscripcion.descuento=($scope.inscripcion.montoCurso*$scope.inscripcion.descuentoPorcentaje)/100;
+                            $scope.inscripcion.montoPagar=$scope.inscripcion.montoCurso-$scope.inscripcion.descuento;
+                        
+                    }
+                }
+
+                $scope.selecionarPromocion = function(){
+                    if ($scope.inscripcion.promocion_id==undefined) {
+                        $scope.inscripcion.descuentoPorcentaje=0;
+                        $scope.inscripcion.descuento=0;
+                        $scope.inscripcion.montoPagar=$scope.inscripcion.montoCurso;
+
+
+                    }else{
+                        crudService.byId($scope.inscripcion.promocion_id,'promociones').then(function (data) {
+                            $scope.promocion = data;
+                            $scope.inscripcion.descuentoPorcentaje=$scope.promocion.porcentajeDescuento;
+
+                            if ($scope.inscripcion.montoCurso!=undefined) {
+                                $scope.inscripcion.descuento=($scope.inscripcion.montoCurso*$scope.inscripcion.descuentoPorcentaje)/100;
+                                $scope.inscripcion.montoPagar=$scope.inscripcion.montoCurso-$scope.inscripcion.descuento;
+                            }
+                        });
                     }
                 }
                 $scope.personaSelected=undefined;
                 $scope.getServicePersona = function(val) {
-                    //alert(val);
                   return crudService.recuperarUnDato('buscarPersona',val).then(function(response){
                     return response.map(function(item){
                       return item;

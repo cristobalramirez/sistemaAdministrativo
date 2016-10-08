@@ -63,6 +63,8 @@
                         <th>Curso</th>
                         <th>Cliente</th>
                         <th>Monto Curso</th>
+                        <th>Monto Descuento</th>
+                        <th>Monto a Pagar</th>
                         <th>Monto Pagado</th>
                         <th>Saldo</th>
                         <th>Estado</th>
@@ -73,10 +75,12 @@
                     
                       <tr ng-repeat="row in inscripciones">
                         <td>{{$index + 1}}</td>
-                        <td>{{row.fechaInscripcion}}</td>
+                        <td>{{row.created_at}}</td>
                         <td>{{row.curso}}</td>
                         <td>{{row.nombres+' '+row.apellidos}}</td>
                         <td>{{row.montoCurso}}</td>
+                        <td>{{row.descuento}}</td>
+                        <td>{{row.montoPagar}}</td>
                         <td>{{row.montoPagado}}</td>
                         <td>{{row.saldo}}</td>
                         <td>{{row.estado==2? 'No Desea':row.estado==0? 'Pre Inscripto':'Inscripto'}}</td>

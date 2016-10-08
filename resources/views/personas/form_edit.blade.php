@@ -24,23 +24,23 @@
                 <!-- form start -->
                 <form name="PersonaEditForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="personaCreateForm.$invalid">
+                  <div class="callout callout-danger" ng-show="PersonaEditForm.$invalid">
                           <strong >Los campos(*) son requeridos</strong>
                 </div>
                     
-                   <div class="form-group" ng-class="{'has-error': personaCreateForm.nombres.$invalid,'has-success':personaCreateForm.nombres.$invalid}">
+                   <div class="form-group" ng-class="{'has-error': PersonaEditForm.nombres.$invalid,'has-success':PersonaEditForm.nombres.$invalid}">
                       <label for="nombres">Nombres *</label>
                       <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="persona.nombres" required>
                     </div>
 
-                    <div class="form-group" ng-class="{'has-error': personaCreateForm.apellidos.$invalid,'has-success':personaCreateForm.apellidos.$invalid}">
+                    <div class="form-group" ng-class="{'has-error': PersonaEditForm.apellidos.$invalid,'has-success':PersonaEditForm.apellidos.$invalid}">
                       <label for="apellidos">Apellidos * </label>
                       <input type="text" class="form-control" name="apellidos"  placeholder="Apellidos" ng-model="persona.apellidos" required>
                     </div>
                     
                     <div class="row">
                       <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': personaCreateForm.dni.$invalid,'has-success':personaCreateForm.dni.$invalid}">
+                        <div class="form-group" ng-class="{'has-error': PersonaEditForm.dni.$invalid,'has-success':PersonaEditForm.dni.$invalid}">
                           <label for="dni">DNI * </label>
                           <input ng-blur="validaDni(persona.dni)" type="number" class="form-control" name="dni"  placeholder="DNI" ng-model="persona.dni" required>
                         </div>
@@ -59,7 +59,7 @@
                       </div>
 
                     <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': personaCreateForm.sexo.$invalid,'has-success':personaCreateForm.sexo.$invalid}">
+                        <div class="form-group" ng-class="{'has-error': PersonaEditForm.sexo.$invalid,'has-success':PersonaEditForm.sexo.$invalid}">
                               <label>Sexo * </label>
                               <select class="form-control ng-pristine ng-valid ng-touched" name="sexo" ng-model="persona.sexo" required><option value="">-- Elige Sexo --</option>
                               <option value="Masculino">Masculino</option>
@@ -102,14 +102,14 @@
 
                     <div class="row">
                       <div  class="col-md-8">
-                      <div class="form-group" ng-class="{'has-error': personaCreateForm.email.$invalid,'has-success':personaCreateForm.email.$invalid}">
+                      <div class="form-group" ng-class="{'has-error': PersonaEditForm.email.$invalid,'has-success':PersonaEditForm.email.$invalid}">
                           <label for="email">Email * </label>
-                          <input type="text" class="form-control" name="email"  placeholder="Email" ng-model="persona.email" required>
+                          <input type="email" class="form-control" name="email"  placeholder="Email" ng-model="persona.email" required>
                         </div>
                       </div>
                       
                       <div  class="col-md-4">
-                      <div class="form-group" ng-class="{'has-error': personaCreateForm.telefono.$invalid,'has-success':personaCreateForm.telefono.$invalid}">
+                      <div class="form-group" ng-class="{'has-error': PersonaEditForm.telefono.$invalid,'has-success':PersonaEditForm.telefono.$invalid}">
                           <label for="telefono">Telefono * </label>
                           <input type="number" class="form-control" name="telefono"  placeholder="Telefono" ng-model="persona.telefono" required>
                         </div>

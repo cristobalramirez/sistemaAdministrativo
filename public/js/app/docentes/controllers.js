@@ -124,6 +124,10 @@
                             $scope.docente.ubigeo_id=$scope.DistritoSelect;
                             $scope.docente.estado="Activo";
                             $scope.banderaCargando=true;
+                            if ($scope.docente.fechaNac==null) {
+                               $scope.docente.fechaNac= "0000-00-00 00:00:00"
+                            }
+                            $log.log($scope.docente);
                                 crudService.create($scope.docente, 'docentes').then(function (data) {
                                     
                                     if (data['estado'] == true) {

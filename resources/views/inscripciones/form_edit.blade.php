@@ -24,41 +24,33 @@
                 <!-- form start -->
                 <form name="inscripcionEditForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
-                                            
-                    <div class="row">
-                    <div  class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error': inscripcionEditForm.fechaInscripcion.$invalid,'has-success':inscripcionEditForm.fechaInscripcion.$invalid}">
-                                  <label for="fechaInscripcion">Fecha de Inscripcion</label>
-                              <div  class="input-group">
-                                  <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                 </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaInscripcion" ng-model="inscripcion.fechaInscripcion" required>
-                              </div>
-                              <label ng-show="inscripcionEditForm.fechaInscripcion.$error.required">
-                            <span ng-show="inscripcionEditForm.fechaInscripcion.$error.required"><i class="fa fa-times-circle-o"></i>El campo Fecha de Inscripcion es Requerido. 
-                            </span>
-                          </label>
+                  <div class="callout callout-danger" ng-show="inscripcionEditForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div> 
+                    
+                  <div class="row">
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                            <label>Medio Publicitario</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" name="medioPublicitario_id" ng-model="inscripcion.medioPublicitario_id" ng-options="item.id as item.descripcion for item in medioPublicitarios"><option value="">-- Elige Medio Publicitario --</option></select>
                         </div>
                       </div>
 
-                      <div  class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error': inscripcionEditForm.medioPublicitario_id.$invalid,'has-success':inscripcionEditForm.medioPublicitario_id.$invalid}">
-                            <label>Medio Publicitario</label>
-                            <select  class="form-control ng-pristine ng-valid ng-touched" name="medioPublicitario_id" ng-model="inscripcion.medioPublicitario_id" ng-options="item.id as item.descripcion for item in medioPublicitarios" required><option value="">-- Elige Medio Publicitario --</option></select>
-                            <label ng-show="inscripcionEditForm.medioPublicitario_id.$error.required">
-                                <span ng-show="inscripcionEditForm.medioPublicitario_id.$error.required"><i class="fa fa-times-circle-o"></i>El campo Medio Publicitario es Requerido. 
-                                </span>
-                              </label>
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                            <label>Promocion</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" ng-click="selecionarPromocion()" name="promocion_id" ng-model="inscripcion.promocion_id" ng-options="item.id as item.descripcion for item in promociones"><option value="">-- Elige Promocion --</option></select>
+                        </div>
+                      </div>
+
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                            <label>Empleado</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" name="empleado_id" ng-model="inscripcion.empleado_id" ng-options="item.id as item.nombres+' '+item.apellidos for item in empleados"><option value="">-- Elige Medio Publicitario --</option></select>
                         </div>
                       </div>
                     </div>
-
+                    </br>
                     <div class="row">
                     <div  class="col-md-10">
                           <input  type="text" ng-model="edicionSelected" placeholder="Buscar Edicion" typeahead="atributo as atributo.descripcion + ' - '+ atributo.nombre for atributo in getService($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control"/>
@@ -67,16 +59,37 @@
                       <button type="submit" class="btn btn-primary" ng-click="addEdicion()">Validar</button>
                     </div>
                   </div>
-
-                  <div class="form-group" ng-class="{'has-error': inscripcionEditForm.montoCurso.$invalid,'has-success':inscripcionEditForm.montoCurso.$invalid}">
-                      <label for="montoCurso">Monto del Curso</label>
-                      <input type="text" class="form-control" name="montoCurso" placeholder="Monto del Curso" ng-model="inscripcion.montoCurso" required>
-                      <label ng-show="inscripcionEditForm.montoCurso.$error.required">
-                        <span ng-show="inscripcionEditForm.montoCurso.$error.required"><i class="fa fa-times-circle-o"></i>El campo Monto del Curso Requerido. 
-                        </span>
-                      </label>
+                  <div class="row">
+                    <div  class="col-md-3">
+                      <div class="form-group" ng-class="{'has-error': inscripcionEditForm.montoCurso.$invalid,'has-success':inscripcionEditForm.montoCurso.$invalid}">
+                          <label for="montoCurso">Monto del Curso * </label>
+                      <input type="text" ng-disabled="true" class="form-control" name="montoCurso" placeholder="Monto del Curso" ng-model="inscripcion.montoCurso" required>
+                        </div>
                     </div>
 
+                    <div  class="col-md-3">
+                      <div class="form-group" ng-class="{'has-error': inscripcionEditForm.descuentoPorcentaje.$invalid,'has-success':inscripcionEditForm.descuentoPorcentaje.$invalid}">
+                          <label for="descuentoPorcentaje">Porcentaje Descuento * </label>
+                      <input type="text" ng-disabled="true" class="form-control" name="descuentoPorcentaje" placeholder="Monto del Curso" ng-model="inscripcion.descuentoPorcentaje" required>
+                        </div>
+                    </div>
+
+
+                    <div  class="col-md-3">
+                      <div class="form-group" ng-class="{'has-error': inscripcionEditForm.descuento.$invalid,'has-success':inscripcionEditForm.descuento.$invalid}">
+                          <label for="descuento">Descuento * </label>
+                      <input type="text" ng-disabled="true" class="form-control" name="descuento" placeholder="Monto del Curso" ng-model="inscripcion.descuento" required>
+                        </div>
+                    </div>
+
+                    <div  class="col-md-3">
+                      <div class="form-group" ng-class="{'has-error': inscripcionEditForm.montoPagar.$invalid,'has-success':inscripcionEditForm.montoPagar.$invalid}">
+                          <label for="montoPagar">Monto a Pagar * </label>
+                      <input type="text" ng-disabled="true" class="form-control" name="montoPagar" placeholder="Monto del Curso" ng-model="inscripcion.montoPagar" required>
+                        </div>
+                    </div>
+                  </div>
+                  </br>
                     <div class="row">
                     <div  class="col-md-10">
                           <input  type="text" ng-model="personaSelected" placeholder="Buscar Persona" typeahead="atributo as atributo.nombres + ' '+ atributo.apellidos for atributo in getServicePersona($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control"/>
@@ -86,52 +99,32 @@
                     </div>
                   </div>
                   <div class="form-group" ng-class="{'has-error': inscripcionEditForm.nombres.$invalid,'has-success':inscripcionEditForm.nombres.$invalid}">
-                      <label for="nombres">Nombres</label>
+                      <label for="nombres">Nombres * </label>
                       <input type="text" class="form-control" name="nombres" placeholder="Nombres" ng-model="inscripcion.nombres" required>
-                      <label ng-show="inscripcionEditForm.nombres.$error.required">
-                        <span ng-show="inscripcionEditForm.nombres.$error.required"><i class="fa fa-times-circle-o"></i>El campo Nombres Requerido. 
-                        </span>
-                      </label>
                     </div>
                     <div class="form-group" ng-class="{'has-error': inscripcionEditForm.apellidos.$invalid,'has-success':inscripcionEditForm.apellidos.$invalid}">
-                      <label for="apellidos">Apellidos</label>
+                      <label for="apellidos">Apellidos * </label>
                       <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" ng-model="inscripcion.apellidos" required>
-                      <label ng-show="inscripcionEditForm.apellidos.$error.required">
-                        <span ng-show="inscripcionEditForm.apellidos.$error.required"><i class="fa fa-times-circle-o"></i>El campo Apellidos Requerido. 
-                        </span>
-                      </label>
                     </div>
                     <div class="row">
                       <div  class="col-md-4">
                           <div class="form-group" ng-class="{'has-error': inscripcionEditForm.dni.$invalid,'has-success':inscripcionEditForm.dni.$invalid}">
-                            <label for="dni">DNI</label>
+                            <label for="dni">DNI * </label>
                             <input type="text" class="form-control" name="dni" placeholder="DNI" ng-model="inscripcion.dni" required>
-                            <label ng-show="inscripcionEditForm.dni.$error.required">
-                              <span ng-show="inscripcionEditForm.dni.$error.required"><i class="fa fa-times-circle-o"></i>El campo DNI Requerido. 
-                              </span>
-                            </label>
                           </div>
                       </div>
 
                       <div  class="col-md-4">
                           <div class="form-group" ng-class="{'has-error': inscripcionEditForm.email.$invalid,'has-success':inscripcionEditForm.email.$invalid}">
-                            <label for="email">Email</label>
+                            <label for="email">Email * </label>
                             <input type="text" class="form-control" name="email" placeholder="Email" ng-model="inscripcion.email" required>
-                            <label ng-show="inscripcionEditForm.email.$error.required">
-                              <span ng-show="inscripcionEditForm.email.$error.required"><i class="fa fa-times-circle-o"></i>El campo Email Requerido. 
-                              </span>
-                            </label>
                           </div>
                       </div>
 
                       <div  class="col-md-4">
                           <div class="form-group" ng-class="{'has-error': inscripcionEditForm.telefono.$invalid,'has-success':inscripcionEditForm.telefono.$invalid}">
-                            <label for="telefono">Telefono</label>
+                            <label for="telefono">Telefono * </label>
                             <input type="text" class="form-control" name="telefono" placeholder="Telefono" ng-model="inscripcion.telefono" required>
-                            <label ng-show="inscripcionEditForm.telefono.$error.required">
-                              <span ng-show="inscripcionEditForm.telefono.$error.required"><i class="fa fa-times-circle-o"></i>El campo Telefono Requerido. 
-                              </span>
-                            </label>
                           </div>
                       </div>
                     </div>

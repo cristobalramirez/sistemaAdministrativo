@@ -17,7 +17,7 @@ class CreateDocentesTable extends Migration
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('dni')->unique();
-            $table->dateTime('fechaNac')->nullable();
+            $table->dateTime('fechaNac');
             $table->string('sexo');
             $table->string('curriculo');
             $table->string('gradoAcademico');

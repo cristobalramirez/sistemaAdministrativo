@@ -58,7 +58,7 @@
                       <div  class="col-md-4">
                         <div class="form-group" ng-class="{'has-error': edicionEditForm.costoCurso.$invalid,'has-success':edicionEditForm.costoCurso.$invalid}">
                           <label for="costoCurso">Costo del Curso * </label>
-                          <input ng-blur="validaDni(edicion.costoCurso)" type="text" class="form-control" name="costoCurso"  placeholder="Costo del Curso" ng-model="edicion.costoCurso" required>
+                          <input ng-blur="validaDni(edicion.costoCurso)" type="number" class="form-control" name="costoCurso"  placeholder="Costo del Curso" ng-model="edicion.costoCurso" required>
                         </div>
                       </div>
                   </div>
@@ -168,8 +168,8 @@
 
                 </div><!-- /.box-body -->
 
-                  <div class="box-footer">
-                    <button type="submit" ng-disabled="bancoCreateForm.$invalid" class="btn btn-primary" ng-click="updateEdicion()">Modificar</button>
+                  <div class="box-footer" ng-show="!banderaCargando">
+                    <button type="submit" ng-disabled="edicionEditForm.$invalid" class="btn btn-primary" ng-click="uploadEditFile()">Modificar</button>
                     <a href="/ediciones" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>
