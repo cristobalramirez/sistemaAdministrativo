@@ -284,3 +284,50 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('inscribir/{id?}','InscribirController@index');
     Route::get('inscribir/form-inscribir','InscribirController@form_inscribir');
     Route::post('api/inscribir/create','InscripcionesController@createInscribir');
+
+    //------------------------------
+    //ACREDITADORAS ROUTES
+    Route::get('categorias', ['as' => 'person', 'uses' => 'CategoriasController@index']);
+    Route::get('categorias/create', ['as' => 'person_create', 'uses' => 'CategoriasController@index']);
+    Route::get('categorias/edit/{id?}', ['as' => 'person_edit', 'uses' => 'CategoriasController@index']);
+    Route::get('categorias/form-create', ['as' => 'person_form_create', 'uses' => 'CategoriasController@form_create']);
+    Route::get('categorias/form-edit', ['as' => 'person_form_edit', 'uses' => 'CategoriasController@form_edit']);
+    Route::get('api/categorias/all', ['as' => 'person_all', 'uses' => 'CategoriasController@all']);
+    Route::get('api/categorias/paginate/', ['as' => 'person_paginate', 'uses' => 'CategoriasController@paginatep']);
+    Route::post('api/categorias/create', ['as' => 'person_create', 'uses' => 'CategoriasController@create']);
+    Route::put('api/categorias/edit', ['as' => 'person_edit', 'uses' => 'CategoriasController@edit']);
+    Route::post('api/categorias/destroy', ['as' => 'person_destroy', 'uses' => 'CategoriasController@destroy']);
+    Route::get('api/categorias/search/{q?}', ['as' => 'person_search', 'uses' => 'CategoriasController@search']);
+    Route::get('api/categorias/find/{id}', ['as' => 'person_find', 'uses' => 'CategoriasController@find']);
+    Route::get('api/cargarCategorias/all', ['as' => 'person_all', 'uses' => 'CategoriasController@cargarCategorias']);
+//END CATEGORIAS ROUTES
+    //ACREDITADORAS ROUTES
+    Route::get('paises', ['as' => 'person', 'uses' => 'PaisesController@index']);
+    Route::get('paises/create', ['as' => 'person_create', 'uses' => 'PaisesController@index']);
+    Route::get('paises/edit/{id?}', ['as' => 'person_edit', 'uses' => 'PaisesController@index']);
+    Route::get('paises/form-create', ['as' => 'person_form_create', 'uses' => 'PaisesController@form_create']);
+    Route::get('paises/form-edit', ['as' => 'person_form_edit', 'uses' => 'PaisesController@form_edit']);
+    Route::get('api/paises/all', ['as' => 'person_all', 'uses' => 'PaisesController@all']);
+    Route::get('api/paises/paginate/', ['as' => 'person_paginate', 'uses' => 'PaisesController@paginatep']);
+    Route::post('api/paises/create', ['as' => 'person_create', 'uses' => 'PaisesController@create']);
+    Route::put('api/paises/edit', ['as' => 'person_edit', 'uses' => 'PaisesController@edit']);
+    Route::post('api/paises/destroy', ['as' => 'person_destroy', 'uses' => 'PaisesController@destroy']);
+    Route::get('api/paises/search/{q?}', ['as' => 'person_search', 'uses' => 'PaisesController@search']);
+    Route::get('api/paises/find/{id}', ['as' => 'person_find', 'uses' => 'PaisesController@find']);
+    Route::get('api/cargarPaises/all', ['as' => 'person_all', 'uses' => 'PaisesController@cargarPaises']);
+//END CATEGORIAS ROUTES
+//ACREDITADORAS ROUTES
+    Route::get('promociones', ['as' => 'person', 'uses' => 'PromocionesController@index']);
+    Route::get('promociones/create', ['as' => 'person_create', 'uses' => 'PromocionesController@index']);
+    Route::get('promociones/edit/{id?}', ['as' => 'person_edit', 'uses' => 'PromocionesController@index']);
+    Route::get('promociones/form-create', ['as' => 'person_form_create', 'uses' => 'PromocionesController@form_create']);
+    Route::get('promociones/form-edit', ['as' => 'person_form_edit', 'uses' => 'PromocionesController@form_edit']);
+    Route::get('api/promociones/all', ['as' => 'person_all', 'uses' => 'PromocionesController@all']);
+    Route::get('api/promociones/paginate/', ['as' => 'person_paginate', 'uses' => 'PromocionesController@paginatep']);
+    Route::post('api/promociones/create', ['as' => 'person_create', 'uses' => 'PromocionesController@create']);
+    Route::put('api/promociones/edit', ['as' => 'person_edit', 'uses' => 'PromocionesController@edit']);
+    Route::post('api/promociones/destroy', ['as' => 'person_destroy', 'uses' => 'PromocionesController@destroy']);
+    Route::get('api/promociones/search/{q?}', ['as' => 'person_search', 'uses' => 'PromocionesController@search']);
+    Route::get('api/promociones/find/{id}', ['as' => 'person_find', 'uses' => 'PromocionesController@find']);
+    Route::get('api/cargarPromociones/all', ['as' => 'person_all', 'uses' => 'PromocionesController@cargarPromociones']);
+//END CATEGORIAS ROUTES

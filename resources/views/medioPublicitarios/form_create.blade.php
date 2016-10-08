@@ -21,21 +21,16 @@
                   <h3 class="box-title">Agregar Medio Publicitario</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
+                <div class="callout callout-danger" ng-show="medioPublicitarioCreateForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div>
                 <form name="medioPublicitarioCreateForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
-                    
+                                      
                    <div class="form-group" ng-class="{'has-error': medioPublicitarioCreateForm.descripcion.$invalid,'has-success':medioPublicitarioCreateForm.descripcion.$invalid}">
-                      <label for="descripcion">Descripcion</label>
+                      <label for="descripcion">Descripcion *</label>
                       <input type="text" class="form-control" name="descripcion" placeholder="Descripcion" ng-model="medioPublicitario.descripcion" required>
-                      <label ng-show="medioPublicitarioCreateForm.descripcion.$error.required">
-                        <span ng-show="medioPublicitarioCreateForm.descripcion.$error.required"><i class="fa fa-times-circle-o"></i>El campo Descripcion es Requerido. 
-                        </span>
-                      </label>
+                      
                     </div>
                     
 

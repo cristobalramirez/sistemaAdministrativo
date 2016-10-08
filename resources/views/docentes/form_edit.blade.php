@@ -24,37 +24,25 @@
                 <!-- form start -->
                 <form name="DocenteEditForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
+                  <div class="callout callout-danger" ng-show="DocenteEditForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div>
                     
-
-                  <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.nombres.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.nombres.$invalid]">
-                      <label for="nombres">Nombres</label>
-                      <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="docente.nombres" required>
-                      <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.nombres.$dirty && DocenteEditForm.nombres.$invalid">
-                        <span ng-show="DocenteEditForm.nombres.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
+                   <div class="form-group" ng-class="{'has-error': DocenteEditForm.nombres.$invalid,'has-success':DocenteEditForm.nombres.$invalid}">
+                      <label for="nombres">Nombres * </label>
+                      <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="docente.nombres" required>                      
                     </div>
 
-                    <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.apellidos.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.apellidos.$invalid]">
-                      <label for="apellidos">Apellidos</label>
+                    <div class="form-group" ng-class="{'has-error': DocenteEditForm.apellidos.$invalid,'has-success':DocenteEditForm.apellidos.$invalid}">
+                      <label for="apellidos">Apellidos * </label>
                       <input type="text" class="form-control" name="apellidos"  placeholder="Apellidos" ng-model="docente.apellidos" required>
-                      <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.apellidos.$dirty && DocenteEditForm.apellidos.$invalid">
-                        <span ng-show="DocenteEditForm.apellidos.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
                     </div>
                     
                     <div class="row">
                       <div  class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.dni.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.dni.$invalid]">
-                          <label for="dni">DNI</label>
-                          <input ng-blur="validaDni(docente.dni)" type="text" class="form-control" name="dni"  placeholder="DNI" ng-model="docente.dni" required>
-                          <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.dni.$dirty && DocenteEditForm.dni.$invalid">
-                            <span ng-show="DocenteEditForm.dni.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
+                        <div class="form-group" ng-class="{'has-error': DocenteEditForm.dni.$invalid,'has-success':DocenteEditForm.dni.$invalid}">
+                          <label for="dni">DNI * </label>
+                          <input ng-blur="validaDni(docente.dni)" type="number" class="form-control" name="dni"  placeholder="DNI" ng-model="docente.dni" required>
                         </div>
                       </div>
 
@@ -71,9 +59,9 @@
                       </div>
 
                     <div  class="col-md-4">
-                        <div>
+                        <div class="form-group" ng-class="{'has-error': DocenteEditForm.sexo.$invalid,'has-success':DocenteEditForm.sexo.$invalid}">
                               <label>Sexo</label>
-                              <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="docente.sexo"><option value="">-- Elige Sexo --</option>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="sexo" ng-model="docente.sexo" required=""><option value="">-- Elige Sexo --</option>
                               <option value="Masculino">Masculino</option>
                               <option value="Femenino">Femenino</option></select>
                           </div>
@@ -83,32 +71,18 @@
 
 
                       <div class="row">
-                      <div  class="col-md-4">
-                        <div  class="form-group">
-                                  <label for="fechaRegistro">Fecha de Registro</label>
-                              <div  class="input-group">
-                                  <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                 </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaRegistro" ng-model="docente.fechaRegistro">
-                              </div>
-                        </div>
-                      </div>
                       
-                      <div  class="col-md-4">
+                      <div  class="col-md-6">
                         <div>
                             <label>Profesion</label>
-                            <select ng-click="cargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="docente.profesion_id" ng-options="item.id as item.nombre for item in profesiones"><option value="">-- Elige Profesion --</option></select>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="docente.profesion_id" ng-options="item.id as item.nombre for item in profesiones"><option value="">-- Elige Profesion --</option></select>
                         </div>
                       </div>
 
-                      <div class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.gradoAcademico.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.gradoAcademico.$invalid]">
+                      <div class="col-md-6">
+                        <div class="form-group">
                           <label for="gradoAcademico">Grado Academico</label>
-                          <input type="text" class="form-control" name="gradoAcademico"  placeholder="Grado Academico" ng-model="docente.gradoAcademico" required>
-                          <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.gradoAcademico.$dirty && DocenteEditForm.gradoAcademico.$invalid">
-                            <span ng-show="DocenteEditForm.gradoAcademico.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
+                          <input type="text" class="form-control" name="gradoAcademico"  placeholder="Grado Academico" ng-model="docente.gradoAcademico">
                         </div>
                       
                     </div>
@@ -116,22 +90,16 @@
 
                     <div class="row">
                       <div  class="col-md-8">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.email.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.email.$invalid]">
-                          <label for="email">Email</label>
-                          <input type="text" class="form-control" name="email"  placeholder="Email" ng-model="docente.email" required>
-                          <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.email.$dirty && DocenteEditForm.email.$invalid">
-                            <span ng-show="DocenteEditForm.email.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
+                        <div class="form-group" ng-class="{'has-error': DocenteEditForm.email.$invalid,'has-success':DocenteEditForm.email.$invalid}">
+                          <label for="email">Email * </label>
+                          <input type="email" class="form-control" name="email"  placeholder="Email" ng-model="docente.email" required>
                         </div>
                       </div>
                       
                       <div  class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.telefono.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.telefono.$invalid]">
-                          <label for="telefono">Telefono</label>
-                          <input type="text" class="form-control" name="telefono"  placeholder="Telefono" ng-model="docente.telefono" required>
-                          <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.telefono.$dirty && DocenteEditForm.telefono.$invalid">
-                            <span ng-show="DocenteEditForm.telefono.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
+                        <div class="form-group" ng-class="{'has-error': DocenteEditForm.telefono.$invalid,'has-success':DocenteEditForm.telefono.$invalid}">
+                          <label for="telefono">Telefono * </label>
+                          <input type="number" class="form-control" name="telefono"  placeholder="Telefono" ng-model="docente.telefono" required>
                         </div>
                       </div>
 
@@ -139,36 +107,23 @@
                     </div>
                     
                     <div class="row">
-                      <div  class="col-md-4">
+                      <div  class="col-md-6">
                         <div class="form-group">
                           <label>Curriculum</label>
-                          <input type="file" name="file" uploader-model="file"/>
+                          <input type="file" name="file" uploader-model="file" />
                         </div>
                       </div>
 
-                      <div  class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.pais.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.pais.$invalid]">
-                          <label for="pais">Pais</label>
-                          <input type="text" class="form-control" name="pais"  placeholder="Pais" ng-model="docente.pais" required>
-                          <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.pais.$dirty && DocenteEditForm.pais.$invalid">
-                            <span ng-show="DocenteEditForm.pais.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
-                        </div>
-                      </div>
-
-                      <div  class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ DocenteEditForm.nacionalidad.$error.required && DocenteEditForm.$submitted || DocenteEditForm.z.$dirty && DocenteEditForm.nacionalidad.$invalid]">
-                          <label for="nacionalidad">Nacionalidad</label>
-                          <input type="text" class="form-control" name="nacionalidad"  placeholder="Nacionalidad" ng-model="docente.nacionalidad" required>
-                          <label ng-show="DocenteEditForm.$submitted || DocenteEditForm.nacionalidad.$dirty && DocenteEditForm.nacionalidad.$invalid">
-                            <span ng-show="DocenteEditForm.nacionalidad.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
+                      <div  class="col-md-6">
+                        <div class="form-group">
+                            <label>País</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" name="profesion_id" ng-model="docente.pais_id" ng-options="item.id as item.nombre for item in paises"></select>
                         </div>
                       </div>
                     </div>
 
 
-                    <div class="row">
+                    <div class="row" ng-show="docente.pais_id==1">
                       <div  class="col-md-4">
                         <div>
                             <label>Departamento</label>

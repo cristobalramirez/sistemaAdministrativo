@@ -17,21 +17,20 @@ class CreateDocentesTable extends Migration
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('dni')->unique();
-            $table->dateTime('fechaNac');
-            $table->dateTime('fechaRegistro');
+            $table->dateTime('fechaNac')->nullable();
             $table->string('sexo');
             $table->string('curriculo');
             $table->string('gradoAcademico');
             $table->string('email');
             $table->string('telefono');
-            $table->string('nacionalidad');
-            $table->string('pais');
             $table->string('estado');
             $table->integer('ubigeo_id')->unsigned()->nullable();
-            $table->integer('profesion_id')->unsigned();
+            $table->integer('profesion_id')->unsigned()->nullable();
+            $table->integer('pais_id')->unsigned()->nullable();
             
             $table->foreign('ubigeo_id')->references('id')->on('ubigeos');
             $table->foreign('profesion_id')->references('id')->on('profesiones');
+            $table->foreign('pais_id')->references('id')->on('paises');
             $table->timestamps();
         });
     }

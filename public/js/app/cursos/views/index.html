@@ -59,8 +59,8 @@
                     <table class="table table-bordered">
                       <tr>
                         <th style="width: 10px">#</th>
-                        <th>Fecha Registro</th>
-                        <th>Descripcion</th>
+                        <th>Cursos</th>
+                        <th>Categoria</th>
                       
                         <th style="width: 40px">Editar</th>
                         <th style="width: 40px">Eliminar</th>
@@ -68,8 +68,8 @@
                     
                       <tr ng-repeat="row in cursos">
                         <td>{{$index + 1}}</td>
-                        <td>{{row.fechaRegistro}}</td>
                         <td>{{row.descripcion}}</td>
+                        <td>{{row.categoria.nombreCategoria}}</td>
                         <td><a ng-click="editCurso(row)" class="btn btn-warning btn-xs">Editar</a></td>
                         <td><a ng-click="deleteCurso(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
                       

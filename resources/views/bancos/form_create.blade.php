@@ -23,19 +23,14 @@
                 <!-- form start -->
                 <form name="bancoCreateForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
+                  <div class="callout callout-danger" ng-show="bancoCreateForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div> 
                     
                    <div class="form-group" ng-class="{'has-error': bancoCreateForm.nombre.$invalid,'has-success':bancoCreateForm.nombre.$invalid}">
-                      <label for="nombre">Nombre</label>
+                      <label for="nombre">Nombre * </label>
                       <input type="text" class="form-control" name="nombre" placeholder="Nombre" ng-model="banco.nombre" required>
-                      <label ng-show="bancoCreateForm.nombre.$error.required">
-                        <span ng-show="bancoCreateForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>El campo Nombre es Requerido. 
-                        </span>
-                      </label>
+                      
                     </div>
                     
 

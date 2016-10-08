@@ -9,17 +9,15 @@ class DocenteManager extends BaseManager {
                     'apellidos'=>'required',
                     'dni' => 'required',
                     'fechaNac'=> '',
-                    'fechaRegistro'=> '',
                     'sexo' => '',
                     'curriculo' => '',
                     'gradoAcademico' => '',
                     'email'=> '',
                     'telefono'=> '',
-                    'nacionalidad'=> '',
-                    'pais'=> '',
                     'estado'=> '',
                     'ubigeo_id'=> '',
-                    'profesion_id'=> ''
+                    'profesion_id'=> '',
+                    'pais_id'=> ''
                   ];
         return $rules;
     }

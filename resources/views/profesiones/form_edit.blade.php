@@ -24,14 +24,12 @@
                 <!-- form start -->
                 <form name="profesionEditForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
+                  <div class="callout callout-danger" ng-show="profesionEditForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div>
                     
                      <div class="form-group" ng-class="{'has-error': profesionEditForm.nombre.$invalid,'has-success':profesionEditForm.nombre.$invalid}">
-                      <label for="nombre">Nombre</label>
+                      <label for="nombre">Nombre * </label>
                       <input type="text" class="form-control" name="nombre" placeholder="Nombre" ng-model="profesion.nombre" required>
                       <label ng-show="profesionEditForm.nombre.$error.required">
                         <span ng-show="profesionEditForm.nombre.$error.required"><i class="fa fa-times-circle-o"></i>El campo Nombre es Requerido. 

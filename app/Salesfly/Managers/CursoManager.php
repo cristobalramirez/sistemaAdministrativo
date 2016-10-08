@@ -4,9 +4,9 @@ class CursoManager extends BaseManager {
 
     public function getRules()
     {
-        $rules = [              
-            'fechaRegistro'=> 'required',
-            'descripcion'=> 'required'
+        $rules = [
+            'descripcion'=> 'required',
+            'categoria_id'=> ''
                   ];
         return $rules;
     }}

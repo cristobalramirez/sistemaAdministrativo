@@ -20,7 +20,8 @@ class PersonaManager extends BaseManager {
                     'estado'=> '',
                     'ubigeoTrabajo_id'=> '',
                     'ubigeoDireccion_id'=> '',
-                    'profesion_id'=> ''
+                    'profesion_id'=> '',
+                    'pais_id'=> ''
                   ];
         return $rules;
     }

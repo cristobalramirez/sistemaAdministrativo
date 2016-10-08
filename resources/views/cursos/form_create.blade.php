@@ -23,37 +23,26 @@
                 <!-- form start -->
                 <form name="cursoCreateForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
-
-
-                        <div  class="form-group">
-                                  <label for="fechaRegistro">Fecha de Registro</label>
-                              <div  class="input-group">
-                                  <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                 </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaRegistro" ng-model="curso.fechaRegistro">
-                              </div>
-                        </div>
+                  <div class="callout callout-danger" ng-show="cursoCreateForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div>
 
                     
-                   <div class="form-group" ng-class="{true: 'has-error'}[ cursoCreateForm.descripcion.$error.required && cursoCreateForm.$submitted || cursoCreateForm.descripcion.$dirty && cursoCreateForm.descripcion.$invalid]">
-                      <label for="descripcion">descripcion</label>
-                      <input type="text" class="form-control" name="descripcion" placeholder="descripcion" ng-model="curso.descripcion" required>
-                      <label ng-show="cursoCreateForm.$submitted || cursoCreateForm.descripcion.$dirty && cursoCreateForm.descripcion.$invalid">
-                        <span ng-show="cursoCreateForm.descripcion.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
+                   <div class="form-group" ng-class="{'has-error': cursoCreateForm.descripcion.$invalid,'has-success':cursoCreateForm.descripcion.$invalid}">
+                      <label for="descripcion">Cursos * </label>
+                      <input type="text" class="form-control" name="descripcion" placeholder="Cursos" ng-model="curso.descripcion" required>
                     </div>
+
+                    <div class="form-group" ng-class="{'has-error': cursoCreateForm.categoria_id.$invalid,'has-success':cursoCreateForm.categoria_id.$invalid}">
+                            <label>Categoria * </label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="categoria_id" ng-model="curso.categoria_id" ng-options="item.id as item.nombreCategoria for item in categorias" required><option value="">-- Elige Categoria --</option></select>
+                            </div>
                     
 
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="createCurso()">Crear</button>
+                    <button type="submit" ng-disabled="cursoCreateForm.$invalid" class="btn btn-primary" ng-click="createCurso()">Crear</button>
                     <a href="/cursos" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

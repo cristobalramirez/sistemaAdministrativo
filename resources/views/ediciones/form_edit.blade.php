@@ -24,47 +24,41 @@
                 <!-- form start -->
                 <form name="edicionEditForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
-                    
-              
+                  <div class="callout callout-danger" ng-show="edicionEditForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div> 
 
-                    
-                   <div class="row">
+
+
+                  <div class="row">
                     <div  class="col-md-4">
-                        <div  class="form-group">
-                                  <label for="fechaInicio">Fecha de Inicio</label>
+                        <div  class="form-group" ng-class="{'has-error': edicionEditForm.fechaInicio.$invalid,'has-success':edicionEditForm.fechaInicio.$invalid}">
+                                  <label for="fechaInicio">Fecha de Inicio * </label>
                               <div  class="input-group">
                                   <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                  </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaInicio" ng-model="edicion.fechaInicio">
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaInicio" ng-model="edicion.fechaInicio" required>
                               </div>
                         </div>
                       </div>
 
                       <div  class="col-md-4">
-                        <div  class="form-group">
-                                  <label for="fechaFin">Fecha de Fin</label>
+                        <div  class="form-group" ng-class="{'has-error': edicionEditForm.fechaFin.$invalid,'has-success':edicionEditForm.fechaFin.$invalid}">
+                                  <label for="fechaFin">Fecha de Fin * </label>
                               <div  class="input-group">
                                   <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                  </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaFin" ng-model="edicion.fechaFin">
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaFin" ng-model="edicion.fechaFin" required>
                               </div>
                         </div>
                       </div>
 
                       <div  class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ edicionEditForm.costoCurso.$error.required && edicionEditForm.$submitted || edicionEditForm.z.$dirty && edicionEditForm.costoCurso.$invalid]">
-                          <label for="costoCurso">Costo del Curso</label>
+                        <div class="form-group" ng-class="{'has-error': edicionEditForm.costoCurso.$invalid,'has-success':edicionEditForm.costoCurso.$invalid}">
+                          <label for="costoCurso">Costo del Curso * </label>
                           <input ng-blur="validaDni(edicion.costoCurso)" type="text" class="form-control" name="costoCurso"  placeholder="Costo del Curso" ng-model="edicion.costoCurso" required>
-                          <label ng-show="edicionEditForm.$submitted || edicionEditForm.costoCurso.$dirty && edicionEditForm.costoCurso.$invalid">
-                            <span ng-show="edicionEditForm.costoCurso.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
                         </div>
                       </div>
                   </div>
@@ -72,24 +66,24 @@
 
                   <div class="row">
                     <div  class="col-md-4">
-                        <div>
-                            <label>Cursos</label>
-                            <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="edicion.curso_id" ng-options="item.id as item.descripcion for item in cursos"><option value="">-- Elige Cursos --</option></select>
+                        <div class="form-group" ng-class="{'has-error': edicionEditForm.curso_id.$invalid,'has-success':edicionEditForm.curso_id.$invalid}">
+                            <label>Curso * </label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="curso_id" ng-model="edicion.curso_id" ng-options="item.id as item.descripcion for item in cursos" required><option value="">-- Elige Curso --</option></select>
                         </div>
                       </div>
                     <div  class="col-md-4">
-                        <div>
-                              <label>Modalidad</label>
-                              <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="edicion.modalidad"><option value="">-- Elige Modalidad --</option>
+                        <div class="form-group" ng-class="{'has-error': edicionEditForm.modalidad.$invalid,'has-success':edicionEditForm.modalidad.$invalid}">
+                              <label>Modalidad * </label>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="modalidad" ng-model="edicion.modalidad" required><option value="">-- Elige Modalidad --</option>
                               <option value="Presencial">Presencial</option>
                               <option value="Semi-Presencial">Semi-Presencial</option>
                               <option value="Tele-Presencial">Tele-Presencial</option></select>
                           </div>
                       </div>
                       <div  class="col-md-4">
-                        <div>
+                        <div class="form-group" ng-class="{'has-error': edicionEditForm.acreditadora_id.$invalid,'has-success':edicionEditForm.acreditadora_id.$invalid}">
                             <label>Acreditadora</label>
-                            <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="edicion.acreditadora_id" ng-options="item.id as item.nombre for item in acreditadoras"><option value="">-- Elige Acreditadora --</option></select>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="acreditadora_id" ng-model="edicion.acreditadora_id" ng-options="item.id as item.nombre for item in acreditadoras" required><option value="">-- Elige Acreditadora --</option></select>
                         </div>
                       </div>
                     </div>
@@ -145,7 +139,7 @@
                           <input  type="text" ng-model="docenteSelected" placeholder="Buscar Docente" typeahead="atributo as atributo.nombres+' '+atributo.apellidos for atributo in getService($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control"/>
                     </div>
                     <div  class="col-md-2">
-                      <button type="submit" class="btn btn-primary" ng-click="crearDocenteEdicion()">Agregar</button>
+                      <button type="submit" class="btn btn-primary" ng-click="addDocente()">Agregar</button>
                     </div>
                   </div>
                   <div class="form-group">
@@ -163,7 +157,7 @@
                                     <td>@{{row.nombres}}</td>
                                     <td>@{{row.apellidos}}</td>
                                     <td>@{{row.sexo}}</td>
-                                    <td><a ng-click="eliminarDocenteEdicion(row)" class="btn btn-danger btn-xs" >Eliminar</a></td>
+                                    <td><a ng-click="destroyDocente($index)" class="btn btn-danger btn-xs" >Eliminar</a></td>
                                   </tr>              
                                 </table>
                   </div>
@@ -175,7 +169,7 @@
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="updateEdicion()">Modificar</button>
+                    <button type="submit" ng-disabled="bancoCreateForm.$invalid" class="btn btn-primary" ng-click="updateEdicion()">Modificar</button>
                     <a href="/ediciones" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

@@ -5,5 +5,10 @@ class Curso extends \Eloquent {
 
 	protected $table = 'cursos';
     
-    protected $fillable = ['fechaRegistro','descripcion'];
+    protected $fillable = ['descripcion','categoria_id'];
+
+    public function categoria()
+    {
+        return $this->belongsTo('\Salesfly\Salesfly\Entities\Categoria');
+    }
 }

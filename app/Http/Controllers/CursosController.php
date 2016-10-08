@@ -24,7 +24,7 @@ class CursosController extends Controller {
 
     public function all()
     {
-        $cursos = $this->cursoRepo->paginate(15);
+        $cursos = $this->cursoRepo->paginaterepo(15);
         return response()->json($cursos);
     }
     public function CargarProfeciones()
@@ -34,7 +34,7 @@ class CursosController extends Controller {
     }
 
     public function paginatep(){
-        $cursos = $this->cursoRepo->paginate(15);
+        $cursos = $this->cursoRepo->paginaterepo(15);
         return response()->json($cursos);
     }
 

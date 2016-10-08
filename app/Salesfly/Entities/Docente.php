@@ -7,17 +7,15 @@ class Docente extends \Eloquent {
     						'apellidos',
     						'dni',
     						'fechaNac',
-                            'fechaRegistro',
 							'sexo',
     						'curriculo',
     						'gradoAcademico',
     						'email',
                             'telefono',
-    						'nacionalidad',
-    						'pais',
     						'estado',
     						'ubigeo_id',
-    						'profesion_id'
+    						'profesion_id',
+                            'pais_id'
     						];
     public function ubigeo()
     {

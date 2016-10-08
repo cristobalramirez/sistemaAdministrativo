@@ -4,6 +4,8 @@
             function($scope, $routeParams,$location,crudService,$filter,$route,$log){
                 $scope.personas = [];
                 $scope.persona = {};
+                $scope.paises ={};
+                $scope.persona.pais_id = "1";
                 //----------------------
                 $scope.TrabajoDepartamentos ={};
                 $scope.TrabajoDepertamentoSelect;
@@ -97,6 +99,9 @@
                     crudService.all('cargarProfesiones').then(function(data){  
                         $scope.profesiones = data;
                     });
+                    crudService.all('cargarPaises').then(function(data){  
+                        $scope.paises = data;
+                    });
 
                 }else{
                     crudService.paginate('personas',1).then(function (data) {
@@ -117,6 +122,9 @@
                     
                     crudService.all('cargarProfesiones').then(function(data){  
                         $scope.profesiones = data;
+                    });
+                    crudService.all('cargarPaises').then(function(data){  
+                        $scope.paises = data;
                     });
                 }
 
@@ -236,7 +244,6 @@
                     });
                 }
                 $scope.validaDni=function(texto){
-
                    if(texto!=undefined){
 
                         crudService.validar('personas',texto).then(function (data){

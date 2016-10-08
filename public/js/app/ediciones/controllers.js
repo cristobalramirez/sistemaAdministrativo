@@ -125,7 +125,6 @@
                 $scope.updateEdicion = function(){
 
                     if ($scope.edicionEditForm.$valid) {
-                        if($scope.edicion.fechaRegistro!=null){
                             crudService.update($scope.edicion,'ediciones').then(function(data)
                             {
                                 if(data['estado'] == true){
@@ -136,9 +135,6 @@
                                     $scope.errors =data;
                                 }
                             });
-                        }else{
-                            alert('Selecione Fecha');  
-                        }
                     }
                 };
 
@@ -183,53 +179,53 @@
                         crudService.uploadFile('ediciones',fileBrochure, name).then(function(data)
                         {
                             $scope.edicion.brochure=data.data;
-                            $scope.fincion2();
+                            $scope.funcion2();
                         });
                     }else{
                         $scope.edicion.brochure="";
-                        $scope.fincion2();
+                        $scope.funcion2();
                     }                       
                 }
-                $scope.fincion2 = function(){
+                $scope.funcion2 = function(){
                     var fileResolucion = $scope.fileResolucion;
                     if (fileResolucion!=undefined) {
                         crudService.uploadFile('ediciones',fileResolucion, name).then(function(data)
                         {
                             $scope.edicion.resolucion=data.data;
-                            $scope.fincion3();
+                            $scope.funcion3();
                         });
                     }else{
                         $scope.edicion.resolucion="";
-                        $scope.fincion3();
+                        $scope.funcion3();
                     }
                 }
-                $scope.fincion3 = function(){
+                $scope.funcion3 = function(){
                     var fileProyecto = $scope.fileProyecto;
                     if (fileProyecto!=undefined) {
                         crudService.uploadFile('ediciones',fileProyecto, name).then(function(data)
                         {
                             $scope.edicion.proyecto=data.data;
-                            $scope.fincion4();
+                            $scope.funcion4();
                         });
                     }else{
                         $scope.edicion.proyecto="";
-                        $scope.fincion4();
+                        $scope.funcion4();
                     }
                 }
-                $scope.fincion4 = function(){
+                $scope.funcion4 = function(){
                     var filePublicidadFace = $scope.filePublicidadFace;
                     if (filePublicidadFace!=undefined) {
                         crudService.uploadFile('ediciones',filePublicidadFace, name).then(function(data)
                         {
                             $scope.edicion.publicidadFace=data.data;
-                            $scope.fincion5();
+                            $scope.funcion5();
                         });
                     }else{
                         $scope.edicion.publicidadFace="";
-                        $scope.fincion5();
+                        $scope.funcion5();
                     }
                 }
-                $scope.fincion5 = function(){
+                $scope.funcion5 = function(){
                     var filePublicidadImprimir = $scope.filePublicidadImprimir;
                     if (filePublicidadImprimir!=undefined) {
                         crudService.uploadFile('ediciones',filePublicidadImprimir, name).then(function(data)

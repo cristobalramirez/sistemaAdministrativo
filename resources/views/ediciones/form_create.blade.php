@@ -23,46 +23,41 @@
                 <!-- form start -->
                 <form name="edicionCreateForm" role="form" novalidate>
                   <div class="box-body">
-                  <div class="callout callout-danger" ng-show="errors">
-                                                  <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                                              </ul>
-                                            </div>
+                  <div class="callout callout-danger" ng-show="edicionCreateForm.$invalid">
+                          <strong >Los campos(*) son requeridos</strong>
+                </div> 
 
 
 
                   <div class="row">
                     <div  class="col-md-4">
-                        <div  class="form-group">
-                                  <label for="fechaInicio">Fecha de Inicio</label>
+                        <div  class="form-group" ng-class="{'has-error': edicionCreateForm.fechaInicio.$invalid,'has-success':edicionCreateForm.fechaInicio.$invalid}">
+                                  <label for="fechaInicio">Fecha de Inicio * </label>
                               <div  class="input-group">
                                   <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                  </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaInicio" ng-model="edicion.fechaInicio">
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaInicio" ng-model="edicion.fechaInicio" required>
                               </div>
                         </div>
                       </div>
 
                       <div  class="col-md-4">
-                        <div  class="form-group">
-                                  <label for="fechaFin">Fecha de Fin</label>
+                        <div  class="form-group" ng-class="{'has-error': edicionCreateForm.fechaFin.$invalid,'has-success':edicionCreateForm.fechaFin.$invalid}">
+                                  <label for="fechaFin">Fecha de Fin * </label>
                               <div  class="input-group">
                                   <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                  </div>
-                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaFin" ng-model="edicion.fechaFin">
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaFin" ng-model="edicion.fechaFin" required>
                               </div>
                         </div>
                       </div>
 
                       <div  class="col-md-4">
-                        <div class="form-group" ng-class="{true: 'has-error'}[ edicionCreateForm.costoCurso.$error.required && edicionCreateForm.$submitted || edicionCreateForm.z.$dirty && edicionCreateForm.costoCurso.$invalid]">
-                          <label for="costoCurso">Costo del Curso</label>
+                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.costoCurso.$invalid,'has-success':edicionCreateForm.costoCurso.$invalid}">
+                          <label for="costoCurso">Costo del Curso * </label>
                           <input ng-blur="validaDni(edicion.costoCurso)" type="text" class="form-control" name="costoCurso"  placeholder="Costo del Curso" ng-model="edicion.costoCurso" required>
-                          <label ng-show="edicionCreateForm.$submitted || edicionCreateForm.costoCurso.$dirty && edicionCreateForm.costoCurso.$invalid">
-                            <span ng-show="edicionCreateForm.costoCurso.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
                         </div>
                       </div>
                   </div>
@@ -70,24 +65,24 @@
 
                   <div class="row">
                     <div  class="col-md-4">
-                        <div>
-                            <label>Cursos</label>
-                            <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="edicion.curso_id" ng-options="item.id as item.descripcion for item in cursos"><option value="">-- Elige Cursos --</option></select>
+                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.curso_id.$invalid,'has-success':edicionCreateForm.curso_id.$invalid}">
+                            <label>Curso * </label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="curso_id" ng-model="edicion.curso_id" ng-options="item.id as item.descripcion for item in cursos" required><option value="">-- Elige Curso --</option></select>
                         </div>
                       </div>
                     <div  class="col-md-4">
-                        <div>
-                              <label>Modalidad</label>
-                              <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="edicion.modalidad"><option value="">-- Elige Modalidad --</option>
+                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.modalidad.$invalid,'has-success':edicionCreateForm.modalidad.$invalid}">
+                              <label>Modalidad * </label>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="modalidad" ng-model="edicion.modalidad" required><option value="">-- Elige Modalidad --</option>
                               <option value="Presencial">Presencial</option>
                               <option value="Semi-Presencial">Semi-Presencial</option>
                               <option value="Tele-Presencial">Tele-Presencial</option></select>
                           </div>
                       </div>
                       <div  class="col-md-4">
-                        <div>
+                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.acreditadora_id.$invalid,'has-success':edicionCreateForm.acreditadora_id.$invalid}">
                             <label>Acreditadora</label>
-                            <select class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="edicion.acreditadora_id" ng-options="item.id as item.nombre for item in acreditadoras"><option value="">-- Elige Acreditadora --</option></select>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="acreditadora_id" ng-model="edicion.acreditadora_id" ng-options="item.id as item.nombre for item in acreditadoras" required><option value="">-- Elige Acreditadora --</option></select>
                         </div>
                       </div>
                     </div>
@@ -172,7 +167,7 @@
                 </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="uploadFile()">Crear</button>
+                    <button type="submit" ng-disabled="edicionCreateForm.$invalid" class="btn btn-primary" ng-click="uploadFile()">Crear</button>
                     <a href="/ediciones" class="btn btn-danger">Cancelar</a>
                   </div>
                 </form>

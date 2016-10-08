@@ -14,8 +14,10 @@ class CreateCursosTable extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('fechaRegistro');
             $table->string('descripcion')->nullable();
+            $table->integer('categoria_id')->unsigned();
+            
+            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
             
         });

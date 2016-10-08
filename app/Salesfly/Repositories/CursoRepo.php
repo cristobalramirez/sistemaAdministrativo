@@ -8,16 +8,25 @@ class CursoRepo extends BaseRepo{
     { 
         return new Curso;
     }
-
     public function search($q)
     {
-        $cursos =Curso::where('descripcion','like', $q.'%')
-                    ->paginate(15);
-        return $cursos;
+        $cuentaBancarias = Curso::with('categoria')->paginate(15);
+        $cuentaBancarias = Curso::with(array('categoria'=>function($query){
+            $query->select('id','nombre');
+        }))->where('descripcion','like', $q.'%')
+        ->paginate(15);
+        return $cuentaBancarias;
+    }
+    public function paginaterepo($c){
+        $cuentaBancarias = Curso::with('categoria')->paginate($c);
+        $cuentaBancarias = Curso::with(array('categoria'=>function($query){
+            $query->select('id','nombreCategoria');
+        }))->paginate($c);
+        return $cuentaBancarias;
     }
     public function all()
     {
         $curos =Curso::get();
         return $curos;
     }
-} 
+}  

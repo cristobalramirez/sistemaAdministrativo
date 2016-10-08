@@ -206,10 +206,52 @@
                     controller: 'InscribirController'
                 })
                 //------------------
+                //------------------//RUTES PERSONAS
+                .when('/categorias', {
+                    templateUrl: '/js/app/categorias/views/index.html',
+                    controller: 'CategoriaController'
+                })
+                .when('/categorias/create',{
+                    templateUrl:'/categorias/form-create',
+                    controller: 'CategoriaController'
+                })
+                .when('/categorias/edit/:id',{
+                    templateUrl:'/categorias/form-edit',
+                    controller: 'CategoriaController'
+                }) 
+                //------------------//RUTES PERSONAS
+                .when('/paises', {
+                    templateUrl: '/js/app/paises/views/index.html',
+                    controller: 'PaisController'
+                })
+                .when('/paises/create',{
+                    templateUrl:'/paises/form-create',
+                    controller: 'PaisController'
+                })
+                .when('/paises/edit/:id',{
+                    templateUrl:'/paises/form-edit',
+                    controller: 'PaisController'
+                }) 
+                //---------------------
+                //------------------//RUTES PERSONAS
+                .when('/promociones', {
+                    templateUrl: '/js/app/promociones/views/index.html',
+                    controller: 'PromocionController'
+                })
+                .when('/promociones/create',{
+                    templateUrl:'/promociones/form-create',
+                    controller: 'PromocionController'
+                })
+                .when('/promociones/edit/:id',{
+                    templateUrl:'/promociones/form-edit',
+                    controller: 'PromocionController'
+                }) 
+                //---------------------
                 .otherwise({
                     redirectTo: '/'
                 });
                 //------------------//RUTES PERSONAS
+
                 
                 //----------------------------
                 

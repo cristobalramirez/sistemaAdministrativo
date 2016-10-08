@@ -29,10 +29,12 @@ class CreatePersonasTable extends Migration
             $table->integer('ubigeoTrabajo_id')->unsigned()->nullable();
             $table->integer('ubigeoDireccion_id')->unsigned()->nullable();
             $table->integer('profesion_id')->unsigned()->nullable();
+            $table->integer('pais_id')->unsigned()->nullable();
             
             $table->foreign('ubigeoTrabajo_id')->references('id')->on('ubigeos');
             $table->foreign('ubigeoDireccion_id')->references('id')->on('ubigeos');
             $table->foreign('profesion_id')->references('id')->on('profesiones');
+            $table->foreign('pais_id')->references('id')->on('paises');
             $table->timestamps();
         });
     }

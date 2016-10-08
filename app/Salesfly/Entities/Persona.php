@@ -18,7 +18,8 @@ class Persona extends \Eloquent {
     						'estado',
     						'ubigeoTrabajo_id',
     						'ubigeoDireccion_id',
-    						'profesion_id'
+    						'profesion_id',
+                            'pais_id'
     						];
     public function ubigeo()
     {

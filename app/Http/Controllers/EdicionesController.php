@@ -97,7 +97,7 @@ class EdicionesController extends Controller {
                 unlink($rest."/public".$edicion->resolucion);
             }            
         }
-        if($request->proyecto!=$docente->proyecto){
+        if($request->proyecto!=$edicion->proyecto){
             if ($edicion->proyecto!="") {
                 $rest = substr(__DIR__, 0, -21);
                 unlink($rest."/public".$edicion->proyecto);
