@@ -13,6 +13,9 @@
                 $scope.promocion={};
                 $scope.inscripcion.descuentoPorcentaje=0;
                 $scope.inscripcion.descuento=0;
+                $scope.inscripcion.nombreMedio;
+                $scope.inscripcion.nombreCurso;
+                $scope.inscripcion.nombrePromocion;
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
@@ -37,6 +40,26 @@
                 { 
                     crudService.byId(id,'inscripciones').then(function (data) {
                         $scope.inscripcion = data;
+                        crudService.byId($scope.inscripcion.medioPublicitario_id,'medioPublicitarios').then(function (data) {
+                            $scope.inscripcion.nombreMedio=data.descripcion;
+                        });
+                        crudService.byId($scope.inscripcion.promocion_id,'promociones').then(function (data) {
+                            $scope.inscripcion.nombrePromocion=data.descripcion;
+                        });
+                        crudService.byId($scope.inscripcion.edicion_id,'ediciones').then(function (data) {
+                            var edicionSelecionada=data;
+                            crudService.byId(edicionSelecionada.curso_id,'cursos').then(function (data) {
+                                $scope.inscripcion.nombreCurso=data.descripcion;
+                                
+
+                                crudService.byId(edicionSelecionada.curso_id,'acreditadoras').then(function (data) {
+                                    $scope.inscripcion.nombreCurso=$scope.inscripcion.nombreCurso+" - "+data.nombre;
+                                    $log.log($scope.inscripcion.nombreCurso);
+                                });    
+                            });
+                        });
+
+                        
                     });
                     crudService.all('cargarMedioPublicitarios').then(function(data){  
                         $scope.medioPublicitarios = data;
@@ -48,6 +71,7 @@
                         $scope.empleados = data;
                     });
                 }else{
+                    $scope.inscripcion.promocion_id="1";
                     crudService.paginate('inscripciones',1).then(function (data) {
                         $scope.inscripciones = data.data;
                         $scope.maxSize = 5;
@@ -56,15 +80,17 @@
                         $scope.itemsperPage = 15;
 
                     });
-                    crudService.all('cargarMedioPublicitarios').then(function(data){  
-                        $scope.medioPublicitarios = data;
-                    });
+                    
                     crudService.all('cargarPromociones').then(function(data){  
                         $scope.promociones = data;
                     });
                     crudService.all('cargarEmpleados').then(function(data){  
                         $scope.empleados = data;
                     });
+                    crudService.all('cargarMedioPublicitarios').then(function(data){  
+                        $scope.medioPublicitarios = data;
+                    });
+
                 }
 
                 
@@ -197,6 +223,7 @@
                     }else{
                         crudService.byId($scope.inscripcion.promocion_id,'promociones').then(function (data) {
                             $scope.promocion = data;
+                            $scope.inscripcion.nombrePromocion=data.descripcion;
                             $scope.inscripcion.descuentoPorcentaje=$scope.promocion.porcentajeDescuento;
 
                             if ($scope.inscripcion.montoCurso!=undefined) {

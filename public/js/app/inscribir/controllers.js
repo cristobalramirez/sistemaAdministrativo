@@ -90,6 +90,7 @@
                                 $scope.inscribir.dni=$scope.persona.dni;
                                 $scope.inscribir.email=$scope.persona.email;
                                 $scope.inscribir.telefono=$scope.persona.telefono;
+                                $scope.inscribir.promocion_id=1;
                                 $scope.fechaInscripcion=new Date();
 
                                 crudService.create($scope.inscribir, 'inscribir').then(function (data) {
