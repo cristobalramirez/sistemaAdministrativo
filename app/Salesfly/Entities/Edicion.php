@@ -15,6 +15,7 @@ class Edicion extends \Eloquent {
     						'publicidadFace',
     						'publicidadImprimir',
                             'estado',
+                            'baner',
     						'curso_id',
     						'acreditadora_id'];
 

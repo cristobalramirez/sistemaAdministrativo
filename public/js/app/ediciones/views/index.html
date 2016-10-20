@@ -65,8 +65,8 @@
                         <th>MODALIDAD</th>
                         <th>COSTO</th>
                         
-                        <th style="width: 210px">Documentos</th>
-                        <th style="width: 140px">Publicidad</th>
+                        <th style="width: 80px">Documentos</th>
+                        <th style="width: 80px">Publicidad</th>
                         <th style="width: 40px">Inscribir</th>
                         <th style="width: 50px">Estado</th>
                         <th style="width: 40px">Editar</th>
@@ -86,6 +86,9 @@
                         </td>
                         <td><a  ng-disabled="row.publicidadFace==''" href="{{row.publicidadFace}}" target="_blank" class="btn btn-success btn-xs">Facebook</a>
                         <a  ng-disabled="row.publicidadImprimir==''" href="{{row.publicidadImprimir}}" target="_blank" class="btn btn-success btn-xs">Imprimir</a>
+
+                        <a  ng-disabled="row.baner==''" href="{{row.baner}}" target="_blank" class="btn btn-success btn-xs">Baner</a>
+
                         </td>
                         <td><a ng-click="inscribirEdicion(row)" class="btn btn-warning btn-xs">Inscribir</a></td>
                         </td>

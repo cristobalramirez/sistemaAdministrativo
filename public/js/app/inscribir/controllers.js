@@ -7,20 +7,21 @@
                 $scope.persona = {};
                 $scope.inscribir = {};
                 $scope.persona.pais_id = "1";
+                $scope.persona.sexo="Masculino";
                 //----------------------
                 $scope.TrabajoDepartamentos ={};
-                $scope.TrabajoDepertamentoSelect;
+                $scope.persona.TrabajoDepertamentoSelect;
                 $scope.TrabajoProvincias ={};
-                $scope.TrabajoProvinciaSelect;
+                $scope.persona.TrabajoProvinciaSelect;
                 $scope.TrabajoDistritos ={};
-                $scope.TrabajoDistritoSelect;
+                $scope.persona.TrabajoDistritoSelect;
                 //----------------------
                 $scope.DomicilioDepartamentos ={};
-                $scope.DomicilioDepertamentoSelect;
+                $scope.persona.DomicilioDepertamentoSelect;
                 $scope.DomicilioProvincias ={};
-                $scope.DomicilioProvinciaSelect;
+                $scope.persona.DomicilioProvinciaSelect;
                 $scope.DomicilioDistritos ={};
-                $scope.DomicilioDistritoSelect;
+                $scope.persona.DomicilioDistritoSelect;
                 //----------------------
                 $scope.ubigeoTrabajo ={};
                 $scope.ubigeoDomicilio ={};
@@ -31,11 +32,9 @@
                 {
                     crudService.byId(id,'ediciones').then(function (data) {
                         $scope.edicion = data;
-                        $log.log($scope.edicion);
                         if ($scope.edicion.costoCurso!=undefined) {
                             crudService.byId($scope.edicion.curso_id,'cursos').then(function (data) {
                                 $scope.curso = data;
-                                $log.log($scope.curso);
                             });    
                             crudService.search('detalleDocenteEdiciones',$scope.edicion.id,1).then(function (data){
                                 $scope.docentesAdd=data;
@@ -68,13 +67,7 @@
                     });
                 }
                 $scope.createInscripcion = function(){
-                    //$scope.atribut.estado = 1;
-                    $log.log($scope.persona);
                     crudService.recuperarDosDato('buscarInscripcion',$scope.edicion.id,$scope.persona.id).then(function(data){  
-                        $log.log("---");
-                        $log.log(data);
-                        $log.log(data.length);
-
                         if (data.length>0) {
                             alert("Usted ya se encuentra registrado en este curso");
                         }else{
@@ -87,6 +80,9 @@
                                 $scope.inscribir.fechaInscripcion
                                 $scope.inscribir.montoCurso=$scope.edicion.costoCurso;
                                 $scope.inscribir.montoPagado=0;
+                                $scope.inscribir.descuentoPorcentaje=0;
+                                $scope.inscribir.descuento=0;
+                                $scope.inscribir.montoPagar=$scope.edicion.costoCurso;
                                 $scope.inscribir.saldo=$scope.edicion.costoCurso;
                                 $scope.inscribir.edicion_id=$scope.edicion.id;
                                 $scope.inscribir.nombres=$scope.persona.nombres;
@@ -95,6 +91,7 @@
                                 $scope.inscribir.email=$scope.persona.email;
                                 $scope.inscribir.telefono=$scope.persona.telefono;
                                 $scope.fechaInscripcion=new Date();
+
                                 crudService.create($scope.inscribir, 'inscribir').then(function (data) {
                           
                                     if (data['estado'] == true) {
@@ -119,16 +116,11 @@
                 }
 
                 $scope.TrabajoCargarProvincia = function(){
-                    $log.log($scope.persona);
                     $scope.TrabajoProvincias ={};
                     $scope.persona.TrabajoProvinciaSelect=null;
                     $scope.persona.TrabajoDistritoSelect=null;
                     crudService.recuperarUnDato('ubigeoProvincia',$scope.persona.TrabajoDepertamentoSelect).then(function(data){  
                         $scope.TrabajoProvincias = data;
-                        
-
-                        $log.log($scope.TrabajoProvincias);
-                        //$scope.provinciaSelect=data[0].provincia;
                     });
                 }
                 $scope.TrabajoCargarDistrito = function(){
@@ -136,7 +128,6 @@
                     $scope.persona.TrabajoDistritoSelect=null;
                     crudService.recuperarDosDato('ubigeoDistrito',$scope.persona.TrabajoDepertamentoSelect,$scope.persona.TrabajoProvinciaSelect).then(function(data){  
                         $scope.TrabajoDistritos = data;
-                        $log.log($scope.TrabajoDistritos);
                     });
                     
                 }
@@ -146,7 +137,6 @@
                     $scope.persona.DomicilioDistritoSelect=null;
                     crudService.recuperarUnDato('ubigeoProvincia',$scope.persona.DomicilioDepertamentoSelect).then(function(data){  
                         $scope.DomicilioProvincias = data;
-                        //$scope.provinciaSelect=data[0].provincia;
                     });
                 }
                 $scope.DomicilioCargarDistrito = function(){
@@ -159,16 +149,18 @@
                 }
 
                 $scope.validarPais = function(){
-                    $scope.DomicilioDepertamentoSelect;
-                    $scope.DomicilioProvinciaSelect;
-                    $scope.DomicilioDistritoSelect;
+                    $scope.persona.direccion=null;
+                    $scope.persona.DomicilioDepertamentoSelect=null;
+                    $scope.persona.DomicilioProvinciaSelect=null;
+                    $scope.persona.DomicilioDistritoSelect=null;
+                    $scope.persona.TrabajoDepertamentoSelect=null;
+                    $scope.persona.TrabajoProvinciaSelect=null;
+                    $scope.persona.TrabajoDistritoSelect=null;
                 }
 
                 $scope.buscarPersonaDni = function(dato){
-                    $log.log(dato);
                     crudService.recuperarUnDato('buscarPersonaConDni',dato).then(function(data){  
                         $scope.persona = data[0];
-                        $log.log($scope.persona);
                         if($scope.persona != null) {
                             if ($scope.persona.fechaNac.length > 0) {
                                 $scope.persona.fechaNac = new Date($scope.persona.fechaNac);
@@ -206,10 +198,12 @@
                                 $scope.persona.DomicilioDistritoSelect=$scope.ubigeoDomicilio.id;
                             });
                         });
+                        $scope.persona.dni=Number($scope.persona.dni);
                         }else{
                             $scope.persona={};
                             $scope.persona.dni=dato;
                             $scope.persona.id=0;
+                            $scope.persona.sexo="Masculino";
                             $scope.persona.pais_id = "1";
                         }
                     });

@@ -117,7 +117,7 @@
                       <div  class="col-md-6">
                         <div class="form-group">
                             <label>País</label>
-                            <select  class="form-control ng-pristine ng-valid ng-touched" name="profesion_id" ng-model="docente.pais_id" ng-options="item.id as item.nombre for item in paises"></select>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" ng-click="validarPais()" name="profesion_id" ng-model="docente.pais_id" ng-options="item.id as item.nombre for item in paises"></select>
                         </div>
                       </div>
                     </div>

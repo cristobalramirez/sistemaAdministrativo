@@ -125,6 +125,13 @@
                           <input type="file" name="filePublicidadImprimir" uploader-model="filePublicidadImprimir" />
                         </div>
                       </div>
+
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                          <label>Baner</label>
+                          <input type="file" name="baner" uploader-model="baner" />
+                        </div>
+                      </div>
                   </div>
                      
                     

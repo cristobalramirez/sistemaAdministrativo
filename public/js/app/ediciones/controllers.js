@@ -229,6 +229,19 @@
                     }
                 }
                 $scope.funcion5 = function(){
+                    var baner = $scope.baner;
+                    if (baner!=undefined) {
+                        crudService.uploadFile('ediciones',baner, name).then(function(data)
+                        {
+                            $scope.edicion.baner=data.data;
+                            $scope.funcion6();
+                        });
+                    }else{
+                        $scope.edicion.baner="";
+                        $scope.funcion6();
+                    }
+                }
+                $scope.funcion6 = function(){
                     var filePublicidadImprimir = $scope.filePublicidadImprimir;
                     if (filePublicidadImprimir!=undefined) {
                         crudService.uploadFile('ediciones',filePublicidadImprimir, name).then(function(data)
@@ -292,6 +305,18 @@
                     }
                 }
                 $scope.funcionEdit5 = function(){
+                    var baner = $scope.baner;
+                    if (baner!=undefined) {
+                        crudService.uploadFile('ediciones',baner, name).then(function(data)
+                        {
+                            $scope.edicion.baner=data.data;
+                            $scope.funcionEdit6();
+                        });
+                    }else{
+                        $scope.funcionEdit6();
+                    }
+                }
+                $scope.funcionEdit6 = function(){
                     var filePublicidadImprimir = $scope.filePublicidadImprimir;
                     if (filePublicidadImprimir!=undefined) {
                         crudService.uploadFile('ediciones',filePublicidadImprimir, name).then(function(data)

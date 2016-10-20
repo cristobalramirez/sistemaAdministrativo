@@ -14,6 +14,7 @@ class EdicionManager extends BaseManager {
                     'proyecto' => '',
                     'publicidadFace' => '',
                     'publicidadImprimir'=> '',
+                    'baner'=> '',
                     'estado'=> '',
                     'curso_id'=> '',
                     'acreditadora_id'=> ''

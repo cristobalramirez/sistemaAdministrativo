@@ -11,6 +11,7 @@
                 $scope.ProvinciaSelect;
                 $scope.Distritos ={};
                 $scope.DistritoSelect;
+                $scope.dniEditar;
                 //$scope.file="";
                 //----------------------
                 $scope.errors = null;
@@ -42,6 +43,7 @@
                     crudService.byId(id,'empleados').then(function (data) {
                         $scope.empleado = data;
                         $scope.empleado.dni=Number($scope.empleado.dni);
+                        $scope.dniEditar=$scope.empleado.dni;
                         $scope.empleado.telefono=Number($scope.empleado.telefono); 
                         if($scope.empleado != null) {
                             if ($scope.empleado.fechaNac.length > 0) {
@@ -190,13 +192,15 @@
                 $scope.validaDni=function(texto){
 
                    if(texto!=undefined){
-
-                        crudService.validar('empleados',texto).then(function (data){
-                            if(data.dni!=undefined){
-                                alert("DNI Registrado!!");
-                                $scope.empleado.dni='';
-                            }
-                        });
+                        if ($scope.dniEditar!=texto) {
+                            crudService.validar('empleados',texto).then(function (data){
+                                if(data.dni!=undefined){
+                                    alert("DNI Registrado!!");
+                                    $scope.empleado.dni='';
+                                }
+                            });
+                        }
+                        
                     }
                }
                $scope.disableProduct = function(row){

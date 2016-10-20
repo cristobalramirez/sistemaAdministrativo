@@ -115,6 +115,12 @@ class EdicionesController extends Controller {
                 unlink($rest."/public".$edicion->publicidadImprimir);
             }            
         }
+        if($request->baner!=$edicion->baner){
+            if ($edicion->baner!="") {
+                $rest = substr(__DIR__, 0, -21);
+                unlink($rest."/public".$edicion->baner);
+            }            
+        }
 
         $manager = new EdicionManager($edicion,$request->all());
         $manager->save();
@@ -145,6 +151,10 @@ class EdicionesController extends Controller {
         if($edicion->publicidadImprimir!=""){
             $rest = substr(__DIR__, 0, -21);
             unlink($rest."/public".$edicion->publicidadImprimir);
+        }
+        if($edicion->baner!=""){
+            $rest = substr(__DIR__, 0, -21);
+            unlink($rest."/public".$edicion->baner);
         }
         $edicion->delete();
         \DB::commit();

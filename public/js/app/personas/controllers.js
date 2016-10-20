@@ -6,6 +6,7 @@
                 $scope.persona = {};
                 $scope.paises ={};
                 $scope.persona.pais_id = "1";
+                $scope.dniEditar;
                 //----------------------
                 $scope.TrabajoDepartamentos ={};
                 $scope.TrabajoDepertamentoSelect;
@@ -52,6 +53,7 @@
                     crudService.byId(id,'personas').then(function (data) {
                         $scope.persona = data;
                         $scope.persona.dni=Number($scope.persona.dni);
+                        $scope.dniEditar=$scope.persona.dni;
                         $scope.persona.telefono=Number($scope.persona.telefono);
 
                         if($scope.persona != null) {
@@ -245,15 +247,27 @@
                 }
                 $scope.validaDni=function(texto){
                    if(texto!=undefined){
-
-                        crudService.validar('personas',texto).then(function (data){
-                            if(data.dni!=undefined){
-                                alert("DNI Registrado!!");
-                                $scope.persona.dni='';
-                            }
-                        });
+                        if ($scope.dniEditar!=texto) {
+                            crudService.validar('personas',texto).then(function (data){
+                                if(data.dni!=undefined){
+                                    alert("DNI Registrado!!");
+                                    $scope.persona.dni=undefined;
+                                }
+                            });  
+                        }
+                        
                     }
                }
+               $scope.validarPais = function(){
+                    $scope.persona.direccion=null;
+                    $scope.DomicilioDepertamentoSelect=null;
+                    $scope.DomicilioProvinciaSelect=null;
+                    $scope.DomicilioDistritoSelect=null;
+                    $scope.TrabajoDepertamentoSelect=null;
+                    $scope.TrabajoProvinciaSelect=null;
+                    $scope.TrabajoDistritoSelect=null;
+                    $scope.persona.institucionTrabajo=null;
+                }
                $scope.disableProduct = function(row){
                     crudService.byforeingKey('personas','disablePersona',row.id).then(function(data)
                     {

@@ -35,7 +35,7 @@
 
                     <div class="form-group" ng-class="{'has-error': promocionCreateForm.porcentajeDescuento.$invalid,'has-success':promocionCreateForm.porcentajeDescuento.$invalid}">
                       <label for="porcentajeDescuento">Procentaje * </label>
-                      <input type="number" min="1" max="100" class="form-control" name="porcentajeDescuento" placeholder="Procentaje" ng-model="promocion.porcentajeDescuento" required>
+                      <input type="number" min="0" max="100" class="form-control" name="porcentajeDescuento" placeholder="Procentaje" ng-model="promocion.porcentajeDescuento" required>
                       
                     </div>
                     

@@ -70,6 +70,16 @@ class InscripcionesController extends Controller {
 
             $request->merge(["persona_id"=>$temporal]);
         }else{
+            $personarepo;
+            $personarepo = new PersonaRepo;
+            $personaSave=$personarepo->getModel();
+            $idPersona=$persona['id'];
+            
+
+            $inscripcion = $personaSave->find($idPersona);
+            
+            $manager = new PersonaManager($inscripcion,$persona);
+            $manager->save();
             $request->merge(["persona_id"=>$persona['id']]);
         }
         $inscripciones = $this->inscripcionRepo->getModel();

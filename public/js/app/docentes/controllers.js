@@ -5,6 +5,7 @@
                 $scope.docentes = [];
                 $scope.docente = {};
                 $scope.docente.pais_id="1";
+                $scope.dniEditar;
                 //----------------------
                 $scope.Departamentos ={};
                 $scope.DepertamentoSelect;
@@ -23,6 +24,11 @@
 
                 $scope.toggle = function () { 
                     $scope.show = !$scope.show; 
+                };
+                $scope.validarPais = function () { 
+                    $scope.DepertamentoSelect=null;
+                    $scope.ProvinciaSelect=null;
+                    $scope.DistritoSelect=null;
                 };
 
                 $scope.pageChanged = function() {
@@ -45,6 +51,7 @@
                     crudService.byId(id,'docentes').then(function (data) {
                         $scope.docente = data;
                         $scope.docente.dni=Number($scope.docente.dni);
+                        $scope.dniEditar=$scope.docente.dni;
                         $scope.docente.telefono=Number($scope.docente.telefono); 
                         if($scope.docente != null) {
                             if ($scope.docente.fechaNac.length > 0) {
@@ -213,13 +220,15 @@
                 $scope.validaDni=function(texto){
 
                    if(texto!=undefined){
-
-                        crudService.validar('docentes',texto).then(function (data){
-                            if(data.dni!=undefined){
-                                alert("DNI Registrado!!");
-                                $scope.docente.dni='';
-                            }
-                        });
+                        if ($scope.dniEditar!=texto) {
+                            crudService.validar('docentes',texto).then(function (data){
+                                if(data.dni!=undefined){
+                                 alert("DNI Registrado!!");
+                                 $scope.docente.dni=undefined;
+                                }
+                            });   
+                        }
+                        
                     }
                }
                $scope.disableProduct = function(row){
