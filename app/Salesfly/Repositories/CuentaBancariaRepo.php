@@ -25,4 +25,11 @@ class CuentaBancariaRepo extends BaseRepo{
         }))->paginate($c);
         return $cuentaBancarias;
     }
+    public function all()
+    {
+        $cuentaBancarias =CuentaBancaria::leftjoin('bancos','cuentaBancarias.banco_id','=','bancos.id')
+                        ->select('cuentaBancarias.*','bancos.nombre as banco')
+                        ->get();
+        return $cuentaBancarias;
+    }
 } 

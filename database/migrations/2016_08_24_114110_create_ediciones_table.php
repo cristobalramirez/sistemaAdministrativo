@@ -25,6 +25,7 @@ class CreateEdicionesTable extends Migration
             $table->string('publicidadImprimir');
             $table->string('baner');
             $table->string('estado');
+            $table->string('descripcionEdicion');
             
             $table->integer('curso_id')->unsigned()->nullable();
             $table->integer('acreditadora_id')->unsigned();

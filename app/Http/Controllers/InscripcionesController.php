@@ -9,6 +9,8 @@ use Salesfly\Salesfly\Repositories\InscripcionRepo;
 use Salesfly\Salesfly\Managers\InscripcionManager;
 use Salesfly\Salesfly\Repositories\PersonaRepo;
 use Salesfly\Salesfly\Managers\PersonaManager;
+use Salesfly\Salesfly\Repositories\PagoRepo;
+use Salesfly\Salesfly\Managers\PagoManager;
  
 class InscripcionesController extends Controller {
 
@@ -53,6 +55,53 @@ class InscripcionesController extends Controller {
         $manager->save();
 
         return response()->json(['estado'=>true, 'nombre'=>$inscripciones->nombre]);
+    }
+    public function eliminarPago(Request $request)
+    {
+        \DB::beginTransaction();
+        $pagoEliminar = $request->pagoEliminar;
+
+        $inscripcion = $this->inscripcionRepo->find($request->id);
+
+        $manager = new InscripcionManager($inscripcion,$request->all());
+        $manager->save();
+
+        $pagorepo;
+        $pagorepo = new PagoRepo;
+        $PagoSave=$pagorepo->getModel();
+
+        $pago= $PagoSave->find($pagoEliminar['id']);
+        if($pago->vaucher!=""){
+            $rest = substr(__DIR__, 0, -21);
+            unlink($rest."/public".$pago->vaucher);
+        }
+        
+        $pago->delete();
+
+        \DB::commit();
+        return response()->json(['estado'=>true, 'nombre'=>$pago->nombre]);
+    }
+    public function realizarPago(Request $request)
+    {
+        \DB::beginTransaction();
+        $pago = $request->pago;
+
+        
+        $inscripcion = $this->inscripcionRepo->find($request->id);
+
+        $manager = new InscripcionManager($inscripcion,$request->all());
+        $manager->save();
+
+
+        $pagorepo;
+        $pagorepo = new PagoRepo;
+        $PagoSave=$pagorepo->getModel();
+            
+        $insertarpago=new PagoManager($PagoSave,$pago);
+        $insertarpago->save();          
+        $PagoSave->save();
+        \DB::commit();
+        return response()->json(['estado'=>true, 'nombre'=>$inscripcion->nombre]);
     }
     public function createInscribir(Request $request)
     {
@@ -107,6 +156,8 @@ class InscripcionesController extends Controller {
         return response()->json(['estado'=>true, 'nombre'=>$inscripcion->nombre]);
     }
 
+
+
     public function destroy(Request $request)
     {
         $inscripcion= $this->inscripcionRepo->find($request->id);
@@ -125,4 +176,22 @@ class InscripcionesController extends Controller {
         $inscripciones = $this->inscripcionRepo->buscarInscripcion($d,$p);
         return response()->json($inscripciones);
     }
+    public function searchCurso($curso,$edicion)
+    {
+        $inscripciones = $this->inscripcionRepo->searchCurso($curso,$edicion);
+        return response()->json($inscripciones);
+    }
+    public function uploadFile(){
+
+        $file = $_FILES["file"]["name"];
+        $time=time();
+        if(!is_dir("files/"))
+            mkdir("files/", 0777);
+        if($file && move_uploaded_file($_FILES["file"]["tmp_name"], "files/".$time."_".$file))
+        {
+             
+        }
+        return "/files/".$time."_".$file;      
+    }
+    
 }

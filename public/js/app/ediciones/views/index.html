@@ -62,6 +62,7 @@
                         <th>FECHA INICIO</th>
                         <th>FECHA FIN</th>
                         <th>CURSO</th>
+                        <th>EDICION</th>
                         <th>MODALIDAD</th>
                         <th>COSTO</th>
                         
@@ -78,6 +79,7 @@
                         <td>{{row.fechaInicio}}</td>
                         <td>{{row.fechaFin}}</td>
                         <td>{{row.curso.descripcion}}</td>
+                        <td>{{row.descripcionEdicion}}</td>                        
                         <td>{{row.modalidad}}</td>
                         <td>{{row.costoCurso}}</td>
                         <td><a  ng-disabled="row.brochure==''" href="{{row.brochure}}" target="_blank" class="btn btn-success btn-xs">Brochure</a>

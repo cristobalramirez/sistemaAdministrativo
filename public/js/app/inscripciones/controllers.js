@@ -15,10 +15,38 @@
                 $scope.inscripcion.descuento=0;
                 $scope.inscripcion.nombreMedio;
                 $scope.inscripcion.nombreCurso;
-                $scope.inscripcion.nombrePromocion;
+                $scope.inscripcion.nombrePromocion; 
+                $scope.cursos={};
+                $scope.selectCurso;
+                $scope.ediciones={};
+                $scope.cuentas={};
+                $scope.pago={};
+                $scope.recuperarInscripcion = {};
+                $scope.file;
+                $scope.pagoEliminar;
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
+                };
+                $scope.buscarCursos = function () {
+                    if ($scope.selectCurso==undefined) {
+                        $scope.selectCurso=0;
+                    }
+                    crudService.recuperarDosDato('buscaredicion',$scope.selectCurso,"%").then(function (data) {
+                            $scope.inscripciones = data.data;
+
+                            crudService.recuperarUnDato('edicionesCurso',$scope.selectCurso).then(function (data) {
+                                $scope.ediciones=data;
+                            });
+                        });
+                };
+                $scope.buscarEdicion = function () {
+                    if ($scope.selectEdicion==undefined) {
+                        $scope.selectEdicion=0;
+                    }
+                    crudService.recuperarDosDato('buscaredicion',$scope.selectCurso,$scope.selectEdicion).then(function (data) {
+                            $scope.inscripciones = data.data;
+                        });
                 };
 
                 $scope.pageChanged = function() {
@@ -90,10 +118,70 @@
                     crudService.all('cargarMedioPublicitarios').then(function(data){  
                         $scope.medioPublicitarios = data;
                     });
+                    crudService.all('todasCursos').then(function (data) {
+                        $scope.cursos=data;
+                    });
+
+                    crudService.all('todasCuentas').then(function(data){  
+                        $scope.cuentas = data;
+                    });
 
                 }
 
-                
+                $scope.cargarPagos = function(row){
+                    $scope.recuperarInscripcion = row;
+                    crudService.recuperarUnDato('pagos',row.id).then(function (data){
+                        $scope.pagos = data;
+                    });
+                   
+                };
+                $scope.name="archivo";
+                $scope.uploadFile = function()
+                {
+                    if ($scope.pagoCreateForm.$valid) {
+                        
+                        var name = $scope.name;
+                        var file = $scope.file;
+
+                        if (file!=undefined) {
+                            crudService.uploadFile('vaucherPago',file, name).then(function(data)
+                            {
+                                $scope.pago.vaucher=data.data;
+                                $scope.realizarPago();
+                            })    
+                        }else{
+                            $scope.pago.vaucher="";
+                            $scope.realizarPago();
+                        }                    
+                    }  
+                }
+                $scope.realizarPago = function(){
+                    $scope.recuperarInscripcion.montoPagado=Number($scope.recuperarInscripcion.montoPagado)+$scope.pago.monto;
+                    $scope.recuperarInscripcion.saldo=Number($scope.recuperarInscripcion.montoPagar)-Number($scope.recuperarInscripcion.montoPagado);
+                    $scope.recuperarInscripcion.estado=1;
+                    $scope.pago.inscripcion_id=$scope.recuperarInscripcion.id;
+
+                    $scope.recuperarInscripcion.pago=$scope.pago;
+
+                    crudService.update($scope.recuperarInscripcion,'realizarPago').then(function(data)
+                        {
+                            if(data['estado'] == true){
+                                $scope.success = data['nombres'];
+                                alert('Pago Registrado');
+                                $location.path('/inscripciones');
+                                $scope.pago={};
+                                $scope.file=undefined;
+                                $scope.name=undefined;
+                                crudService.recuperarUnDato('pagos',$scope.recuperarInscripcion.id).then(function (data){
+                                    $scope.pagos = data;
+                                });
+
+                            }else{
+                                $scope.errors =data;
+                            }
+                        });
+                   
+                };
 
                 $scope.searchInscripcion= function(){
                 if ($scope.query.length > 0) {
@@ -167,10 +255,43 @@
                     
                     $scope.inscripcion = row;
                 }
+                $scope.deletePago= function(row){
+                    
+                    $scope.pagoEliminar = row;
+                }
+
+                $scope.cancelPago = function(){
+                    $scope.pagoEliminar = {};
+                }
+                $scope.destroyPago = function(){
+                    $scope.recuperarInscripcion.montoPagado=Number($scope.recuperarInscripcion.montoPagado)-$scope.pagoEliminar.monto;
+                    $scope.recuperarInscripcion.saldo=Number($scope.recuperarInscripcion.montoPagar)-Number($scope.recuperarInscripcion.montoPagado);
+                    if ($scope.recuperarInscripcion.montoPagado==0) {
+                        $scope.recuperarInscripcion.estado=0;
+                    }
+                    
+                    $scope.pagoEliminar.inscripcion_id=$scope.recuperarInscripcion.id;
+
+                    $scope.recuperarInscripcion.pagoEliminar=$scope.pagoEliminar;
+
+                    crudService.destroy($scope.recuperarInscripcion,'eliminarPago').then(function(data)
+                    {
+                        crudService.recuperarUnDato('pagos',$scope.recuperarInscripcion.id).then(function (data){
+                                    $scope.pagos = data;
+                                });
+                        if(data['estado'] == true){
+                            $scope.pagoEliminar = {};
+                        }else{
+                            $scope.errors = data;
+                        }
+                    });
+                   
+                };
 
                 $scope.cancelInscripcion = function(){
                     $scope.inscripcion = {};
                 }
+
 
                 $scope.destroyInscripcion = function(){
                     crudService.destroy($scope.inscripcion,'inscripciones').then(function(data)

@@ -31,4 +31,12 @@ class EdicionRepo extends BaseRepo{
                         ->get();
             return $datos;
     }
+    public function edicionesCurso($curso)
+    {
+        //return $curso;
+        $ediciones =Edicion::where('curso_id','=',$curso)
+                    //->groupBy('ediciones.descripcionEdicion')
+                    ->get();
+        return $ediciones;
+    }
 } 

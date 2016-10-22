@@ -17,6 +17,7 @@ class EdicionManager extends BaseManager {
                     'baner'=> '',
                     'estado'=> '',
                     'curso_id'=> '',
+                    'descripcionEdicion'=>'',
                     'acreditadora_id'=> ''
                   ];
         return $rules;

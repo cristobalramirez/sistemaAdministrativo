@@ -82,4 +82,9 @@ class CuentaBancariasController extends Controller {
 
         return response()->json($cuentaBancarias);
     }
+    public function todas()
+    {
+        $cuentaBancarias = $this->cuentaBancariaRepo->all();
+        return response()->json($cuentaBancarias);
+    }
 }

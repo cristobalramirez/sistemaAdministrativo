@@ -185,6 +185,7 @@ class EdicionesController extends Controller {
         $ediciones = $this->edicionRepo->buscarEdicion($q);
         return response()->json($ediciones);
     }
+    
     public function disablePersona($id){
         \DB::beginTransaction();
         $edicion = $this->edicionRepo->find($id);
@@ -199,6 +200,11 @@ class EdicionesController extends Controller {
         //die();
         \DB::commit();
         return response()->json(['estado'=>true]);
+    }
+    public function edicionesCurso  ($curso)
+    {
+        $edicion = $this->edicionRepo->edicionesCurso($curso);
+        return response()->json($edicion);
     }
     
 }

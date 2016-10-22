@@ -201,6 +201,8 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('api/cuentaBancarias/destroy', ['as' => 'person_destroy', 'uses' => 'CuentaBancariasController@destroy']);
     Route::get('api/cuentaBancarias/search/{q?}', ['as' => 'person_search', 'uses' => 'CuentaBancariasController@search']);
     Route::get('api/cuentaBancarias/find/{id}', ['as' => 'person_find', 'uses' => 'CuentaBancariasController@find']);
+
+    Route::get('api/todasCuentas/all', ['as' => 'person_all', 'uses' => 'CuentaBancariasController@todas']);
 //END CATEGORIAS ROUTES
     //PERSONAS ROUTES
     Route::get('docentes', ['as' => 'person', 'uses' => 'DocentesController@index']);
@@ -281,7 +283,16 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/inscripciones/search/{q?}', ['as' => 'person_search', 'uses' => 'InscripcionesController@search']);
     Route::get('api/inscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'InscripcionesController@find']);
 
-    Route::get('api/buscarInscripcion/recuperarDosDato/{d?}/{p?}', ['as' => 'person_all', 'uses' => 'InscripcionesController@buscarInscripcion']); 
+    Route::get('api/buscarInscripcion/recuperarDosDato/{d?}/{p?}', ['as' => 'person_all', 'uses' => 'InscripcionesController@buscarInscripcion']);
+    Route::get('api/buscaredicion/recuperarDosDato/{c?}/{e?}', ['as' => 'person_all', 'uses' => 'InscripcionesController@searchCurso']); 
+    
+    Route::get('api/edicionesCurso/recuperarUnDato/{c?}/{e?}', ['as' => 'person_all', 'uses' => 'EdicionesController@edicionesCurso']); 
+
+    Route::post('api/vaucherPago/uploadFile',['as'=>'product_disabled', 'uses'=>'InscripcionesController@uploadFile']);
+
+    Route::put('api/realizarPago/edit', ['as' => 'person_edit', 'uses' => 'InscripcionesController@realizarPago']);
+    
+    Route::post('api/eliminarPago/destroy', ['as' => 'person_destroy', 'uses' => 'InscripcionesController@eliminarPago']);
 
 //END CATEGORIAS ROUTES
 
@@ -355,3 +366,4 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/buscarEmpleado/recuperarUnDato/{d?}', ['as' => 'person_all', 'uses' => 'EmpleadosController@buscarEmpleado']);
     Route::get('api/cargarEmpleados/all', ['as' => 'person_all', 'uses' => 'EmpleadosController@cargarEmpleados']);
 //END CATEGORIAS ROUTES
+Route::get('api/pagos/recuperarUnDato/{q?}', ['as' => 'person_search', 'uses' => 'PagosController@search']);

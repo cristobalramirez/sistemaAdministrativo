@@ -15,6 +15,31 @@ class InscripcionRepo extends BaseRepo{
                     ->paginate(15);
         return $inscripciones;
     }
+    public function searchCurso($curso,$edicion)
+    {
+        if ($curso==0) {
+            $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
+                    ->leftjoin('cursos','ediciones.curso_id','=','cursos.id')
+                    ->select('inscripciones.*','cursos.descripcion as curso')
+                    ->paginate(15);
+        }else if($edicion==0){
+            $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
+                    ->leftjoin('cursos','ediciones.curso_id','=','cursos.id')
+                    ->select('inscripciones.*','cursos.descripcion as curso')
+                    ->where('cursos.id','=', $curso)
+                    //->where('ediciones.id','=',$edicion)
+                    ->paginate(15);
+        }else{
+            $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
+                    ->leftjoin('cursos','ediciones.curso_id','=','cursos.id')
+                    ->select('inscripciones.*','cursos.descripcion as curso')
+                    ->where('cursos.id','=', $curso)
+                    ->where('ediciones.id','=',$edicion)
+                    ->paginate(15);
+        }
+        
+        return $inscripciones;
+    }
     public function paginaterepo($c){
          $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
                     ->leftjoin('cursos','ediciones.curso_id','=','cursos.id')
@@ -28,4 +53,5 @@ class InscripcionRepo extends BaseRepo{
                     ->get();
         return $inscripciones;
     } 
+    
 } 

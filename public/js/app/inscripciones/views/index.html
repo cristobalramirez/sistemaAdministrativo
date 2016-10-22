@@ -28,8 +28,22 @@
               <div class="box"> 
 
                 <div class="box-header with-border">
-                  <h3 class="box-title">Inscripciones</h3>
+                  <div class="row">
+                      <div class="col-sm-5">
+                        <div class="form-group" >
+                          <label>Curso</label>
+                          <select class="form-control ng-pristine ng-valid ng-touched" ng-click="buscarCursos()" name="cuso" ng-model="selectCurso" ng-options="item.id as item.descripcion for item in cursos"><option value="">-- Todos --</option></select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group" >
+                          <label>Edicion</label>
+                          <select ng-disabled="selectCurso==undefined||selectCurso==0" ng-click="buscarEdicion()" class="form-control ng-pristine ng-valid ng-touched" name="selectEdicion" ng-model="selectEdicion" ng-options="item.id as item.descripcionEdicion for item in ediciones"><option value="">-- Todos --</option></select>
+                        </div>
+                      </div>
+
                   <div class="box-tools">
+                   <label>Buscar</label>
                   <form ng-keyup="searchInscripcion()">
                     <div class="input-group" style="width: 200px;">
                       <input type="text" ng-model="query"  name="table_search" class="form-control input-sm pull-right" placeholder="Search" />
@@ -38,6 +52,7 @@
                       </div>
                     </div>
                     </form>
+                  </div>
                   </div>
                 </div><!-- /.box-header -->  
                 <div class="box-body">
@@ -68,8 +83,9 @@
                         <th>Monto Pagado</th>
                         <th>Saldo</th>
                         <th>Estado</th>
-                      
-                        <th style="width: 40px">Editar</th>
+
+                        <th style="width: 40px">Pagos</th>
+                        <th style="width: 40px">Ver</th>
                         <th style="width: 40px">Eliminar</th>
                       </tr>
                     
@@ -84,7 +100,8 @@
                         <td>{{row.montoPagado}}</td>
                         <td>{{row.saldo}}</td>
                         <td>{{row.estado==2? 'No Desea':row.estado==0? 'Pre Inscripto':'Inscripto'}}</td>
-                        <td><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Editar</a></td>
+                        <td><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
                       
                       </tr>
@@ -103,3 +120,98 @@
             </div>  
           </div>
         </section>
+
+        <!-- =========================================Ventana Agregar Año================================= -->
+         <div class="container"  style="margin-top: 60px;">
+           <div  class="modal fade" id="miventana1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
+             <div  class="modal-dialog">
+                  <div style="border-radius: 5px" class="modal-content">
+                        <form name="pagoCreateForm" role="form" novalidate>
+                        <div class="modal-header" style="background-color: #0673B3; border-radius: 5px; color: #E2E2EC;">
+                    
+                          <h4 class="modal-title">Pago: {{recuperarInscripcion.nombres+' '+recuperarInscripcion.apellidos}} --  {{recuperarInscripcion.curso}} (Saldo= {{recuperarInscripcion.saldo}})</h4>
+                        </div>
+                        <!--=================cueropo========================-->
+                          <div class="modal-body">
+
+                            <div class="form-group" ng-class="{'has-error': pagoCreateForm.fechaPago.$invalid,'has-success':pagoCreateForm.fechaPago.$invalid}">
+                                  <label for="fechaPago">Fecha de Pago</label>
+                                <div  class="input-group">
+                                  <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                 </div>
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaPago" ng-model="pago.fechaPago" required>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-9">
+                                <div class="form-group" >
+                                  <label>Cuenta</label>
+                                  <select class="form-control ng-pristine ng-valid ng-touched" name="selectEdicion" ng-model="pago.cuentaBancaria_id" ng-options="item.id as item.banco+'-'+item.numeroCuenta for item in cuentas"><option value="">-- Seleccione Cuenta --</option></select>
+                                </div>
+                              </div>
+                              <div class="col-sm-3">
+                                <div class="form-group" ng-class="{'has-error': pagoCreateForm.monto.$invalid,'has-success':pagoCreateForm.monto.$invalid}">
+                                  <label for="monto">Monto a Pagar * </label>
+                                  <input type="number" class="form-control" name="monto"  placeholder="Monto a Pagar" ng-model="pago.monto" required>
+                                </div>
+                              </div>
+                            </div>
+                            
+
+                            
+                            
+                              <div class="form-group">
+                                <label>Voucher</label>
+                                <input type="file" name="file" uploader-model="file" />
+                              </div>
+                            
+                    
+                   
+                          </div>
+
+                        <!--================================================-->
+                        <div class="modal-footer" >
+                          <button type="submit" ng-disabled="pagoCreateForm.$invalid" class="btn btn-primary" ng-click="uploadFile()" >Cobrar</button>
+                          <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
+                      </div>
+                      <div class="box box-primary">
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Pagos registrados</h3>
+                      </div><!-- /.box-header -->
+                      <div class="box-body">
+                      <div class="callout callout-info"  ng-show="pagoEliminar.id">
+                        <h4>¿ Estás seguro que deseas eliminar el pago de monto = {{pagoEliminar.monto}} ?</h4>
+                        <p>
+                          <button type="button" class="btn btn-danger" ng-click="destroyPago()">Si</button>
+                          <button type="button" class="btn btn-default" ng-click="cancelPago()">No</button>
+                        </p>
+                      </div>
+                        <table class="table table-bordered">
+                          <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Fecha Pago</th>
+                            <th>Momto</th>
+                            <th>Cuenta</th>
+
+                            <th style="width: 40px">Voucher</th>
+                            <th style="width: 40px">Eliminar</th>
+                          </tr>
+                    
+                          <tr ng-repeat="row in pagos">
+                            <td>{{$index + 1}}</td>
+                            <td>{{row.fechaPago}}</td>
+                            <td>{{row.monto}}</td>
+                            <td>{{row.banco+'-'+row.cuenta}}</td>
+                            <td><a  ng-disabled="row.vaucher==''" href="{{row.vaucher}}" target="_blank" class="btn btn-success btn-xs">Ver Voucher</a></td>
+                            <td><a ng-click="deletePago(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+                          </tr>
+                        </table>                 
+                      </div><!-- /.box-body -->
+                      </div>
+
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>

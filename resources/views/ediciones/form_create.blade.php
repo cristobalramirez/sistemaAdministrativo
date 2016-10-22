@@ -28,6 +28,31 @@
                 </div> 
 
 
+                  <div class="row">
+                    <div  class="col-md-4">
+                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.curso_id.$invalid,'has-success':edicionCreateForm.curso_id.$invalid}">
+                            <label>Curso * </label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="curso_id" ng-model="edicion.curso_id" ng-options="item.id as item.descripcion for item in cursos" required><option value="">-- Elige Curso --</option></select>
+                        </div>
+                      </div>
+                    <div  class="col-md-4">
+                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.modalidad.$invalid,'has-success':edicionCreateForm.modalidad.$invalid}">
+                              <label>Modalidad * </label>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="modalidad" ng-model="edicion.modalidad" required><option value="">-- Elige Modalidad --</option>
+                              <option value="Presencial">Presencial</option>
+                              <option value="Semi-Presencial">Semi-Presencial</option>
+                              <option value="Tele-Presencial">Tele-Presencial</option></select>
+                          </div>
+                      </div>
+                      <div  class="col-md-4">
+                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.acreditadora_id.$invalid,'has-success':edicionCreateForm.acreditadora_id.$invalid}">
+                            <label>Acreditadora</label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="acreditadora_id" ng-model="edicion.acreditadora_id" ng-options="item.id as item.nombre for item in acreditadoras" required><option value="">-- Elige Acreditadora --</option></select>
+                        </div>
+                      </div>
+                    </div>
+
+
 
                   <div class="row">
                     <div  class="col-md-4">
@@ -62,30 +87,13 @@
                       </div>
                   </div>
 
+                        <div class="form-group" >
+                          <label for="descripcionEdicion">Descripcion Edición</label>
+                          <input type="text" class="form-control" name="descripcionEdicion"  placeholder="Descripcion Edición" ng-model="edicion.descripcionEdicion">
+                        </div>
 
-                  <div class="row">
-                    <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.curso_id.$invalid,'has-success':edicionCreateForm.curso_id.$invalid}">
-                            <label>Curso * </label>
-                            <select class="form-control ng-pristine ng-valid ng-touched" name="curso_id" ng-model="edicion.curso_id" ng-options="item.id as item.descripcion for item in cursos" required><option value="">-- Elige Curso --</option></select>
-                        </div>
-                      </div>
-                    <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.modalidad.$invalid,'has-success':edicionCreateForm.modalidad.$invalid}">
-                              <label>Modalidad * </label>
-                              <select class="form-control ng-pristine ng-valid ng-touched" name="modalidad" ng-model="edicion.modalidad" required><option value="">-- Elige Modalidad --</option>
-                              <option value="Presencial">Presencial</option>
-                              <option value="Semi-Presencial">Semi-Presencial</option>
-                              <option value="Tele-Presencial">Tele-Presencial</option></select>
-                          </div>
-                      </div>
-                      <div  class="col-md-4">
-                        <div class="form-group" ng-class="{'has-error': edicionCreateForm.acreditadora_id.$invalid,'has-success':edicionCreateForm.acreditadora_id.$invalid}">
-                            <label>Acreditadora</label>
-                            <select class="form-control ng-pristine ng-valid ng-touched" name="acreditadora_id" ng-model="edicion.acreditadora_id" ng-options="item.id as item.nombre for item in acreditadoras" required><option value="">-- Elige Acreditadora --</option></select>
-                        </div>
-                      </div>
-                    </div>
+
+                  
                     <div class="row">
                       <div  class="col-md-4">
                         <div class="form-group">

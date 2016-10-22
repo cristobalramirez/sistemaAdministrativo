@@ -17,6 +17,7 @@ class Edicion extends \Eloquent {
                             'estado',
                             'baner',
     						'curso_id',
+                            'descripcionEdicion',
     						'acreditadora_id'];
 
     
