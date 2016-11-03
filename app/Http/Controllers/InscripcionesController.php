@@ -165,7 +165,7 @@ class InscripcionesController extends Controller {
         return response()->json(['estado'=>true, 'nombre'=>$inscripcion->nombre]);
     }
 
-    public function search($q)
+    public function search($q) 
     {
         $inscripciones = $this->inscripcionRepo->search($q);
 

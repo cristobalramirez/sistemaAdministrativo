@@ -284,7 +284,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/inscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'InscripcionesController@find']);
 
     Route::get('api/buscarInscripcion/recuperarDosDato/{d?}/{p?}', ['as' => 'person_all', 'uses' => 'InscripcionesController@buscarInscripcion']);
-    Route::get('api/buscaredicion/recuperarDosDato/{c?}/{e?}', ['as' => 'person_all', 'uses' => 'InscripcionesController@searchCurso']); 
+    Route::get('api/buscaredicionCurso/recuperarDosDatoPag/{c?}/{e?}/', ['as' => 'person_search', 'uses' => 'InscripcionesController@searchCurso']); 
     
     Route::get('api/edicionesCurso/recuperarUnDato/{c?}/{e?}', ['as' => 'person_all', 'uses' => 'EdicionesController@edicionesCurso']); 
 
@@ -367,3 +367,19 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/cargarEmpleados/all', ['as' => 'person_all', 'uses' => 'EmpleadosController@cargarEmpleados']);
 //END CATEGORIAS ROUTES
 Route::get('api/pagos/recuperarUnDato/{q?}', ['as' => 'person_search', 'uses' => 'PagosController@search']);
+
+//ACREDITADORAS ROUTES
+    Route::get('seguimientoInscripciones', ['as' => 'person', 'uses' => 'SeguimientoInscripcionController@index']);
+    Route::get('seguimientoInscripciones/create', ['as' => 'person_create', 'uses' => 'SeguimientoInscripcionController@index']);
+    Route::get('seguimientoInscripciones/edit/{id?}', ['as' => 'person_edit', 'uses' => 'SeguimientoInscripcionController@index']);
+    Route::get('seguimientoInscripciones/form-create', ['as' => 'person_form_create', 'uses' => 'SeguimientoInscripcionController@form_create']);
+    Route::get('seguimientoInscripciones/form-edit', ['as' => 'person_form_edit', 'uses' => 'SeguimientoInscripcionController@form_edit']);
+    Route::get('api/seguimientoInscripciones/all', ['as' => 'person_all', 'uses' => 'SeguimientoInscripcionController@all']);
+    Route::get('api/seguimientoInscripciones/paginate/', ['as' => 'person_paginate', 'uses' => 'SeguimientoInscripcionController@paginatep']);
+    Route::post('api/seguimientoInscripciones/create', ['as' => 'person_create', 'uses' => 'SeguimientoInscripcionController@create']);
+    Route::put('api/seguimientoInscripciones/edit', ['as' => 'person_edit', 'uses' => 'SeguimientoInscripcionController@edit']);
+    Route::post('api/seguimientoInscripciones/destroy', ['as' => 'person_destroy', 'uses' => 'SeguimientoInscripcionController@destroy']);
+    Route::get('api/seguimientoInscripciones/search/{q?}', ['as' => 'person_search', 'uses' => 'SeguimientoInscripcionController@search']);
+    Route::get('api/seguimientoInscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'SeguimientoInscripcionController@find']);
+    Route::get('api/seguimientos/recuperarUnDato/{q?}', ['as' => 'person_search', 'uses' => 'SeguimientoInscripcionController@seguimientos']);
+//END CATEGORIAS ROUTES

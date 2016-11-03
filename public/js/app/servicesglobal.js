@@ -226,6 +226,24 @@
 
                 return deferred.promise;
             }
+            function recuperarUnDatoPag(uri,dato,page){
+                var deferred = $q.defer();
+                var result = $http.get('/api/'+uri+'/recuperarUnDatoPag/'+dato+'/?page='+page);
+
+                result.success(function(data){
+                        deferred.resolve(data);
+                });
+                return deferred.promise;
+            }
+            function recuperarDosDatoPag(uri,dato1,dato2,page){
+                var deferred = $q.defer();
+                var result = $http.get('/api/'+uri+'/recuperarDosDatoPag/'+dato1+'/'+dato2+'/?page='+page);
+
+                result.success(function(data){
+                        deferred.resolve(data);
+                });
+                return deferred.promise;
+            }
             function recuperarDosDato(uri,dato1,dato2)
             {
                 var deferred = $q.defer();
@@ -282,6 +300,8 @@
                 Reportes: Reportes,
                 recuperarUnDato:recuperarUnDato,
                 recuperarDosDato:recuperarDosDato,
+                recuperarUnDatoPag:recuperarUnDatoPag,
+                recuperarDosDatoPag:recuperarDosDatoPag,
                 cantidadProductos:cantidadProductos
             }
         }])

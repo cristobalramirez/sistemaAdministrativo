@@ -139,7 +139,8 @@
                     <div  class="col-md-5">
                     </div>
                     <div  class="col-md-2">
-                      <button type="submit" ng-disabled="inscribirCreateForm.$invalid" class="btn btn-primary" ng-click="createInscripcion()"><strong>INSCRIBIR</strong></button>
+                      <button type="submit" ng-show="!banderaInscribir" ng-disabled="inscribirCreateForm.$invalid" class="btn btn-primary" ng-click="createInscripcion()"><strong>INSCRIBIR</strong></button>
+                      <button type="submit" ng-show="banderaInscribir" ng-disabled="true" class="btn btn-primary"><strong>Enviando...</strong></button>
                     </div>
                     <div  class="col-md-5">
                     </div>

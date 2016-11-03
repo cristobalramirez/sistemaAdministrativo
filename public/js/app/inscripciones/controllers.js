@@ -24,6 +24,10 @@
                 $scope.recuperarInscripcion = {};
                 $scope.file;
                 $scope.pagoEliminar;
+                $scope.seguimientoInscripcion={};
+                $scope.seguimientos={};
+                $scope.SeguimientoEliminar = {};
+                $scope.banderaPago=false;
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
@@ -32,8 +36,10 @@
                     if ($scope.selectCurso==undefined) {
                         $scope.selectCurso=0;
                     }
-                    crudService.recuperarDosDato('buscaredicion',$scope.selectCurso,"%").then(function (data) {
+                    crudService.recuperarDosDatoPag('buscaredicionCurso',$scope.selectCurso,0,1).then(function (data) {
                             $scope.inscripciones = data.data;
+                            $scope.totalItems = data.total;
+                            $scope.currentPage = data.current_page;
 
                             crudService.recuperarUnDato('edicionesCurso',$scope.selectCurso).then(function (data) {
                                 $scope.ediciones=data;
@@ -44,8 +50,10 @@
                     if ($scope.selectEdicion==undefined) {
                         $scope.selectEdicion=0;
                     }
-                    crudService.recuperarDosDato('buscaredicion',$scope.selectCurso,$scope.selectEdicion).then(function (data) {
+                    crudService.recuperarDosDatoPag('buscaredicionCurso',$scope.selectCurso,$scope.selectEdicion,1).then(function (data) {
                             $scope.inscripciones = data.data;
+                            $scope.totalItems = data.total;
+                            $scope.currentPage = data.current_page;
                         });
                 };
 
@@ -54,6 +62,13 @@
                         crudService.search('inscripciones',$scope.query,$scope.currentPage).then(function (data){
                         $scope.inscripciones = data.data;
                     });
+                    }else if ($scope.selectCurso!=undefined) {
+                        if ($scope.selectEdicion==undefined) {
+                            $scope.selectEdicion=0;
+                        }
+                        crudService.recuperarDosDatoPag('buscaredicionCurso',$scope.selectCurso,$scope.selectEdicion,$scope.currentPage).then(function (data) {
+                            $scope.inscripciones = data.data;
+                        });
                     }else{
                         crudService.paginate('inscripciones',$scope.currentPage).then(function (data) {
                             $scope.inscripciones = data.data;
@@ -135,6 +150,60 @@
                     });
                    
                 };
+                $scope.cargarseguimientos = function(row){
+                    $scope.recuperarInscripcion = row;
+                    $log.log(row.id);
+                    $scope.seguimientoInscripcion.inscripcion_id=row.id;
+                    $scope.seguimientoInscripcion.empleado_id=1;
+
+                    crudService.recuperarUnDato('seguimientos',row.id).then(function (data){
+                        $scope.seguimientos = data;
+                    });
+                };
+
+                $scope.GrabarSeguimiento = function(row){
+                    crudService.create($scope.seguimientoInscripcion, 'seguimientoInscripciones').then(function (data) {
+                          
+                        if (data['estado'] == true) {
+                            $scope.success = data['nombres'];
+                            crudService.recuperarUnDato('seguimientos',$scope.recuperarInscripcion.id).then(function (data){
+                                $scope.seguimientos = data;
+                            });
+                            $scope.seguimientoInscripcion.fechaCompromiso=null;
+                            $scope.seguimientoInscripcion.horaCompromiso=null;
+                            $scope.seguimientoInscripcion.descripcion=null;
+                            alert('Registrado correctamente');
+
+                        } else {
+                            $scope.errors = data;
+
+                        }
+                    });
+                };
+
+                $scope.deleteSeguimiento= function(row){
+                    
+                    $scope.SeguimientoEliminar = row;
+                }
+
+                $scope.cancelSeguimiento = function(){ 
+                    $scope.SeguimientoEliminar = {};
+                }
+                $scope.destroySeguimiento = function(){
+                    crudService.destroy($scope.SeguimientoEliminar,'seguimientoInscripciones').then(function(data)
+                    {
+                        crudService.recuperarUnDato('seguimientos',$scope.recuperarInscripcion.id).then(function (data){
+                                $scope.seguimientos = data;
+                            });
+                        if(data['estado'] == true){
+                            $scope.SeguimientoEliminar = {};
+                        }else{
+                            $scope.errors = data;
+                        }
+                    });
+                   
+                };
+
                 $scope.name="archivo";
                 $scope.uploadFile = function()
                 {
@@ -142,7 +211,7 @@
                         
                         var name = $scope.name;
                         var file = $scope.file;
-
+                        $scope.banderaPago=true;
                         if (file!=undefined) {
                             crudService.uploadFile('vaucherPago',file, name).then(function(data)
                             {
@@ -156,6 +225,7 @@
                     }  
                 }
                 $scope.realizarPago = function(){
+
                     $scope.recuperarInscripcion.montoPagado=Number($scope.recuperarInscripcion.montoPagado)+$scope.pago.monto;
                     $scope.recuperarInscripcion.saldo=Number($scope.recuperarInscripcion.montoPagar)-Number($scope.recuperarInscripcion.montoPagado);
                     $scope.recuperarInscripcion.estado=1;
@@ -168,6 +238,7 @@
                             if(data['estado'] == true){
                                 $scope.success = data['nombres'];
                                 alert('Pago Registrado');
+                                $scope.banderaPago=false;
                                 $location.path('/inscripciones');
                                 $scope.pago={};
                                 $scope.file=undefined;

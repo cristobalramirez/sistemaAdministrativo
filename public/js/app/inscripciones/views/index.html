@@ -84,6 +84,7 @@
                         <th>Saldo</th>
                         <th>Estado</th>
 
+                        <th style="width: 40px">Seguimientos</th>
                         <th style="width: 40px">Pagos</th>
                         <th style="width: 40px">Ver</th>
                         <th style="width: 40px">Eliminar</th>
@@ -100,6 +101,8 @@
                         <td>{{row.montoPagado}}</td>
                         <td>{{row.saldo}}</td>
                         <td>{{row.estado==2? 'No Desea':row.estado==0? 'Pre Inscripto':'Inscripto'}}</td>
+                        <td><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        Seguimiento</a></td>
                         <td><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
@@ -121,7 +124,7 @@
           </div>
         </section>
 
-        <!-- =========================================Ventana Agregar Año================================= -->
+        <!-- =========================================Ventana Agregar Pago================================= -->
          <div class="container"  style="margin-top: 60px;">
            <div  class="modal fade" id="miventana1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
              <div  class="modal-dialog">
@@ -172,7 +175,8 @@
 
                         <!--================================================-->
                         <div class="modal-footer" >
-                          <button type="submit" ng-disabled="pagoCreateForm.$invalid" class="btn btn-primary" ng-click="uploadFile()" >Cobrar</button>
+                        <button ng-Show="banderaPago" ng-disabled="true" type="submit" ng-disabled="pagoCreateForm.$invalid" class="btn btn-primary" ng-click="uploadFile()" >Enviando...</button>
+                          <button ng-Show="!banderaPago" type="submit" ng-disabled="pagoCreateForm.$invalid" class="btn btn-primary" ng-click="uploadFile()" >Cobrar</button>
                           <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
                       </div>
                       <div class="box box-primary">
@@ -211,6 +215,86 @@
                       </div>
 
                     </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- ---------------------------------------------------------------- -->
+
+
+           <!-- =========================================Ventana Agregar Seguimiento================================= -->
+         <div class="container"  style="margin-top: 60px;">
+           <div  class="modal fade" id="miventana2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
+             <div  class="modal-dialog">
+                  <div style="border-radius: 5px" class="modal-content">
+                        <div class="modal-header" style="background-color: #0673B3; border-radius: 5px; color: #E2E2EC;">
+                    
+                          <h4 class="modal-title">Pago: {{recuperarInscripcion.nombres+' '+recuperarInscripcion.apellidos}} --  {{recuperarInscripcion.curso}}</h4>
+                        </div>
+                        <!--=================cueropo========================-->
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <div class="form-group">
+                                  <label for="fechaCompromiso">Fecha de Compromiso</label>
+                                  <div  class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaCompromiso" ng-model="seguimientoInscripcion.fechaCompromiso" >
+                                  </div>
+                                </div>
+                              </div>
+
+                              
+                            </div>
+                            <div class="form-group" >
+                                <label for="notas">Descripción</label>
+                                <textarea type="notas" class="form-control" name="notas" placeholder="..." ng-model="seguimientoInscripcion.descripcion" rows="3" cols="50"></textarea>
+                              </div>
+                            
+                    
+                   
+                          </div>
+
+                        <!--================================================-->
+                        <div class="modal-footer" >
+                          <button type="submit" class="btn btn-primary" ng-click="GrabarSeguimiento()" >Registrar</button>
+                          <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
+                      </div>
+                      <div class="box box-primary">
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Pagos registrados</h3>
+                      </div><!-- /.box-header -->
+                      <div class="box-body">
+                      <div class="callout callout-info"  ng-show="SeguimientoEliminar.id">
+                        <h4>¿ Estás seguro que deseas eliminar el Seguimiento ?</h4>
+                        <p>
+                          <button type="button" class="btn btn-danger" ng-click="destroySeguimiento()">Si</button>
+                          <button type="button" class="btn btn-default" ng-click="cancelSeguimiento()">No</button>
+                        </p>
+                      </div>
+                        <table class="table table-bordered">
+                          <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Fecha Llamada</th>
+                            <th>Fecha Compromiso</th>
+                            <th>Descripcion</th>
+
+                            <th style="width: 40px">Eliminar</th>
+                          </tr>
+                    
+                          <tr ng-repeat="row in seguimientos">
+                            <td>{{$index + 1}}</td>
+                            <td>{{row.created_at}}</td>
+                            <td>{{row.fechaCompromiso}}</td>
+                            <td>{{row.descripcion}}</td>
+                            
+                            <td><a ng-click="deleteSeguimiento(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+                          </tr>
+                        </table>                 
+                      </div><!-- /.box-body -->
+                      </div>
                   </div>
               </div>
             </div>

@@ -25,6 +25,7 @@
                 //----------------------
                 $scope.ubigeoTrabajo ={};
                 $scope.ubigeoDomicilio ={};
+                $scope.banderaInscribir=false;
 
                 var id = $routeParams.id;
 
@@ -67,9 +68,12 @@
                     });
                 }
                 $scope.createInscripcion = function(){
+                    $scope.banderaInscribir=true;
                     crudService.recuperarDosDato('buscarInscripcion',$scope.edicion.id,$scope.persona.id).then(function(data){  
                         if (data.length>0) {
                             alert("Usted ya se encuentra registrado en este curso");
+                            $scope.banderaInscribir=false;
+                            $route.reload();
                         }else{
                             $scope.persona.ubigeoTrabajo_id=$scope.persona.TrabajoDistritoSelect;
                                 $scope.persona.ubigeoDireccion_id=$scope.persona.DomicilioDistritoSelect;
@@ -98,6 +102,7 @@
                                     if (data['estado'] == true) {
                                     $scope.success = data['nombres'];
                                         alert('Registrado corretamente correctamente');
+                                        $scope.banderaInscribir=false;
                                         $route.reload();
 
                                     } else {
