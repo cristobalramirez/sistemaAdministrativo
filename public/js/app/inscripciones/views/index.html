@@ -9,7 +9,7 @@
           </ol>
 
           
-        </section>
+        </section> 
 
         
 
@@ -77,8 +77,8 @@
                         <th>Fecha Inscripcion</th>
                         <th>Curso</th>
                         <th>Cliente</th>
+                        <th>Telefono</th>
                         <th>Monto Curso</th>
-                        <th>Monto Descuento</th>
                         <th>Monto a Pagar</th>
                         <th>Monto Pagado</th>
                         <th>Saldo</th>
@@ -91,21 +91,122 @@
                       </tr>
                     
                       <tr ng-repeat="row in inscripciones">
-                        <td>{{$index + 1}}</td>
-                        <td>{{row.created_at}}</td>
-                        <td>{{row.curso}}</td>
-                        <td>{{row.nombres+' '+row.apellidos}}</td>
-                        <td>{{row.montoCurso}}</td>
-                        <td>{{row.descuento}}</td>
-                        <td>{{row.montoPagar}}</td>
-                        <td>{{row.montoPagado}}</td>
-                        <td>{{row.saldo}}</td>
-                        <td>{{row.estado==2? 'No Desea':row.estado==0? 'Pre Inscripto':'Inscripto'}}</td>
-                        <td><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{$index + 1}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.created_at}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.curso}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.nombres+' '+row.apellidos}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.telefono}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoCurso}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoPagar}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoPagado}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.saldo}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{'Pre Inscripto'}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
                         Seguimiento</a></td>
-                        <td><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
-                        <td><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
-                        <td><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{$index + 1}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.created_at}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.curso}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.nombres+' '+row.apellidos}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.telefono}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoCurso}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoPagar}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoPagado}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.saldo}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{'Cancelado'}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        Seguimiento</a></td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{$index + 1}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.created_at}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.curso}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.nombres+' '+row.apellidos}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.telefono}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoCurso}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoPagar}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoPagado}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.saldo}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{'Habilitado'}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        Seguimiento</a></td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+
+                        <td ng-show="row.estado==3" style="background: #74F566">{{$index + 1}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.created_at}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.curso}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.nombres+' '+row.apellidos}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.telefono}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.montoCurso}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.montoPagar}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.montoPagado}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.saldo}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{'Confirmado'}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        Seguimiento</a></td>
+                        <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                        <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{$index + 1}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.created_at}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.curso}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.nombres+' '+row.apellidos}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.telefono}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoCurso}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoPagar}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoPagado}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.saldo}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{'Deshabilitado'}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        Seguimiento</a></td>
+                        <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                        <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{$index + 1}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.created_at}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.curso}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.nombres+' '+row.apellidos}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.telefono}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoCurso}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoPagar}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoPagado}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.saldo}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{'Gratis'}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        Seguimiento</a></td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+                        <td ng-show="row.estado==4" style="background: #F16878">{{$index + 1}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.created_at}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.curso}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.nombres+' '+row.apellidos}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.telefono}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.montoCurso}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.montoPagar}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.montoPagado}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.saldo}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{'Negado'}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="cargarseguimientos(row)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#miventana2">
+                        Seguimiento</a></td>
+                        <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
+                        <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                        <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
                       
                       </tr>
                     
@@ -175,7 +276,7 @@
 
                         <!--================================================-->
                         <div class="modal-footer" >
-                        <button ng-Show="banderaPago" ng-disabled="true" type="submit" ng-disabled="pagoCreateForm.$invalid" class="btn btn-primary" ng-click="uploadFile()" >Enviando...</button>
+                        <button ng-Show="banderaPago" ng-disabled="true" type="submit" class="btn btn-primary" >Enviando...</button>
                           <button ng-Show="!banderaPago" type="submit" ng-disabled="pagoCreateForm.$invalid" class="btn btn-primary" ng-click="uploadFile()" >Cobrar</button>
                           <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
                       </div>
@@ -251,6 +352,15 @@
                             <div class="form-group" >
                                 <label for="notas">Descripción</label>
                                 <textarea type="notas" class="form-control" name="notas" placeholder="..." ng-model="seguimientoInscripcion.descripcion" rows="3" cols="50"></textarea>
+                              </div>
+
+                              <div class="form-group" >
+                                <label>Estado</label>
+                                <select class="form-control ng-pristine ng-valid ng-touched" name="selectEdicion" ng-model="estadoInscripcion">
+                                <option value="0">-- Ninguno --</option>
+                                <option value="2">HABILITADO</option>
+                                <option value="6">DESHABILITADO</option>
+                                <option value="4">NEGADO</option></select>
                               </div>
                             
                     

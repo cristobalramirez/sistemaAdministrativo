@@ -28,6 +28,7 @@
                 $scope.seguimientos={};
                 $scope.SeguimientoEliminar = {};
                 $scope.banderaPago=false;
+                $scope.estadoInscripcion=0;
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
@@ -152,6 +153,7 @@
                 };
                 $scope.cargarseguimientos = function(row){
                     $scope.recuperarInscripcion = row;
+                    $scope.estadoInscripcion=$scope.recuperarInscripcion.estado;
                     $log.log(row.id);
                     $scope.seguimientoInscripcion.inscripcion_id=row.id;
                     $scope.seguimientoInscripcion.empleado_id=1;
@@ -162,8 +164,15 @@
                 };
 
                 $scope.GrabarSeguimiento = function(row){
+                    if ($scope.recuperarInscripcion.estado!=$scope.estadoInscripcion) {
+                        $log.log("Actualizando");
+                        $scope.recuperarInscripcion.estado=$scope.estadoInscripcion;
+                        crudService.update($scope.recuperarInscripcion,'inscripciones').then(function(data)
+                        {
+                            
+                        });
+                    }
                     crudService.create($scope.seguimientoInscripcion, 'seguimientoInscripciones').then(function (data) {
-                          
                         if (data['estado'] == true) {
                             $scope.success = data['nombres'];
                             crudService.recuperarUnDato('seguimientos',$scope.recuperarInscripcion.id).then(function (data){
@@ -172,6 +181,7 @@
                             $scope.seguimientoInscripcion.fechaCompromiso=null;
                             $scope.seguimientoInscripcion.horaCompromiso=null;
                             $scope.seguimientoInscripcion.descripcion=null;
+                            //$scope.estadoInscripcion=0;
                             alert('Registrado correctamente');
 
                         } else {
@@ -228,7 +238,16 @@
 
                     $scope.recuperarInscripcion.montoPagado=Number($scope.recuperarInscripcion.montoPagado)+$scope.pago.monto;
                     $scope.recuperarInscripcion.saldo=Number($scope.recuperarInscripcion.montoPagar)-Number($scope.recuperarInscripcion.montoPagado);
-                    $scope.recuperarInscripcion.estado=1;
+                    if ($scope.recuperarInscripcion.saldo==$scope.recuperarInscripcion.montoPagar) {
+                        $scope.recuperarInscripcion.estado=0;   
+                    }else if ($scope.recuperarInscripcion.saldo>0) {
+                        $scope.recuperarInscripcion.estado=3; 
+                    }else{
+                      $scope.recuperarInscripcion.estado=1;   
+                    }
+
+
+                    
                     $scope.pago.inscripcion_id=$scope.recuperarInscripcion.id;
 
                     $scope.recuperarInscripcion.pago=$scope.pago;
@@ -306,6 +325,11 @@
                 };
 
                 $scope.updateInscripcion = function(){
+                    if ($scope.inscripcion.promocion_id==3) {
+                        $scope.inscripcion.estado=5;
+                    }else{
+                        $scope.inscripcion.estado=0;
+                    }
 
                     if ($scope.inscripcionEditForm.$valid) {
                         $scope.inscripcion.saldo=$scope.inscripcion.montoPagar-$scope.inscripcion.montoPagado;
@@ -337,8 +361,12 @@
                 $scope.destroyPago = function(){
                     $scope.recuperarInscripcion.montoPagado=Number($scope.recuperarInscripcion.montoPagado)-$scope.pagoEliminar.monto;
                     $scope.recuperarInscripcion.saldo=Number($scope.recuperarInscripcion.montoPagar)-Number($scope.recuperarInscripcion.montoPagado);
-                    if ($scope.recuperarInscripcion.montoPagado==0) {
-                        $scope.recuperarInscripcion.estado=0;
+                    if ($scope.recuperarInscripcion.saldo==$scope.recuperarInscripcion.montoPagar) {
+                        $scope.recuperarInscripcion.estado=0;   
+                    }else if ($scope.recuperarInscripcion.saldo>0) {
+                        $scope.recuperarInscripcion.estado=3; 
+                    }else{
+                      $scope.recuperarInscripcion.estado=1;   
                     }
                     
                     $scope.pagoEliminar.inscripcion_id=$scope.recuperarInscripcion.id;
