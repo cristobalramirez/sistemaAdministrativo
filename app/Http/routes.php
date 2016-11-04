@@ -383,3 +383,33 @@ Route::get('api/pagos/recuperarUnDato/{q?}', ['as' => 'person_search', 'uses' =>
     Route::get('api/seguimientoInscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'SeguimientoInscripcionController@find']);
     Route::get('api/seguimientos/recuperarUnDato/{q?}', ['as' => 'person_search', 'uses' => 'SeguimientoInscripcionController@seguimientos']);
 //END CATEGORIAS ROUTES
+//ACREDITADORAS ROUTES
+    Route::get('agencias', ['as' => 'person', 'uses' => 'AgenciasController@index']);
+    Route::get('agencias/create', ['as' => 'person_create', 'uses' => 'AgenciasController@index']);
+    Route::get('agencias/edit/{id?}', ['as' => 'person_edit', 'uses' => 'AgenciasController@index']);
+    Route::get('agencias/form-create', ['as' => 'person_form_create', 'uses' => 'AgenciasController@form_create']);
+    Route::get('agencias/form-edit', ['as' => 'person_form_edit', 'uses' => 'AgenciasController@form_edit']);
+    Route::get('api/agencias/all', ['as' => 'person_all', 'uses' => 'AgenciasController@all']);
+    Route::get('api/agencias/paginate/', ['as' => 'person_paginate', 'uses' => 'AgenciasController@paginatep']);
+    Route::post('api/agencias/create', ['as' => 'person_create', 'uses' => 'AgenciasController@create']);
+    Route::put('api/agencias/edit', ['as' => 'person_edit', 'uses' => 'AgenciasController@edit']);
+    Route::post('api/agencias/destroy', ['as' => 'person_destroy', 'uses' => 'AgenciasController@destroy']);
+    Route::get('api/agencias/search/{q?}', ['as' => 'person_search', 'uses' => 'AgenciasController@search']);
+    Route::get('api/agencias/find/{id}', ['as' => 'person_find', 'uses' => 'AgenciasController@find']);
+    Route::get('api/cargarAgencias/all', ['as' => 'person_all', 'uses' => 'AgenciasController@cargarAgencias']);
+//END CATEGORIAS ROUTES
+//ACREDITADORAS ROUTES
+    Route::get('envios', ['as' => 'person', 'uses' => 'EnviosController@index']);
+    Route::get('envios/create', ['as' => 'person_create', 'uses' => 'EnviosController@index']);
+    Route::get('envios/edit/{id?}', ['as' => 'person_edit', 'uses' => 'EnviosController@index']);
+    Route::get('envios/form-create', ['as' => 'person_form_create', 'uses' => 'EnviosController@form_create']);
+    Route::get('envios/form-edit', ['as' => 'person_form_edit', 'uses' => 'EnviosController@form_edit']);
+    Route::get('api/envios/all', ['as' => 'person_all', 'uses' => 'EnviosController@all']);
+    Route::get('api/envios/paginate/', ['as' => 'person_paginate', 'uses' => 'EnviosController@paginatep']);
+    Route::post('api/envios/create', ['as' => 'person_create', 'uses' => 'EnviosController@create']);
+    Route::put('api/envios/edit', ['as' => 'person_edit', 'uses' => 'EnviosController@edit']);
+    Route::post('api/envios/destroy', ['as' => 'person_destroy', 'uses' => 'EnviosController@destroy']);
+    Route::get('api/envios/search/{q?}', ['as' => 'person_search', 'uses' => 'EnviosController@search']);
+    Route::get('api/envios/find/{id}', ['as' => 'person_find', 'uses' => 'EnviosController@find']);
+    Route::get('api/envioInscripcion/find/{id}', ['as' => 'person_find', 'uses' => 'EnviosController@envioInscripcion']);
+//END CATEGORIAS ROUTES

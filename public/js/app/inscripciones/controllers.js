@@ -29,6 +29,16 @@
                 $scope.SeguimientoEliminar = {};
                 $scope.banderaPago=false;
                 $scope.estadoInscripcion=0;
+                //----------------------
+                $scope.Departamentos ={};
+                $scope.DepertamentoSelect;
+                $scope.Provincias ={};
+                $scope.ProvinciaSelect;
+                $scope.Distritos ={};
+                $scope.DistritoSelect;
+                //$scope.file="";
+                //----------------------
+                $scope.envio={};
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
@@ -98,7 +108,6 @@
 
                                 crudService.byId(edicionSelecionada.curso_id,'acreditadoras').then(function (data) {
                                     $scope.inscripcion.nombreCurso=$scope.inscripcion.nombreCurso+" - "+data.nombre;
-                                    $log.log($scope.inscripcion.nombreCurso);
                                 });    
                             });
                         });
@@ -142,6 +151,13 @@
                         $scope.cuentas = data;
                     });
 
+                    crudService.all('ubigeoDepartamento').then(function(data){  
+                        $scope.Departamentos = data;
+                    });
+                     crudService.all('cargarAgencias').then(function(data){  
+                        $scope.agencias = data;
+                    });
+
                 }
 
                 $scope.cargarPagos = function(row){
@@ -154,7 +170,6 @@
                 $scope.cargarseguimientos = function(row){
                     $scope.recuperarInscripcion = row;
                     $scope.estadoInscripcion=$scope.recuperarInscripcion.estado;
-                    $log.log(row.id);
                     $scope.seguimientoInscripcion.inscripcion_id=row.id;
                     $scope.seguimientoInscripcion.empleado_id=1;
 
@@ -165,7 +180,6 @@
 
                 $scope.GrabarSeguimiento = function(row){
                     if ($scope.recuperarInscripcion.estado!=$scope.estadoInscripcion) {
-                        $log.log("Actualizando");
                         $scope.recuperarInscripcion.estado=$scope.estadoInscripcion;
                         crudService.update($scope.recuperarInscripcion,'inscripciones').then(function(data)
                         {
@@ -476,5 +490,96 @@
                         $scope.inscripcion.persona_id=$scope.personaSelected.id;
                     }
                 }
+
+
+                $scope.CargarProvincia = function(){
+                    $scope.Provincias ={};
+                    $scope.ProvinciaSelect=null;
+                    $scope.DistritoSelect=null;
+                    crudService.recuperarUnDato('ubigeoProvincia',$scope.DepertamentoSelect).then(function(data){  
+                        $scope.Provincias = data;
+                        //$scope.provinciaSelect=data[0].provincia;
+                    });
+                }
+                $scope.CargarDistrito = function(){
+                    $scope.Distritos ={};
+                    $scope.DistritoSelect=null;
+                    crudService.recuperarDosDato('ubigeoDistrito',$scope.DepertamentoSelect,$scope.ProvinciaSelect).then(function(data){  
+                        $scope.Distritos = data;
+                    });
+                }
+                $scope.GrabarEnvio = function(){
+                    $scope.envio.ubigeo_id=$scope.DistritoSelect;
+                    $scope.envio.inscripcion_id=$scope.recuperarInscripcion.id;
+                    crudService.create($scope.envio, 'envios').then(function (data) {
+                        if (data['estado'] == true) {
+                            $scope.success = data['nombres'];
+                            alert('Envio Registrado correctamente');
+                            $scope.traerEnvio($scope.recuperarInscripcion.id); 
+                        } else {
+                            $scope.errors = data;
+                        }
+                    });    
+                }
+                $scope.EditarEnvio = function(){
+                    $scope.envio.ubigeo_id=$scope.DistritoSelect;
+                    crudService.update($scope.envio,'envios').then(function(data)
+                    {
+                        if(data['estado'] == true){
+                            $scope.success = data['nombres'];
+                            alert('Actualizado correctamente');
+                            $scope.traerEnvio($scope.recuperarInscripcion.id); 
+                        }else{
+                            $scope.errors =data;
+                        }
+                    });
+                    
+                };
+                $scope.cargarEnvio = function(row){
+                    $scope.recuperarInscripcion = row;
+                    $scope.traerEnvio($scope.recuperarInscripcion.id);
+                   
+                };
+
+                $scope.traerEnvio= function(id){
+                    crudService.byId(id,'envioInscripcion').then(function (data){
+                        $scope.envio = data[0];
+                        if ($scope.envio!=undefined) {
+                            $scope.envio.monto=Number($scope.envio.monto);
+                            if ($scope.envio.fechaCompromiso != null) {
+                                $scope.envio.fechaCompromiso = new Date($scope.envio.fechaCompromiso);
+                            }
+                            if ($scope.envio.fechaEnvio != null) {
+                                $scope.envio.fechaEnvio = new Date($scope.envio.fechaEnvio);
+                            }
+                            crudService.byId($scope.envio.ubigeo_id,'ubigeos').then(function (data) {
+                                $scope.ubigeo = data;
+                                crudService.all('ubigeoDepartamento').then(function(data){  
+                                    $scope.Departamentos = data;
+                                    $scope.DepertamentoSelect=$scope.ubigeo.departamento;
+                                });
+                                crudService.recuperarUnDato('ubigeoProvincia',$scope.ubigeo.departamento).then(function(data){  
+                                    $scope.Provincias = data;
+                                    $scope.ProvinciaSelect=$scope.ubigeo.provincia;
+                                });
+                                crudService.recuperarDosDato('ubigeoDistrito',$scope.ubigeo.departamento,$scope.ubigeo.provincia).then(function(data){  
+                                    $scope.Distritos = data;
+                                    $scope.DistritoSelect=$scope.ubigeo.id;
+                                });
+                            });
+                            $scope.banderaEnvio=true;
+                        }else{
+                            $scope.banderaEnvio=false;
+                            $scope.envio={};
+                            $scope.DepertamentoSelect=undefined;
+                            $scope.ProvinciaSelect=undefined;
+                            $scope.DistritoSelect=undefined;
+                            $scope.envio.descripcion=$scope.recuperarInscripcion.nombres+" "+$scope.recuperarInscripcion.apellidos;
+                        }
+                        
+                    });
+                }
+
+
             }]);
 })();

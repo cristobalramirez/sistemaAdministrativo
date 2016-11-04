@@ -167,6 +167,7 @@
                 <li class=""><a href="/ediciones" ><i class="fa fa-circle-o"></i>Ediciones </a></li>
                 <li class=""><a href="/promociones" ><i class="fa fa-circle-o"></i>Promociones </a></li>
                 <li class=""><a href="/inscripciones" ><i class="fa fa-circle-o"></i>Inscripciones</a></li>
+                <li class=""><a href="/agencias" ><i class="fa fa-circle-o"></i>Agencias</a></li>
               </ul>
             </li>
             @endif

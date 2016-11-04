@@ -168,8 +168,10 @@
                     crudService.recuperarUnDato('buscarPersonaConDni',dato).then(function(data){  
                         $scope.persona = data[0];
                         if($scope.persona != null) {
-                            if ($scope.persona.fechaNac.length > 0) {
-                                $scope.persona.fechaNac = new Date($scope.persona.fechaNac);
+                            if ($scope.persona.fechaNac!=null) {
+                                if ($scope.persona.fechaNac.length > 0) {
+                                    $scope.persona.fechaNac = new Date($scope.persona.fechaNac);
+                                }
                             }
                         }
                         if ($scope.persona!=null) {

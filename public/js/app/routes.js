@@ -259,6 +259,19 @@
                     templateUrl:'/empleados/form-edit',
                     controller: 'EmpleadoController'
                 }) 
+                //------------------//RUTES PERSONAS
+                .when('/agencias', {
+                    templateUrl: '/js/app/agencias/views/index.html',
+                    controller: 'AgenciaController'
+                })
+                .when('/agencias/create',{
+                    templateUrl:'/agencias/form-create',
+                    controller: 'AgenciaController'
+                })
+                .when('/agencias/edit/:id',{
+                    templateUrl:'/agencias/form-edit',
+                    controller: 'AgenciaController'
+                }) 
                 //---------------------
                 .otherwise({
                     redirectTo: '/'
