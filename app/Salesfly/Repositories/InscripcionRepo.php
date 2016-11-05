@@ -15,7 +15,7 @@ class InscripcionRepo extends BaseRepo{
                     ->paginate(15);
         return $inscripciones;
     }
-    public function searchCurso($curso,$edicion)
+    public function searchCurso($curso,$edicion,$fecha)
     {
         if ($curso==0) {
             $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
@@ -29,13 +29,22 @@ class InscripcionRepo extends BaseRepo{
                     ->where('cursos.id','=', $curso)
                     //->where('ediciones.id','=',$edicion)
                     ->paginate(15);
-        }else{
+        }else if($fecha==0){
             $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
                     ->leftjoin('cursos','ediciones.curso_id','=','cursos.id')
                     ->select('inscripciones.*','cursos.descripcion as curso')
                     ->where('cursos.id','=', $curso)
                     ->where('ediciones.id','=',$edicion)
                     ->paginate(15);
+        }else{
+          $inscripciones =Inscripcion::leftjoin('ediciones','inscripciones.edicion_id','=','ediciones.id')
+                    ->leftjoin('cursos','ediciones.curso_id','=','cursos.id')
+                    ->leftjoin('seguimientoInscripciones','seguimientoInscripciones.inscripcion_id','=','inscripciones.id')
+                    ->select('inscripciones.*','cursos.descripcion as curso')
+                    ->where('cursos.id','=', $curso)
+                    ->where('ediciones.id','=',$edicion)
+                    ->where('seguimientoInscripciones.fechaCompromiso','like',$fecha.'%')
+                    ->paginate(15);  
         }
         
         return $inscripciones;

@@ -176,9 +176,9 @@ class InscripcionesController extends Controller {
         $inscripciones = $this->inscripcionRepo->buscarInscripcion($d,$p);
         return response()->json($inscripciones);
     }
-    public function searchCurso($curso,$edicion)
+    public function searchCurso($curso,$edicion,$fecha)
     {
-        $inscripciones = $this->inscripcionRepo->searchCurso($curso,$edicion);
+        $inscripciones = $this->inscripcionRepo->searchCurso($curso,$edicion,$fecha);
         return response()->json($inscripciones);
     }
     public function uploadFile(){

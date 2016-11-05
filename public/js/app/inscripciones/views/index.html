@@ -29,17 +29,28 @@
 
                 <div class="box-header with-border">
                   <div class="row">
-                      <div class="col-sm-5">
+                      <div class="col-sm-4">
                         <div class="form-group" >
                           <label>Curso</label>
                           <select class="form-control ng-pristine ng-valid ng-touched" ng-click="buscarCursos()" name="cuso" ng-model="selectCurso" ng-options="item.id as item.descripcion for item in cursos"><option value="">-- Todos --</option></select>
                         </div>
                       </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-2">
                         <div class="form-group" >
                           <label>Edicion</label>
                           <select ng-disabled="selectCurso==undefined||selectCurso==0" ng-click="buscarEdicion()" class="form-control ng-pristine ng-valid ng-touched" name="selectEdicion" ng-model="selectEdicion" ng-options="item.id as item.descripcionEdicion for item in ediciones"><option value="">-- Todos --</option></select>
                         </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                                  <label for="fechaCompromiso">Fecha de Compromiso</label>
+                                  <div  class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input  ng-disabled="selectEdicion==undefined||selectEdicion==0" type="date" ng-change="buscarFecha()" class="form-control"  name="fechaCompromiso" ng-model="fechaCompromisoBuscar" >
+                                  </div>
+                                </div>
                       </div>
 
                   <div class="box-tools">

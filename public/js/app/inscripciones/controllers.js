@@ -39,15 +39,41 @@
                 //$scope.file="";
                 //----------------------
                 $scope.envio={};
+                $scope.fechaCompromisoBuscar;
 
                 $scope.toggle = function () {
                     $scope.show = !$scope.show; 
                 };
+                $scope.buscarFecha = function () {
+                    if ($scope.fechaCompromisoBuscar==undefined) {
+                        $scope.fechaCompromisoBuscar=0;
+                        var fecha=undefined;
+                        $scope.fechaBuscar=0;
+                    }else{
+                        var fecha = new Date($scope.fechaCompromisoBuscar)
+                        var dia;
+                        if (fecha.getDate()<10) {
+                           var dia= "0"+fecha.getDate();
+                        }else{
+                            var dia=fecha.getDate();
+                        }
+                        $scope.fechaBuscar=fecha.getFullYear()+'-'+(fecha.getMonth()+1)+'-'+dia;
+                    }
+                    crudService.recuperarTresDatoPag('buscaredicionCurso',$scope.selectCurso,$scope.selectEdicion,$scope.fechaBuscar,1).then(function (data) {
+                            $scope.inscripciones = data.data;
+                            $scope.totalItems = data.total;
+                            $scope.currentPage = data.current_page;
+                        });
+                };
+                
                 $scope.buscarCursos = function () {
+                    $scope.fechaCompromisoBuscar=undefined;
+                    $scope.selectEdicion=undefined;
                     if ($scope.selectCurso==undefined) {
                         $scope.selectCurso=0;
+                        
                     }
-                    crudService.recuperarDosDatoPag('buscaredicionCurso',$scope.selectCurso,0,1).then(function (data) {
+                    crudService.recuperarTresDatoPag('buscaredicionCurso',$scope.selectCurso,0,0,1).then(function (data) {
                             $scope.inscripciones = data.data;
                             $scope.totalItems = data.total;
                             $scope.currentPage = data.current_page;
@@ -58,10 +84,12 @@
                         });
                 };
                 $scope.buscarEdicion = function () {
+                    $scope.fechaCompromisoBuscar=undefined;
                     if ($scope.selectEdicion==undefined) {
                         $scope.selectEdicion=0;
+                        
                     }
-                    crudService.recuperarDosDatoPag('buscaredicionCurso',$scope.selectCurso,$scope.selectEdicion,1).then(function (data) {
+                    crudService.recuperarTresDatoPag('buscaredicionCurso',$scope.selectCurso,$scope.selectEdicion,0,1).then(function (data) {
                             $scope.inscripciones = data.data;
                             $scope.totalItems = data.total;
                             $scope.currentPage = data.current_page;
@@ -77,7 +105,7 @@
                         if ($scope.selectEdicion==undefined) {
                             $scope.selectEdicion=0;
                         }
-                        crudService.recuperarDosDatoPag('buscaredicionCurso',$scope.selectCurso,$scope.selectEdicion,$scope.currentPage).then(function (data) {
+                        crudService.recuperarTresDatoPag('buscaredicionCurso',$scope.selectCurso,$scope.selectEdicion,$scope.fechaBuscar,$scope.currentPage).then(function (data) {
                             $scope.inscripciones = data.data;
                         });
                     }else{

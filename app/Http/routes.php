@@ -284,7 +284,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('api/inscripciones/find/{id}', ['as' => 'person_find', 'uses' => 'InscripcionesController@find']);
 
     Route::get('api/buscarInscripcion/recuperarDosDato/{d?}/{p?}', ['as' => 'person_all', 'uses' => 'InscripcionesController@buscarInscripcion']);
-    Route::get('api/buscaredicionCurso/recuperarDosDatoPag/{c?}/{e?}/', ['as' => 'person_search', 'uses' => 'InscripcionesController@searchCurso']); 
+    Route::get('api/buscaredicionCurso/recuperarDosDatoPag/{c?}/{e?}/{f?}/', ['as' => 'person_search', 'uses' => 'InscripcionesController@searchCurso']); 
     
     Route::get('api/edicionesCurso/recuperarUnDato/{c?}/{e?}', ['as' => 'person_all', 'uses' => 'EdicionesController@edicionesCurso']); 
 

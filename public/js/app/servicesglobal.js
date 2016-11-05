@@ -244,6 +244,15 @@
                 });
                 return deferred.promise;
             }
+            function recuperarTresDatoPag(uri,dato1,dato2,dato3,page){
+                var deferred = $q.defer();
+                var result = $http.get('/api/'+uri+'/recuperarDosDatoPag/'+dato1+'/'+dato2+'/'+dato3+'/?page='+page);
+
+                result.success(function(data){
+                        deferred.resolve(data);
+                });
+                return deferred.promise;
+            }
             function recuperarDosDato(uri,dato1,dato2)
             {
                 var deferred = $q.defer();
@@ -302,6 +311,7 @@
                 recuperarDosDato:recuperarDosDato,
                 recuperarUnDatoPag:recuperarUnDatoPag,
                 recuperarDosDatoPag:recuperarDosDatoPag,
+                recuperarTresDatoPag:recuperarTresDatoPag,
                 cantidadProductos:cantidadProductos
             }
         }])
