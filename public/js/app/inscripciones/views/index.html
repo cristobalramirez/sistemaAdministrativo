@@ -25,7 +25,7 @@
             <div class="col-md-12">
 
 
-              <div class="box"> 
+              <div class="box">  
 
                 <div class="box-header with-border">
                   <div class="row">
@@ -679,6 +679,40 @@
 
                       
                     </div>
+
+
+                    <div class="form-group">
+                          <label for="direccion">Domicilio</label>
+                          <input type="text" class="form-control" name="direccion"  placeholder="Domicilio" ng-model="persona.direccion">
+                        </div>
+                    
+
+
+                    <div class="row" ng-show="persona.pais_id==1">
+                      <div  class="col-md-4">
+                       
+                        <div class="form-group">
+                            <label>Departamento</label>
+                            <select ng-click="DomicilioCargarProvincia()" class="form-control ng-pristine ng-valid ng-touched" name="departamento" ng-model="DomicilioDepertamentoSelect" ng-options="item.departamento as item.departamento for item in DomicilioDepartamentos"><option value="">-- Elige Departamento --</option></select>
+                        </div>
+                      </div>
+                      
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                            <label>Provinca</label>
+                            <select ng-disabled="DomicilioDepertamentoSelect==null" ng-click="DomicilioCargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="provincia" ng-model="DomicilioProvinciaSelect" ng-options="item.provincia as item.provincia for item in DomicilioProvincias"><option value="">-- Elige Provincia --</option></select>
+                        </div>
+                      </div>
+
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                            <label>Distrito</label>
+                            <select ng-disabled="DomicilioDepertamentoSelect==null || DomicilioProvinciaSelect==undefined" class="form-control ng-pristine ng-valid ng-touched" name="distrito" ng-model="DomicilioDistritoSelect" ng-options="item.id as item.distrito for item in DomicilioDistritos"><option value="">-- Elige Distrito --</option></select>
+                          </div>
+                      </div>
+                    </div>
+
+                    
 
                           
                     </div><!-- /.box-body -->
