@@ -429,6 +429,9 @@
                         $scope.inscripcion.montoPagado=0;
                         $scope.inscripcion.saldo=$scope.inscripcion.montoPagar-$scope.inscripcion.montoPagado;
                         $scope.inscripcion.estado=0;
+                        //02-01-2017
+                        $scope.inscripcion.empleado_id=1;
+                        //-----
                         if ($scope.inscripcion.edicion_id!=undefined) {
                             if ($scope.inscripcion.persona_id!=undefined) {
                                 crudService.create($scope.inscripcion, 'inscripciones').then(function (data) {
