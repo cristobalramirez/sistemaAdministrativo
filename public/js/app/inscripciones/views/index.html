@@ -89,6 +89,7 @@
                         <th>Cliente</th>
                         <th>Email</th>
                         <th>Telefono</th>
+                        <th>Curso</th>
                         <th>Monto Curso</th>
                         <th>Monto a Pagar</th>
                         <th>Monto Pagado</th>
@@ -108,6 +109,7 @@
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.persona.email}}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoPagado}}</td>
@@ -126,6 +128,7 @@
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.persona.email}}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoPagado}}</td>
@@ -144,6 +147,7 @@
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.persona.email}}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoPagado}}</td>
@@ -163,6 +167,7 @@
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.persona.email}}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.montoPagado}}</td>
@@ -181,6 +186,7 @@
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.persona.email}}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoPagado}}</td>
@@ -199,6 +205,7 @@
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.persona.email}}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoPagado}}</td>
@@ -217,6 +224,7 @@
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.persona.email}}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.montoPagado}}</td>

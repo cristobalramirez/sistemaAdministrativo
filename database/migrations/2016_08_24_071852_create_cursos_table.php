@@ -16,7 +16,7 @@ class CreateCursosTable extends Migration
             $table->increments('id');
             $table->string('descripcion')->nullable();
             $table->integer('categoria_id')->unsigned();
-            
+            $table->string('abreviatura',20)->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
             

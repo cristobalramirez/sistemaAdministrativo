@@ -34,6 +34,11 @@
                       <input type="text" class="form-control" name="descripcion" placeholder="Cursos" ng-model="curso.descripcion" required>
                     </div>
 
+                    <div class="form-group" ng-class="{'has-error': cursoCreateForm.abreviatura.$invalid,'has-success':cursoCreateForm.abreviatura.$invalid}">
+                      <label for="abreviatura">Abreviatura * </label>
+                      <input type="text" class="form-control" name="abreviatura" placeholder="Abreviatura" ng-model="curso.abreviatura" required>
+                    </div>
+
                     <div class="form-group" ng-class="{'has-error': cursoEditForm.categoria_id.$invalid,'has-success':cursoEditForm.categoria_id.$invalid}">
                             <label>Categoria * </label>
                             <select class="form-control ng-pristine ng-valid ng-touched" name="categoria_id" ng-model="curso.categoria_id" ng-options="item.id as item.nombreCategoria for item in categorias" required><option value="">-- Elige Categoria --</option></select>

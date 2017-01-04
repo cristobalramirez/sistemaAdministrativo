@@ -5,7 +5,7 @@ class Curso extends \Eloquent {
 
 	protected $table = 'cursos';
     
-    protected $fillable = ['descripcion','categoria_id'];
+    protected $fillable = ['descripcion','categoria_id','abreviatura'];
 
     public function categoria()
     {

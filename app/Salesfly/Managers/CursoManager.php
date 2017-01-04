@@ -6,6 +6,7 @@ class CursoManager extends BaseManager {
     {
         $rules = [
             'descripcion'=> 'required',
+            'abreviatura'=> 'required',
             'categoria_id'=> ''
                   ];
         return $rules;
