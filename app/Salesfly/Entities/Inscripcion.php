@@ -22,4 +22,11 @@ class Inscripcion extends \Eloquent {
     						'email',
     						'telefono'
     						];
+
+        public function persona(){
+            return $this->belongsTo('Salesfly\Salesfly\Entities\Persona','persona_id');
+        }
+        public function edicion(){
+            return $this->belongsTo('Salesfly\Salesfly\Entities\Edicion','edicion_id');
+        }
     }

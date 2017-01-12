@@ -2,7 +2,7 @@
         <section class="content-header">
           <h1>Inscripciones
             <small>Panel de Control</small>
-          </h1>
+          </h1> 
           <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Inscripciones</li>
@@ -25,7 +25,7 @@
             <div class="col-md-12">
 
 
-              <div class="box"> 
+              <div class="box">  
 
                 <div class="box-header with-border">
                   <div class="row">
@@ -86,9 +86,10 @@
                       <tr>
                         <th style="width: 10px">#</th>
                         <th>Fecha Inscripcion</th>
-                        <th>Curso</th>
                         <th>Cliente</th>
+                        <th>Email</th>
                         <th>Telefono</th>
+                        <th>Curso</th>
                         <th>Monto Curso</th>
                         <th>Monto a Pagar</th>
                         <th>Monto Pagado</th>
@@ -99,14 +100,16 @@
                         <th style="width: 40px">Pagos</th>
                         <th style="width: 40px">Ver</th>
                         <th style="width: 40px">Envios</th>
+                        <th style="width: 40px">Actualizar</th>
                       </tr>
                     
                       <tr ng-repeat="row in inscripciones">
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{$index + 1}}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.created_at}}</td>
-                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.curso}}</td>
-                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.nombres+' '+row.apellidos}}</td>
-                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.telefono}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.persona.email}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF">{{row.montoPagado}}</td>
@@ -117,13 +120,15 @@
                         <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs" data-toggle="modal" data-target="#miventana3">Envio</a></td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
 
 
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{$index + 1}}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.created_at}}</td>
-                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.curso}}</td>
-                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.nombres+' '+row.apellidos}}</td>
-                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.telefono}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.persona.email}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{row.montoPagado}}</td>
@@ -134,13 +139,15 @@
                         <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
 
 
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{$index + 1}}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.created_at}}</td>
-                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.curso}}</td>
-                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.nombres+' '+row.apellidos}}</td>
-                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.telefono}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.persona.email}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{row.montoPagado}}</td>
@@ -151,13 +158,16 @@
                         <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+
 
 
                         <td ng-show="row.estado==3" style="background: #74F566">{{$index + 1}}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.created_at}}</td>
-                        <td ng-show="row.estado==3" style="background: #74F566">{{row.curso}}</td>
-                        <td ng-show="row.estado==3" style="background: #74F566">{{row.nombres+' '+row.apellidos}}</td>
-                        <td ng-show="row.estado==3" style="background: #74F566">{{row.telefono}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.persona.email}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==3" style="background: #74F566">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==3" style="background: #74F566">{{row.montoPagado}}</td>
@@ -168,13 +178,15 @@
                         <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
+                        <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
 
 
                         <td ng-show="row.estado==6" style="background: #E8929C">{{$index + 1}}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.created_at}}</td>
-                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.curso}}</td>
-                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.nombres+' '+row.apellidos}}</td>
-                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.telefono}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.persona.email}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==6" style="background: #E8929C">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==6" style="background: #E8929C">{{row.montoPagado}}</td>
@@ -185,13 +197,15 @@
                         <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
+                        <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
 
 
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{$index + 1}}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.created_at}}</td>
-                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.curso}}</td>
-                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.nombres+' '+row.apellidos}}</td>
-                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.telefono}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.persona.email}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{row.montoPagado}}</td>
@@ -202,12 +216,15 @@
                         <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+
 
                         <td ng-show="row.estado==4" style="background: #F16878">{{$index + 1}}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.created_at}}</td>
-                        <td ng-show="row.estado==4" style="background: #F16878">{{row.curso}}</td>
-                        <td ng-show="row.estado==4" style="background: #F16878">{{row.nombres+' '+row.apellidos}}</td>
-                        <td ng-show="row.estado==4" style="background: #F16878">{{row.telefono}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.persona.nombres+' '+row.persona.apellidos}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.persona.email}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.persona.telefono}}</td>
+                        <td ng-show="row.estado==4" style="background: #F16878">{{row.edicion.curso.abreviatura + ' - '+row.edicion.descripcionEdicion }}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.montoCurso}}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.montoPagar}}</td>
                         <td ng-show="row.estado==4" style="background: #F16878">{{row.montoPagado}}</td>
@@ -218,6 +235,7 @@
                         <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="cargarPagos(row)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miventana1">Pagar</a></td>
                         <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
+                        <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
                       
                       </tr>
                     
@@ -401,6 +419,7 @@
                             <th>Fecha Llamada</th>
                             <th>Fecha Compromiso</th>
                             <th>Descripcion</th>
+                            <th>Estado</th>
 
                             <th style="width: 40px">Eliminar</th>
                           </tr>
@@ -410,6 +429,13 @@
                             <td>{{row.created_at}}</td>
                             <td>{{row.fechaCompromiso}}</td>
                             <td>{{row.descripcion}}</td>
+                            <td ng-show="row.estado==0">{{'Pre Inscripto'}}</td>
+                            <td ng-show="row.estado==1">{{'Cancelado'}}</td>
+                            <td ng-show="row.estado==2">{{'Habilitado'}}</td>
+                            <td ng-show="row.estado==3">{{'Confirmado'}}</td>
+                            <td ng-show="row.estado==4">{{'Negado'}}</td>
+                            <td ng-show="row.estado==5">{{'Gratis'}}</td>
+                            <td ng-show="row.estado==6">{{'Deshabilitado'}}</td>
                             
                             <td><a ng-click="deleteSeguimiento(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
                           </tr>
@@ -546,6 +572,168 @@
                           <button ng-show="banderaEnvio" type="submit" class="btn btn-primary" ng-click="EditarEnvio()">Actualizar</button>
                           <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
                       </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- =========================================Ventana Agregar Envio================================= -->
+         <div class="container"  style="margin-top: 60px;">
+           <div  class="modal fade" id="miventana4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
+             <div  class="modal-dialog">
+                  <div style="border-radius: 5px" class="modal-content">
+                        <div class="modal-header" style="background-color: #0673B3; border-radius: 5px; color: #E2E2EC;">
+                    
+                          <h4 class="modal-title">Actualizar Cliente</h4>
+                        </div>
+                        <form name="PersonaEditForm" role="form" novalidate>
+                        <!--=================cueropo========================-->
+                        <div class="box-body">    
+                             <div class="form-group" ng-class="{'has-error': PersonaEditForm.nombres.$invalid,'has-success':PersonaEditForm.nombres.$invalid}">
+                      <label for="nombres">Nombres *</label>
+                      <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="persona.nombres" required>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': PersonaEditForm.apellidos.$invalid,'has-success':PersonaEditForm.apellidos.$invalid}">
+                      <label for="apellidos">Apellidos * </label>
+                      <input type="text" class="form-control" name="apellidos"  placeholder="Apellidos" ng-model="persona.apellidos" required>
+                    </div>
+                    
+                    <div class="row">
+                      <div  class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': PersonaEditForm.dni.$invalid,'has-success':PersonaEditForm.dni.$invalid}">
+                          <label for="dni">DNI * </label>
+                          <input ng-blur="validaDni(persona.dni)" type="number" class="form-control" name="dni"  placeholder="DNI" ng-model="persona.dni" required>
+                        </div>
+                      </div>
+
+                      <div  class="col-md-6">
+                        <div class="form-group">
+                                  <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                              <div  class="input-group">
+                                  <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                 </div>
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaNacimiento" ng-model="persona.fechaNac">
+                              </div>
+                        </div>
+                      </div>
+
+                      </div>
+
+                      <div class="row">
+                      <div  class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': PersonaEditForm.sexo.$invalid,'has-success':PersonaEditForm.sexo.$invalid}">
+                              <label>Sexo * </label>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="sexo" ng-model="persona.sexo" required><option value="">-- Elige Sexo --</option>
+                              <option value="Masculino">Masculino</option>
+                              <option value="Femenino">Femenino</option></select>
+                          </div>
+                      </div>
+
+
+                      <div  class="col-md-6">
+                        <div class="form-group" >
+                              <label>Estado Civil</label>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="estadoCivil" ng-model="persona.estadoCivil"><option value="">-- Elige Estado Civil --</option>
+                                <option value="Masculino">SOLTERO</option>
+                                <option value="Femenino">CASADO</option>
+                                <option value="Femenino">CONVIVIENTE</option>
+                                <option value="Femenino">VIUDO</option>
+                                <option value="Femenino">DIVORCIADO</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      </div>
+
+
+
+                      <div class="row">
+                      
+                      
+                      <div  class="col-md-6">
+                        <div class="form-group">
+                            <label>Profesion</label>
+                            <select class="form-control ng-pristine ng-valid ng-touched" name="profesion_id" ng-model="persona.profesion_id" ng-options="item.id as item.nombre for item in profesiones"><option value="">-- Elige Profesion --</option></select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="descripcionProfesion">Descipcion Profesion</label>
+                        <input type="text" class="form-control" name="Ciclo Academico" placeholder="Descipcion Profesion" ng-disabled="persona.profesion_id!=1" ng-model="persona.descripcionProfesio">
+                      </div>
+                      
+                    </div>
+
+      
+
+                    <div class="row">
+                      <div  class="col-md-8">
+                      <div class="form-group" ng-class="{'has-error': PersonaEditForm.email.$invalid,'has-success':PersonaEditForm.email.$invalid}">
+                          <label for="email">Email * </label>
+                          <input type="email" class="form-control" name="email"  placeholder="Email" ng-model="persona.email" required>
+                        </div>
+                      </div>
+                      
+                      <div  class="col-md-4">
+                      <div class="form-group" ng-class="{'has-error': PersonaEditForm.telefono.$invalid,'has-success':PersonaEditForm.telefono.$invalid}">
+                          <label for="telefono">Telefono</label>
+                          <input type="number" class="form-control" name="telefono"  placeholder="Telefono" ng-model="persona.telefono" required>
+                        </div>
+                      </div>
+
+                      
+                    </div>
+
+
+                    <div class="form-group">
+                          <label for="direccion">Domicilio</label>
+                          <input type="text" class="form-control" name="direccion"  placeholder="Domicilio" ng-model="persona.direccion">
+                        </div>
+                    
+
+
+                    <div class="row" ng-show="persona.pais_id==1">
+                      <div  class="col-md-4">
+                       
+                        <div class="form-group">
+                            <label>Departamento</label>
+                            <select ng-click="DomicilioCargarProvincia()" class="form-control ng-pristine ng-valid ng-touched" name="departamento" ng-model="DomicilioDepertamentoSelect" ng-options="item.departamento as item.departamento for item in DomicilioDepartamentos"><option value="">-- Elige Departamento --</option></select>
+                        </div>
+                      </div>
+                      
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                            <label>Provinca</label>
+                            <select ng-disabled="DomicilioDepertamentoSelect==null" ng-click="DomicilioCargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="provincia" ng-model="DomicilioProvinciaSelect" ng-options="item.provincia as item.provincia for item in DomicilioProvincias"><option value="">-- Elige Provincia --</option></select>
+                        </div>
+                      </div>
+
+                      <div  class="col-md-4">
+                        <div class="form-group">
+                            <label>Distrito</label>
+                            <select ng-disabled="DomicilioDepertamentoSelect==null || DomicilioProvinciaSelect==undefined" class="form-control ng-pristine ng-valid ng-touched" name="distrito" ng-model="DomicilioDistritoSelect" ng-options="item.id as item.distrito for item in DomicilioDistritos"><option value="">-- Elige Distrito --</option></select>
+                          </div>
+                      </div>
+                    </div>
+
+                    
+
+                          
+                    </div><!-- /.box-body -->
+                    
+                   
+                          
+
+                        <!--================================================-->
+                        <div class="modal-footer" >
+                          <button type="submit" ng-disabled="PersonaEditForm.$invalid" class="btn btn-primary" ng-click="ActualizarPersona()" data-dismiss="modal">Modificar </button>
+                          <a  class="btn btn-danger" data-dismiss="modal" ng-click="SalirPersona()" aria-hidden="ngenabled">Salir</a>
+                      </div>
+                      </form>
                   </div>
               </div>
             </div>

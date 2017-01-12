@@ -25,4 +25,7 @@ class Persona extends \Eloquent {
     {
         return $this->belongsTo('\Salesfly\Salesfly\Entities\Ubigeo');
     }
+    public function persona(){
+        return $this->belongsTo('Salesfly\Salesfly\Entities\Persona','persona_id');
+    }
 }
