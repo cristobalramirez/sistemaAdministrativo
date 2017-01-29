@@ -101,6 +101,7 @@
                         <th style="width: 40px">Ver</th>
                         <th style="width: 40px">Envios</th>
                         <th style="width: 40px">Actualizar</th>
+                        <th style="width: 20px"></th>
                       </tr>
                     
                       <tr ng-repeat="row in inscripciones">
@@ -121,6 +122,7 @@
                         <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs" data-toggle="modal" data-target="#miventana3">Envio</a></td>
                         <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+                        <td ng-show="row.estado==0" style="background: #FFFFFF"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
 
 
                         <td ng-show="row.estado==1" style="background: #5AEC92">{{$index + 1}}</td>
@@ -140,6 +142,7 @@
                         <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
                         <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+                        <td ng-show="row.estado==1" style="background: #5AEC92"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
 
 
                         <td ng-show="row.estado==2" style="background: #FAF09E">{{$index + 1}}</td>
@@ -159,6 +162,7 @@
                         <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
                         <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+                        <td ng-show="row.estado==2" style="background: #FAF09E"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
 
 
 
@@ -179,6 +183,7 @@
                         <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
                         <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+                        <td ng-show="row.estado==3" style="background: #74F566"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
 
 
                         <td ng-show="row.estado==6" style="background: #E8929C">{{$index + 1}}</td>
@@ -198,6 +203,7 @@
                         <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
                         <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+                        <td ng-show="row.estado==6" style="background: #E8929C"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
 
 
                         <td ng-show="row.estado==5" style="background: #6AE0E9">{{$index + 1}}</td>
@@ -217,6 +223,7 @@
                         <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
                         <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+                        <td ng-show="row.estado==5" style="background: #6AE0E9"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
 
 
                         <td ng-show="row.estado==4" style="background: #F16878">{{$index + 1}}</td>
@@ -236,6 +243,7 @@
                         <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="editInscripcion(row)" class="btn btn-warning btn-xs">Ver</a></td>
                         <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="cargarEnvio(row)" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#miventana3">Envio</a></td>
                         <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="cargarPersona(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#miventana4">Cliente</a></td>
+                        <td ng-show="row.estado==4" style="background: #F16878"><a ng-click="deleteInscripcion(row)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
                       
                       </tr>
                     

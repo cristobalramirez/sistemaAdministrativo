@@ -228,18 +228,18 @@
                     // 01-01-2017
 
                     crudService.byId($scope.persona.ubigeoDireccion_id,'ubigeos').then(function (data) {
-                            $scope.ubigeoTrabajo = data;
+                            $scope.ubigeoDomicilio = data;
                             crudService.all('ubigeoDepartamento').then(function(data){  
-                                $scope.TrabajoDepartamentos = data;
-                                $scope.TrabajoDepertamentoSelect=$scope.ubigeoTrabajo.departamento;
+                                $scope.DomicilioDepartamentos = data;
+                                $scope.DomicilioDepertamentoSelect=$scope.ubigeoDomicilio.departamento; 
                             });
-                            crudService.recuperarUnDato('ubigeoProvincia',$scope.ubigeoTrabajo.departamento).then(function(data){  
-                                $scope.TrabajoProvincias = data;
-                                $scope.TrabajoProvinciaSelect=$scope.ubigeoTrabajo.provincia;;
+                            crudService.recuperarUnDato('ubigeoProvincia',$scope.ubigeoDomicilio.departamento).then(function(data){  
+                                $scope.DomicilioProvincias = data;
+                                $scope.DomicilioProvinciaSelect=$scope.ubigeoDomicilio.provincia;;
                             });
-                            crudService.recuperarDosDato('ubigeoDistrito',$scope.ubigeoTrabajo.departamento,$scope.ubigeoTrabajo.provincia).then(function(data){  
-                                $scope.TrabajoDistritos = data;
-                                $scope.TrabajoDistritoSelect=$scope.ubigeoTrabajo.id;
+                            crudService.recuperarDosDato('ubigeoDistrito',$scope.ubigeoDomicilio.departamento,$scope.ubigeoDomicilio.provincia).then(function(data){  
+                                $scope.DomicilioDistritos = data;
+                                $scope.DomicilioDistritoSelect=$scope.ubigeoDomicilio.id;
                             });
                         });
                     
@@ -490,10 +490,6 @@
                     }
                 };
 
-                $scope.deleteInscripcion= function(row){
-                    
-                    $scope.inscripcion = row;
-                }
                 $scope.deletePago= function(row){
                     
                     $scope.pagoEliminar = row;
@@ -531,12 +527,17 @@
                    
                 };
 
+
+                $scope.deleteInscripcion= function(row){
+                    
+                    $scope.inscripcion = row;
+                }
+
                 $scope.cancelInscripcion = function(){
                     $scope.inscripcion = {};
                 }
-
-
                 $scope.destroyInscripcion = function(){
+                    console.log($scope.inscripcion);
                     crudService.destroy($scope.inscripcion,'inscripciones').then(function(data)
                     {
                         if(data['estado'] == true){

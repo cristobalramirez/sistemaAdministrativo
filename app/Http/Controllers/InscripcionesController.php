@@ -11,6 +11,7 @@ use Salesfly\Salesfly\Repositories\PersonaRepo;
 use Salesfly\Salesfly\Managers\PersonaManager;
 use Salesfly\Salesfly\Repositories\PagoRepo;
 use Salesfly\Salesfly\Managers\PagoManager;
+use Salesfly\Salesfly\Repositories\SeguimientoInscripcionRepo;
  
 class InscripcionesController extends Controller {
 
@@ -160,6 +161,21 @@ class InscripcionesController extends Controller {
 
     public function destroy(Request $request)
     {
+        $pagos = $request->pago;
+        $seguimientos = $request->seguimiento;
+        foreach ($pagos as $pago) {
+            $pagoRepo = new PagoRepo;
+            $pagoEliminar= $pagoRepo->find($pago['id']);
+            $pagoEliminar->delete();
+
+            $pago = null;
+        }
+        foreach ($seguimientos as $seguimiento) {
+            $seguimientoRepo = new SeguimientoInscripcionRepo;
+            $seguimientoEliminar= $seguimientoRepo->find($seguimiento['id']);
+            $seguimientoEliminar->delete();
+            $seguimientoEliminar = null;
+        }
         $inscripcion= $this->inscripcionRepo->find($request->id);
         $inscripcion->delete();
         return response()->json(['estado'=>true, 'nombre'=>$inscripcion->nombre]);

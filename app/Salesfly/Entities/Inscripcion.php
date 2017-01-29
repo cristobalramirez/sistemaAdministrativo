@@ -28,5 +28,11 @@ class Inscripcion extends \Eloquent {
         }
         public function edicion(){
             return $this->belongsTo('Salesfly\Salesfly\Entities\Edicion','edicion_id');
-        }
+        } 
+        public function pago(){
+            return $this->hasMany('Salesfly\Salesfly\Entities\Pago');
+        } 
+        public function seguimiento(){
+            return $this->hasMany('Salesfly\Salesfly\Entities\SeguimientoInscripcion');
+        } 
     }
