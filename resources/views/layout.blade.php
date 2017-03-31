@@ -168,6 +168,10 @@
                 <li class=""><a href="/promociones" ><i class="fa fa-circle-o"></i>Promociones </a></li>
                 <li class=""><a href="/inscripciones" ><i class="fa fa-circle-o"></i>Inscripciones</a></li>
                 <li class=""><a href="/agencias" ><i class="fa fa-circle-o"></i>Agencias</a></li>
+
+                <li class=""><a href="/escalas" ><i class="fa fa-circle-o"></i>Escalas</a></li>
+                <li class=""><a href="/especialidades" ><i class="fa fa-circle-o"></i>Especialidades</a></li>
+                <li class=""><a href="/tipocomprobantes" ><i class="fa fa-circle-o"></i>Tipo Comprobantes</a></li>
               </ul>
             </li>
             @endif
