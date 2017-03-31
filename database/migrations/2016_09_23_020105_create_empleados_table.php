@@ -26,8 +26,11 @@ class CreateEmpleadosTable extends Migration
             $table->string('estado');
             $table->string('direccion');
             $table->integer('ubigeo_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+                
             
             $table->foreign('ubigeo_id')->references('id')->on('ubigeos');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

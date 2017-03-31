@@ -413,3 +413,65 @@ Route::get('api/pagos/recuperarUnDato/{q?}', ['as' => 'person_search', 'uses' =>
     Route::get('api/envios/find/{id}', ['as' => 'person_find', 'uses' => 'EnviosController@find']);
     Route::get('api/envioInscripcion/find/{id}', ['as' => 'person_find', 'uses' => 'EnviosController@envioInscripcion']);
 //END CATEGORIAS ROUTES
+//TIPO GASTOS ROUTES
+    Route::get('tipogastos', ['as' => 'person', 'uses' => 'TipoGastosController@index']);
+    Route::get('tipogastos/create', ['as' => 'person_create', 'uses' => 'TipoGastosController@index']);
+    Route::get('tipogastos/edit/{id?}', ['as' => 'person_edit', 'uses' => 'TipoGastosController@index']);
+    Route::get('tipogastos/form-create', ['as' => 'person_form_create', 'uses' => 'TipoGastosController@form_create']);
+    Route::get('tipogastos/form-edit', ['as' => 'person_form_edit', 'uses' => 'TipoGastosController@form_edit']);
+    Route::get('api/tipogastos/all', ['as' => 'person_all', 'uses' => 'TipoGastosController@all']);
+    Route::get('api/tipogastos/paginate/', ['as' => 'person_paginate', 'uses' => 'TipoGastosController@paginatep']);
+    Route::post('api/tipogastos/create', ['as' => 'person_create', 'uses' => 'TipoGastosController@create']);
+    Route::put('api/tipogastos/edit', ['as' => 'person_edit', 'uses' => 'TipoGastosController@edit']);
+    Route::post('api/tipogastos/destroy', ['as' => 'person_destroy', 'uses' => 'TipoGastosController@destroy']);
+    Route::get('api/tipogastos/search/{q?}', ['as' => 'person_search', 'uses' => 'TipoGastosController@search']);
+    Route::get('api/tipogastos/find/{id}', ['as' => 'person_find', 'uses' => 'TipoGastosController@find']);
+//END TIPO GASTOS ROUTES
+//TIPO Comprobantes ROUTES
+    Route::get('tipocomprobantes', ['as' => 'person', 'uses' => 'TipoComprobanteController@index']);
+    Route::get('tipocomprobantes/create', ['as' => 'person_create', 'uses' => 'TipoComprobanteController@index']);
+    Route::get('tipocomprobantes/edit/{id?}', ['as' => 'person_edit', 'uses' => 'TipoComprobanteController@index']);
+    Route::get('tipocomprobantes/form-create', ['as' => 'person_form_create', 'uses' => 'TipoComprobanteController@form_create']);
+    Route::get('tipocomprobantes/form-edit', ['as' => 'person_form_edit', 'uses' => 'TipoComprobanteController@form_edit']);
+    Route::get('api/tipocomprobantes/all', ['as' => 'person_all', 'uses' => 'TipoComprobanteController@all']);
+    Route::get('api/tipocomprobantes/paginate/', ['as' => 'person_paginate', 'uses' => 'TipoComprobanteController@paginatep']);
+    Route::post('api/tipocomprobantes/create', ['as' => 'person_create', 'uses' => 'TipoComprobanteController@create']);
+    Route::put('api/tipocomprobantes/edit', ['as' => 'person_edit', 'uses' => 'TipoComprobanteController@edit']);
+    Route::post('api/tipocomprobantes/destroy', ['as' => 'person_destroy', 'uses' => 'TipoComprobanteController@destroy']);
+    Route::get('api/tipocomprobantes/search/{q?}', ['as' => 'person_search', 'uses' => 'TipoComprobanteController@search']);
+    Route::get('api/tipocomprobantes/find/{id}', ['as' => 'person_find', 'uses' => 'TipoComprobanteController@find']);
+//END TIPO Comprobantes ROUTES
+
+//TIPO ESCALA ROUTES
+    Route::get('escalas', ['as' => 'person', 'uses' => 'EscalaController@index']);
+    Route::get('escalas/create', ['as' => 'person_create', 'uses' => 'EscalaController@index']);
+    Route::get('escalas/edit/{id?}', ['as' => 'person_edit', 'uses' => 'EscalaController@index']);
+    Route::get('escalas/form-create', ['as' => 'person_form_create', 'uses' => 'EscalaController@form_create']);
+    Route::get('escalas/form-edit', ['as' => 'person_form_edit', 'uses' => 'EscalaController@form_edit']);
+    Route::get('api/escalas/all', ['as' => 'person_all', 'uses' => 'EscalaController@all']);
+    Route::get('api/escalas/paginate/', ['as' => 'person_paginate', 'uses' => 'EscalaController@paginatep']);
+    Route::post('api/escalas/create', ['as' => 'person_create', 'uses' => 'EscalaController@create']);
+    Route::put('api/escalas/edit', ['as' => 'person_edit', 'uses' => 'EscalaController@edit']);
+    Route::post('api/escalas/destroy', ['as' => 'person_destroy', 'uses' => 'EscalaController@destroy']);
+    Route::get('api/escalas/search/{q?}', ['as' => 'person_search', 'uses' => 'EscalaController@search']);
+    Route::get('api/escalas/find/{id}', ['as' => 'person_find', 'uses' => 'EscalaController@find']);
+
+    Route::get('api/cargarescala/all', ['as' => 'person_all', 'uses' => 'EscalaController@CargarEscala']);
+//END TIPO ESCALA ROUTES
+
+//TIPO ESPECIALIDAD ROUTES
+    Route::get('especialidades', ['as' => 'person', 'uses' => 'EspecialidadController@index']);
+    Route::get('especialidades/create', ['as' => 'person_create', 'uses' => 'EspecialidadController@index']);
+    Route::get('especialidades/edit/{id?}', ['as' => 'person_edit', 'uses' => 'EspecialidadController@index']);
+    Route::get('especialidades/form-create', ['as' => 'person_form_create', 'uses' => 'EspecialidadController@form_create']);
+    Route::get('especialidades/form-edit', ['as' => 'person_form_edit', 'uses' => 'EspecialidadController@form_edit']);
+    Route::get('api/especialidades/all', ['as' => 'person_all', 'uses' => 'EspecialidadController@all']);
+    Route::get('api/especialidades/paginate/', ['as' => 'person_paginate', 'uses' => 'EspecialidadController@paginatep']);
+    Route::post('api/especialidades/create', ['as' => 'person_create', 'uses' => 'EspecialidadController@create']);
+    Route::put('api/especialidades/edit', ['as' => 'person_edit', 'uses' => 'EspecialidadController@edit']);
+    Route::post('api/especialidades/destroy', ['as' => 'person_destroy', 'uses' => 'EspecialidadController@destroy']);
+    Route::get('api/especialidades/search/{q?}', ['as' => 'person_search', 'uses' => 'EspecialidadController@search']);
+    Route::get('api/especialidades/find/{id}', ['as' => 'person_find', 'uses' => 'EspecialidadController@find']);
+
+    Route::get('api/cargarespecialidad/all', ['as' => 'person_all', 'uses' => 'EspecialidadController@CargarEspecialidad']);
+//END TIPO ESPECIALIDAD ROUTES

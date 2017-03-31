@@ -27,6 +27,6 @@ class CreateAgenciasTable extends Migration
      */
     public function down()
     {
-         Schema::drop('categorias');
+         Schema::drop('agencias');
     }
 }

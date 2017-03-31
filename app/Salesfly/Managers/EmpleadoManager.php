@@ -16,7 +16,8 @@ class EmpleadoManager extends BaseManager {
                     'telefono'=> '',
                     'estado'=> '',
                     'direccion'=> '',
-                    'ubigeo_id'=> ''
+                    'ubigeo_id'=> '',
+                    'user_id'=>''
                   ];
         return $rules;
     }

@@ -27,7 +27,10 @@
                 $scope.ubigeoDomicilio ={};
                 $scope.banderaInscribir=false;
 
-                var id = $routeParams.id;
+                $scope.escalas = {};
+                $scope.especialidades = {};
+
+                var id = $routeParams.id; 
 
                 if(id)
                 {
@@ -36,6 +39,8 @@
                         if ($scope.edicion.costoCurso!=undefined) {
                             crudService.byId($scope.edicion.curso_id,'cursos').then(function (data) {
                                 $scope.curso = data;
+                                console.log("--Curso--");
+                                console.log($scope.curso);
                             });    
                             crudService.search('detalleDocenteEdiciones',$scope.edicion.id,1).then(function (data){
                                 $scope.docentesAdd=data;
@@ -65,6 +70,13 @@
                     });
                     crudService.all('cargarPaises').then(function(data){  
                         $scope.paises = data;
+                    });
+
+                    crudService.all('cargarescala').then(function(data){  
+                        $scope.escalas = data;
+                    });
+                    crudService.all('cargarespecialidad').then(function(data){  
+                        $scope.especialidades = data;
                     });
                 }
                 $scope.createInscripcion = function(){

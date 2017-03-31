@@ -102,7 +102,7 @@
                 $scope.createEdicion = function(){
                     if ($scope.edicionCreateForm.$valid) {
                         //if($scope.edicion.fechaRegistro!=null){
-                            $scope.edicion.detDocenteEdicion=$scope.docentesAdd;
+                            $scope.edicion.detDocenteEdicion=$scope.docentesAdd; 
                             $scope.edicion.estado="Activo";
                             $scope.banderaCargando=true;
                             crudService.create($scope.edicion, 'ediciones').then(function (data) {
@@ -129,6 +129,7 @@
                 $scope.updateEdicion = function(){
                     if ($scope.edicionEditForm.$valid) {
                             $scope.banderaCargando=true;
+                            $scope.edicion.detDocenteEdicion=$scope.docentesAdd; 
                             crudService.update($scope.edicion,'ediciones').then(function(data)
                             {
                                 if(data['estado'] == true){

@@ -122,8 +122,26 @@ class EdicionesController extends Controller {
             }            
         }
 
+
+
         $manager = new EdicionManager($edicion,$request->all());
         $manager->save();
+
+        //---------------------------------------------
+        $detDocenteEdicion = $request->detDocenteEdicion;
+        $temporal=$request->id;
+
+        $detDocenteEdicionRepo;
+        
+        foreach($detDocenteEdicion as $objeto){
+            $objeto['edicion_id'] = $temporal;
+            $detDocenteEdicionRepo = new DetalleDocenteEdicionRepo;
+            $insertar=new DetalleDocenteEdicionManager($detDocenteEdicionRepo->getModel(),$objeto);
+            $insertar->save();
+          
+            $detDocenteEdicionRepo = null;
+        }
+        //---------------------------------------------
         \DB::commit();
         return response()->json(['estado'=>true, 'nombre'=>$edicion->nombre]);
     }

@@ -29,6 +29,10 @@
                 $scope.success;
                 $scope.query = '';
 
+                //-----------------------------
+                $scope.escalas ={};
+                $scope.especialidades ={};
+
                 $scope.toggle = function () { 
                     $scope.show = !$scope.show; 
                 };
@@ -104,6 +108,12 @@
                     crudService.all('cargarPaises').then(function(data){  
                         $scope.paises = data;
                     });
+                    crudService.all('cargarescala').then(function(data){  
+                        $scope.escalas = data;
+                    });
+                    crudService.all('cargarespecialidad').then(function(data){  
+                        $scope.especialidades = data;
+                    });
 
                 }else{
                     crudService.paginate('personas',1).then(function (data) {
@@ -127,6 +137,13 @@
                     });
                     crudService.all('cargarPaises').then(function(data){  
                         $scope.paises = data;
+                    });
+
+                    crudService.all('cargarescala').then(function(data){  
+                        $scope.escalas = data;
+                    });
+                    crudService.all('cargarespecialidad').then(function(data){  
+                        $scope.especialidades = data;
                     });
                 }
 

@@ -21,7 +21,8 @@ class InscripcionManager extends BaseManager {
                     'apellidos'=>'',
                     'dni' => '',
                     'email'=> '',
-                    'telefono'=> ''
+                    'telefono'=> '',
+                    'descripcion_promocion'=> ''
                   ];
         return $rules;
     }

@@ -32,6 +32,10 @@ class CreateInscripcionesTable extends Migration
             $table->string('dni');
             $table->string('email');
             $table->string('telefono');
+
+            //------------------------
+            $table->string('descripcion_promocion')->nullable();
+            //------------------------
             
             $table->foreign('medioPublicitario_id')->references('id')->on('medioPublicitarios');
             $table->foreign('persona_id')->references('id')->on('personas');

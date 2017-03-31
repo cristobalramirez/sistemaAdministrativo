@@ -12,6 +12,12 @@
                 $scope.Distritos ={};
                 $scope.DistritoSelect;
                 $scope.dniEditar;
+
+                $scope.user={};
+                $scope.roles = [{key1:'2',value1:'Coordinador Academico'},{key1:'3',value1:'Asesor(a) de Ventas'},{key1:'4',value1:'Asesor(a) de Academico'},{key1:'5',value1:'Gerencia'},{key1:'6',value1:'Diseñador Grafico'}];
+                $scope.user.role_id = '2';
+                $scope.estados = [{key:'0',value:'Deshabilitado'},{key:'1',value:'Habilitado'}];
+                $scope.user.estado = '1';
                 //$scope.file="";
                 //----------------------
                 $scope.errors = null;

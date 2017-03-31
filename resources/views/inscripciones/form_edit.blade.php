@@ -53,6 +53,9 @@
                     <label>Promocion : @{{inscripcion.nombrePromocion}}</label>
                   </div>
                   <div>
+                    <label>Promocion : @{{inscripcion.descripcion_promocion}}</label>
+                  </div>
+                  <div>
                     <label>Costo Curso : @{{inscripcion.montoCurso}}</label>
                   </div>
                   <div>
@@ -75,6 +78,10 @@
                             <label>Promocion</label>
                             <select  class="form-control ng-pristine ng-valid ng-touched" ng-click="selecionarPromocion()" name="promocion_id" ng-model="inscripcion.promocion_id" ng-options="item.id as item.descripcion for item in promociones"></select>
                         </div>
+                      </div>
+                      <div  class="col-md-8">
+                          <label for="descripcion_promocion">Descripcion Promocion </label>
+                          <input type="text" class="form-control" name="descripcion_promocion" placeholder="Descripcion Promocion" ng-model="inscripcion.descripcion_promocion">
                       </div>
                     </div>
                     

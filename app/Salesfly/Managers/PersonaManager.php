@@ -21,7 +21,9 @@ class PersonaManager extends BaseManager {
                     'ubigeoTrabajo_id'=> '',
                     'ubigeoDireccion_id'=> '',
                     'profesion_id'=> '',
-                    'pais_id'=> ''
+                    'pais_id'=> '',
+                    'escala_id'=> '',
+                    'especialidad_id'=> ''
                   ];
         return $rules;
     }

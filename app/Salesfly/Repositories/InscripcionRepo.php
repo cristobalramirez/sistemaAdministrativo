@@ -14,8 +14,10 @@ class InscripcionRepo extends BaseRepo{
                     ->with('pago')
                     ->with('seguimiento')
                     ->with('edicion.curso')
+                    
                     ->where('dni','like', $q.'%')
-                    ->orWhere('nombres','like',$q.'%')
+                    ->orWhere('nombres','like','%'.$q.'%')
+                    ->orWhere('apellidos','like','%'.$q.'%')
                     ->paginate(15);
         return $inscripciones;
     }

@@ -28,17 +28,23 @@
                 </div> 
                     
                   <div class="row">
-                      <div  class="col-md-6">
+                      <div  class="col-md-3">
                         <div class="form-group">
                             <label>Medio Publicitario</label>
                             <select  class="form-control ng-pristine ng-valid ng-touched" name="medioPublicitario_id" ng-model="inscripcion.medioPublicitario_id" ng-options="item.id as item.descripcion for item in medioPublicitarios"><option value="">-- Elige Medio Publicitario --</option></select>
                         </div>
                       </div>
 
-                      <div  class="col-md-6">
+                      <div  class="col-md-3">
                         <div class="form-group">
                             <label>Promocion</label>
                             <select  class="form-control ng-pristine ng-valid ng-touched" ng-click="selecionarPromocion()" name="promocion_id" ng-model="inscripcion.promocion_id" ng-options="item.id as item.descripcion for item in promociones"></select>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="col-md-6">
+                          <label for="descripcion_promocion">Descripcion Promocion </label>
+                          <input type="text" class="form-control" name="descripcion_promocion" placeholder="Descripcion Promocion" ng-model="inscripcion.descripcion_promocion" >
                         </div>
                       </div>
                     </div>

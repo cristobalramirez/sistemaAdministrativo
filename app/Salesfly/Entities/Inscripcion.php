@@ -20,7 +20,8 @@ class Inscripcion extends \Eloquent {
     						'apellidos',
     						'dni',
     						'email',
-    						'telefono'
+    						'telefono',
+                            'descripcion_promocion'
     						];
 
         public function persona(){

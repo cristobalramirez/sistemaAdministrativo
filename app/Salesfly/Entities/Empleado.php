@@ -14,7 +14,8 @@ class Empleado extends \Eloquent {
                             'telefono',
     						'estado',
                             'direccion',
-    						'ubigeo_id'
+    						'ubigeo_id',
+                            'user_id'
     						];
     public function ubigeo()
     {

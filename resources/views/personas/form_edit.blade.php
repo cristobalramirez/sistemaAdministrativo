@@ -13,13 +13,13 @@
 
         </section>
 
-        <section class="content">
+       <section class="content">
         <div class="row">
         <div class="col-md-12">
 
           <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Editar Persona</h3>
+                  <h3 class="box-title">Agregar Persona</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form name="PersonaEditForm" role="form" novalidate>
@@ -118,29 +118,48 @@
                       
                     </div>
 
-                    <div class="box box-primary">
+                    
+
+
+
+                  <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Direccion de trabajo</h3>
+                  <h3 class="box-title">Informacion de trabajo</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 
                   <div class="box-body">
                   <div class="row">
-                      <div  class="col-md-4">
+                      <!--<div  class="col-md-4">
                         <div class="form-group">
                             <label>País</label>
                             <select  class="form-control ng-pristine ng-valid ng-touched" ng-click="validarPais()" name="profesion_id" ng-model="persona.pais_id" ng-options="item.id as item.nombre for item in paises"></select>
                         </div>
-                      </div>
-                      <div  class="col-md-8">
+                      </div>-->
+                      <div  class="col-md-12">
                     <div class="form-group">
                       <label for="institucionTrabajo">Institucion de Trabajo</label>
                       <input type="text" class="form-control" name="institucionTrabajo"  placeholder="Institucion de Trabajo" ng-model="persona.institucionTrabajo">
                     </div>
                     </div>
                   </div>
+                  <label>Solo para Docentes</label>
+                  <div class="row">
+                      <div  class="col-md-6">
+                        <div class="form-group">
+                            <label>Escala</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" name="escala_id" ng-model="persona.escala_id" ng-options="item.id as item.descripcion for item in escalas"></select>
+                        </div>
+                      </div>
+                      <div  class="col-md-6">
+                        <div class="form-group">
+                            <label>Especialidad</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" name="especialidad_id" ng-model="persona.especialidad_id" ng-options="item.id as item.descripcion for item in especialidades"></select>
+                        </div>
+                      </div>
+                  </div>
                   
-                    <div class="row" ng-show="persona.pais_id==1">
+                    <!--<div class="row" ng-show="persona.pais_id==1">
                       <div  class="col-md-4">
                         <div>
                             <label>Departamento</label>
@@ -161,7 +180,7 @@
                             <select ng-disabled="TrabajoDepertamentoSelect==null || TrabajoProvinciaSelect==undefined" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="TrabajoDistritoSelect" ng-options="item.id as item.distrito for item in TrabajoDistritos"><option value="">-- Elige Distrito --</option></select>
                         </div>
                       </div>
-                    </div>
+                    </div>-->
 
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -170,15 +189,15 @@
 
                     <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Direccion de residencia</h3>
+                  <h3 class="box-title">Direccion de Residencia</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 
                   <div class="box-body">
-                    <div class="form-group">
+                    <!--<div class="form-group">
                           <label for="direccion">Domicilio</label>
                           <input type="text" class="form-control" name="direccion"  placeholder="Domicilio" ng-model="persona.direccion">
-                        </div>
+                        </div>-->
                     
 
 

@@ -272,7 +272,60 @@
                     templateUrl:'/agencias/form-edit',
                     controller: 'AgenciaController'
                 }) 
+                //------------------//RUTES TIPO GASTOS
+                .when('/tipogastos', {
+                    templateUrl: '/js/app/tipogastos/views/index.html',
+                    controller: 'TipoGastoController'
+                })
+                .when('/tipogastos/create',{
+                    templateUrl:'/tipogastos/form-create',
+                    controller: 'TipoGastoController'
+                })
+                .when('/tipogastos/edit/:id',{
+                    templateUrl:'/tipogastos/form-edit',
+                    controller: 'TipoGastoController'
+                }) 
+                //------------------//RUTES TIPO cOMPROBANTE
+                .when('/tipocomprobantes', {
+                    templateUrl: '/js/app/tipocomprobantes/views/index.html',
+                    controller: 'TipoComprobanteController'
+                })
+                .when('/tipocomprobantes/create',{
+                    templateUrl:'/tipocomprobantes/form-create',
+                    controller: 'TipoComprobanteController'
+                })
+                .when('/tipocomprobantes/edit/:id',{
+                    templateUrl:'/tipocomprobantes/form-edit',
+                    controller: 'TipoComprobanteController'
+                }) 
+                //------------------//RUTES TIPO cOMPROBANTE
+                .when('/escalas', {
+                    templateUrl: '/js/app/escalas/views/index.html',
+                    controller: 'EscalaController'
+                })
+                .when('/escalas/create',{
+                    templateUrl:'/escalas/form-create',
+                    controller: 'EscalaController'
+                })
+                .when('/escalas/edit/:id',{
+                    templateUrl:'/escalas/form-edit',
+                    controller: 'EscalaController'
+                }) 
+                //------------------//RUTES TIPO cOMPROBANTE
+                .when('/especialidades', {
+                    templateUrl: '/js/app/especialidades/views/index.html',
+                    controller: 'EspecialidadController'
+                })
+                .when('/especialidades/create',{
+                    templateUrl:'/especialidades/form-create',
+                    controller: 'EspecialidadController'
+                })
+                .when('/especialidades/edit/:id',{
+                    templateUrl:'/especialidades/form-edit',
+                    controller: 'EspecialidadController'
+                }) 
                 //---------------------
+
                 .otherwise({
                     redirectTo: '/'
                 });

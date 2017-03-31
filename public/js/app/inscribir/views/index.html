@@ -30,26 +30,60 @@
                         </div>
 
                         
-                        <div class="form-group">
+                        
+
+
+
+
+                      <div class="form-group" ng-class="{'has-error': inscribirCreateForm.nombres.$invalid,'has-success':inscribirCreateForm.nombres.$invalid}">
+                      <label for="nombres">Nombres * </label>
+                      <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="persona.nombres" required>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': inscribirCreateForm.apellidos.$invalid,'has-success':inscribirCreateForm.apellidos.$invalid}">
+                      <label for="apellidos">Apellidos *</label>
+                      <input type="text" class="form-control" name="apellidos"  placeholder="Apellidos" ng-model="persona.apellidos" required>
+                    </div>
+
+
+                    <div class="form-group">
                               <label>Sexo * </label>
                               <div class="radio">
                           <label><input type="radio" name="optradio" value="Masculino" ng-model="persona.sexo" >Masculino    </label>
                         
                           <label><input type="radio" name="optradio" value="Femenino" ng-model="persona.sexo" >Femenino</label>
                         </div>
+                          </div> 
+
+                    <div class="form-group" ng-class="{'has-error': inscribirCreateForm.fechaNacimiento.$invalid,'has-success':inscribirCreateForm.fechaNacimiento.$invalid}">
+                                  <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                              <div  class="input-group">
+                                  <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                 </div>
+                                    <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaNacimiento" ng-model="persona.fechaNac" required>
+                              </div>
+                        </div>
+                    <div class="form-group"  ng-class="{'has-error': inscribirCreateForm.estadoCivil.$invalid,'has-success':inscribirCreateForm.estadoCivil.$invalid}">
+                              <label>Estado Civil *</label>
+                              <select class="form-control ng-pristine ng-valid ng-touched" name="estadoCivil" ng-model="persona.estadoCivil" required><option value="" >-- Elige Estado Civil --</option>
+                                <option value="Masculino">SOLTERO</option>
+                                <option value="Femenino">CASADO</option>
+                                <option value="Femenino">CONVIVIENTE</option>
+                                <option value="Femenino">VIUDO</option>
+                                <option value="Femenino">DIVORCIADO</option>
+                              </select>
                           </div>
 
-
-
-
-                      <div class="form-group" ng-class="{'has-error': inscribirCreateForm.nombres.$invalid,'has-success':inscribirCreateForm.nombres.$invalid}">
-                      <label for="nombres">Nombres</label>
-                      <input type="text" class="form-control" name="nombres"  placeholder="Nombres" ng-model="persona.nombres" required>
-                    </div>
-
-                    <div class="form-group" ng-class="{'has-error': inscribirCreateForm.apellidos.$invalid,'has-success':inscribirCreateForm.apellidos.$invalid}">
-                      <label for="apellidos">Apellidos</label>
-                      <input type="text" class="form-control" name="apellidos"  placeholder="Apellidos" ng-model="persona.apellidos" required>
+                    <div ng-if="curso.categoria_id==4">
+                          <div class="form-group" ng-class="{'has-error': inscribirCreateForm.escala_id.$invalid,'has-success':inscribirCreateForm.escala_id.$invalid}">
+                              <label>Escala *</label>
+                              <select  class="form-control ng-pristine ng-valid ng-touched" name="escala_id" ng-model="persona.escala_id" required ng-options="item.id as item.descripcion for item in escalas"></select>
+                          </div>
+                          <div class="form-group" ng-class="{'has-error': inscribirCreateForm.especialidad_id.$invalid,'has-success':inscribirCreateForm.especialidad_id.$invalid}">
+                              <label>Especialidad *</label>
+                              <select  class="form-control ng-pristine ng-valid ng-touched" name="especialidad_id" required ng-model="persona.especialidad_id" ng-options="item.id as item.descripcion for item in especialidades"></select>
+                          </div>
                     </div>
                     
 
@@ -67,46 +101,47 @@
                   <div class="box-body">
 
                         <div class="form-group" ng-class="{'has-error': inscribirCreateForm.email.$invalid,'has-success':inscribirCreateForm.email.$invalid}">
-                          <label for="email">Email</label>
+                          <label for="email">Email *</label>
                           <input type="text" class="form-control" name="email"  placeholder="Email" ng-model="persona.email" required>
                         </div>
 
                         <div class="form-group" ng-class="{'has-error': inscribirCreateForm.telefono.$invalid,'has-success':inscribirCreateForm.telefono.$invalid}">
-                          <label for="telefono">Telefono</label>
+                          <label for="telefono">Telefono *</label>
                           <input type="text" class="form-control" name="telefono"  placeholder="Telefono" ng-model="persona.telefono" required>
                         </div>
 
 
-                        <div class="form-group">
-                            <label>País</label>
-                            <select  class="form-control ng-pristine ng-valid ng-touched" ng-click="validarPais()" name="profesion_id" ng-model="persona.pais_id" ng-options="item.id as item.nombre for item in paises"></select>
+                       <!-- <div class="form-group" ng-class="{'has-error': inscribirCreateForm.pais_id.$invalid,'has-success':inscribirCreateForm.pais_id.$invalid}">
+                            <label>País *</label>
+                            <select  class="form-control ng-pristine ng-valid ng-touched" ng-click="validarPais()" name="pais_id" ng-model="persona.pais_id" ng-options="item.id as item.nombre for item in paises" required></select>
                         </div>
 
-                    <div class="form-group" ng-show="persona.pais_id==1">
-                      <label for="direccion">Domicilio</label>
-                      <input type="text" class="form-control" name="direccion"  placeholder="Domicilio" ng-model="persona.direccion" >
-                    </div>
+
+                    <div class="form-group" ng-if="persona.pais_id==1" ng-class="{'has-error': inscribirCreateForm.direccion.$invalid,'has-success':inscribirCreateForm.direccion.$invalid}">
+                      <label for="direccion">Domicilio *</label>
+                      <input type="text" class="form-control" name="direccion"  placeholder="Domicilio" ng-model="persona.direccion" required>
+                    </div>-->
 
 
-                    <div class="row" ng-show="persona.pais_id==1">
+                    <div class="row" ng-if="persona.pais_id==1">
                       <div  class="col-md-4">
-                        <div class="form-group">
-                            <label>Departamento</label>
-                            <select ng-click="DomicilioCargarProvincia()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.DomicilioDepertamentoSelect" ng-options="item.departamento as item.departamento for item in DomicilioDepartamentos"><option value="">-- Elige Departamento --</option></select>
+                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.DomicilioDepertamentoSelect.$invalid,'has-success':inscribirCreateForm.DomicilioDepertamentoSelect.$invalid}">
+                            <label>Departamento *</label>
+                            <select ng-click="DomicilioCargarProvincia()" class="form-control ng-pristine ng-valid ng-touched" name="DomicilioDepertamentoSelect" ng-model="persona.DomicilioDepertamentoSelect" ng-options="item.departamento as item.departamento for item in DomicilioDepartamentos" required><option value="">-- Elige Departamento --</option></select>
                         </div>
                       </div>
                       
                       <div  class="col-md-4">
-                        <div class="form-group">
-                            <label>Provinca</label>
-                            <select ng-disabled="persona.DomicilioDepertamentoSelect==null" ng-click="DomicilioCargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.DomicilioProvinciaSelect" ng-options="item.provincia as item.provincia for item in DomicilioProvincias"><option value="">-- Elige Provincia --</option></select>
+                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.DomicilioProvinciaSelect.$invalid,'has-success':inscribirCreateForm.DomicilioProvinciaSelect.$invalid}">
+                            <label>Provinca * </label>
+                            <select ng-disabled="persona.DomicilioDepertamentoSelect==null" ng-click="DomicilioCargarDistrito()" class="form-control ng-pristine ng-valid ng-touched" name="DomicilioProvinciaSelect" ng-model="persona.DomicilioProvinciaSelect" ng-options="item.provincia as item.provincia for item in DomicilioProvincias" required><option value="">-- Elige Provincia --</option></select>
                         </div>
                       </div>
 
                       <div  class="col-md-4">
-                        <div class="form-group">
-                            <label>Distrito</label>
-                            <select ng-click="ver()" ng-disabled="persona.DomicilioDepertamentoSelect==null || persona.DomicilioProvinciaSelect==undefined" class="form-control ng-pristine ng-valid ng-touched" name="" ng-model="persona.DomicilioDistritoSelect" ng-options="item.id as item.distrito for item in DomicilioDistritos"><option value="">-- Elige Distrito --</option></select>
+                        <div class="form-group" ng-class="{'has-error': inscribirCreateForm.DomicilioDistritoSelect.$invalid,'has-success':inscribirCreateForm.DomicilioDistritoSelect.$invalid}">
+                            <label>Distrito *</label>
+                            <select ng-click="ver()" ng-disabled="persona.DomicilioDepertamentoSelect==null || persona.DomicilioProvinciaSelect==undefined" class="form-control ng-pristine ng-valid ng-touched" name="DomicilioDistritoSelect" ng-model="persona.DomicilioDistritoSelect" ng-options="item.id as item.distrito for item in DomicilioDistritos" required><option value="">-- Elige Distrito --</option></select>
                         </div>
                       </div>
                     </div>
